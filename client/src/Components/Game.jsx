@@ -5,6 +5,7 @@ export default function Game() {
     const [CPUSelection, setCPUSelection] = useState()
     const [userMatchResult, setUserMatchResult] = useState()
 
+    //Set CPU choice
     const randomCPUSelection = () => {
         const result = Math.floor(Math.random() * 3);
         console.log(result)
@@ -23,6 +24,7 @@ export default function Game() {
         }
     }
 
+    //Set Match Result
     const MatchResult = () => {
         if((userSelection === "Rock" && CPUSelection ==="Scissors") 
         || (userSelection === "Paper" && CPUSelection ==="Rock") 
