@@ -1,6 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, createContext } from 'react';
 
-export default function Game() {
+const GameContext = createContext({});
+
+export function ShifumiWeapon() {
+    const ShifumiWeaponObject = Object.freeze({
+        paper:"Paper",
+        scissors: "Scissors",
+        rock: "Rock"
+    })
+}
+
+export function ShifumiResult() {
+    const ShifumiResultObject = Object.freeze({
+        win:"Win",
+        loose:"Loose",
+        draw:"Draw"
+    })
+}
+
+export function GameContextProvider({ children }) {
     const [userSelection, setUserSelection] = useState()
     const [cpuSelection, setCpuSelection] = useState()
     const [userMatchResult, setUserMatchResult] = useState()
@@ -41,19 +59,18 @@ export default function Game() {
     console.log(`${userSelection} vs ${cpuSelection} = ${userMatchResult}`)
 
 
+  const values = { userSelection, cpuSelection, userMatchResult };
 
-    return (
-        <div>
-            <h2>{userSelection}</h2>
-            <button onClick={() => setUserSelection("Rock")} >Rock</button>
-            <button onClick={() => setUserSelection("Paper")}>Paper</button>
-            <button onClick={() => setUserSelection("Scissors")}>Scissors</button>
+  return (
+    <GameContext.Provider value={values}>{children}</GameContext.Provider>
+  );
+}
 
-            <h2>{cpuSelection}</h2>
-
-            <button onClick={randomCPUSelection}>Play</button>
-
-            <h2>{userMatchResult}</h2>
-        </div>
-    )
+export function useGameContext() {
+  const context = useContext(GameContext);
+  if (!context)
+    throw new Error(
+      'useGameContext should be used within a GameContextProvider',
+    );
+  return context;
 }
