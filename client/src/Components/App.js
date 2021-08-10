@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { io } from "socket.io-client";
-import '../styles/App.css';
+import '../Styles/App.css';
 import Game from './Game';
 
 function App() {
@@ -18,7 +18,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>App</h1>
       <Game />
     </div>
   );
