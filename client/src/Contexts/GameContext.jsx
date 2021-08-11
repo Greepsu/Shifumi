@@ -3,15 +3,15 @@ import React, { useState, useContext, createContext } from "react";
 const GameContext = createContext({});
 
 const ShifumiWeaponObject = Object.freeze({
-  paper: "Paper",
-  scissors: "Scissors",
-  rock: "Rock",
+  PAPER: "Paper",
+  SCISSORS: "Scissors",
+  ROCK: "Rock",
 });
 
 const ShifumiResultObject = Object.freeze({
-  win: "Win",
-  loose: "Loose",
-  draw: "Draw",
+  WIN: "Win",
+  LOOSE: "Loose",
+  DRAW: "Draw",
 });
 
 export function GameContextProvider({ children }) {
@@ -53,6 +53,8 @@ export function GameContextProvider({ children }) {
       setUserMatchResult("You loose !");
     }
   };
+
+const userSelection = (weapon) => setUserSelection(weapon)
 
   console.log(`${userSelection} vs ${cpuSelection} = ${userMatchResult}`);
 
