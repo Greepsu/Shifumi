@@ -1,5 +1,7 @@
 import React, { useState, useContext, createContext } from 'react';
 
+import { generateRandomNumber } from "../Components/Helper"
+
 const GameContext = createContext({});
 
 export function ShifumiWeapon() {
@@ -23,22 +25,22 @@ export function GameContextProvider({ children }) {
     const [cpuSelection, setCpuSelection] = useState()
     const [userMatchResult, setUserMatchResult] = useState()
 
-    //Set CPU choice
-    const randomCPUSelection = () => {
-        const result = Math.floor(Math.random() * 3);
-        switch (result) {
-            case 0:
-                setCpuSelection("Rock")
-                break
-            case 1:
-                setCpuSelection("Paper")
-                break
-            case 2:
-                setCpuSelection("Scissors")
-                break
-            default:
-              console.log(`Sorry, Bot have some issues`);
-        }
+  //Set CPU choice
+  const randomCPUSelection = () => {
+    const result = generateRandomNumber();
+    switch (result) {
+      case 0:
+        setCpuSelection("Rock");
+        break;
+      case 1:
+        setCpuSelection("Paper");
+        break;
+      case 2:
+        setCpuSelection("Scissors");
+        break;
+      default:
+        console.log(`Sorry, Bot have some issues`);
+    }
 
         matchResult()
     }

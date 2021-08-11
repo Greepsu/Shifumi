@@ -1,9 +1,5 @@
 import React from 'react'
 
-function Helper() {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+const generateRandomNumber = () => Math.floor(Math.random() * 3);
+
+

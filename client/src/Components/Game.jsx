@@ -44,16 +44,16 @@ export default function Game() {
 
     return (
         <div>
-            <h2>{userSelection}</h2>
-            <button onClick={() => setUserSelection("Rock")} >Rock</button>
-            <button onClick={() => setUserSelection("Paper")}>Paper</button>
-            <button onClick={() => setUserSelection("Scissors")}>Scissors</button>
+            <h2>User Weapon: </h2>
+            <button>Rock</button>
+            <button>Paper</button>
+            <button>Scissors</button>
 
-            <h2>{cpuSelection}</h2>
+            <h2>Cpu Weapon: </h2>
 
-            <button onClick={randomCPUSelection}>Play</button>
+            <button>Play</button>
 
-            <h2>{userMatchResult}</h2>
+            <h2>Results: </h2>
         </div>
     )
 }
