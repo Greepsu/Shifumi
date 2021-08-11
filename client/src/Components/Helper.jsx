@@ -1,5 +1,3 @@
-import React from 'react'
-
-const generateRandomNumber = () => Math.floor(Math.random() * 3);
+export const generateRandomNumber = () => Math.floor(Math.random() * 3);
 
 
