@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from 'react';
 
 //Import random number generator for determine CPU selection
 import { generateRandomNumber } from "../Components/Helper";
@@ -79,8 +79,6 @@ export function GameContextProvider({ children }) {
 export function useGameContext() {
   const context = useContext(GameContext);
   if (!context)
-    throw new Error(
-      "useGameContext should be used within a GameContextProvider"
-    );
+    throw new Error('useGameContext should be used within a GameContextProvider');
   return context;
 }
