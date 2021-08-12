@@ -12,20 +12,18 @@ export function GameContextProvider({ children }) {
   const [userMatchResult, setUserMatchResult] = useState();
   const [score, setScore] = useState(0);
 
-  console.log(ShifumiWeaponObject.ROCK)
-
   //Set CPU choice
   function randomCPUSelection() {
     const result = generateRandomNumber();
     switch (result) {
       case 0:
-        setCpuSelection(ShifumiWeaponObject.ROCK);
+        handleCpuSelection(ShifumiWeaponObject.ROCK)
         break;
       case 1:
-        setCpuSelection(ShifumiWeaponObject.PAPER);
+        handleCpuSelection(ShifumiWeaponObject.PAPER)
         break;
       case 2:
-        setCpuSelection(ShifumiWeaponObject.SCISSORS);
+        handleCpuSelection(ShifumiWeaponObject.SCISSORS)
         break;
       default:
         console.log(`Sorry, Bot have some issues`);
@@ -53,24 +51,7 @@ export function GameContextProvider({ children }) {
             setScore(score - 1);
           }
         }
-
-      }, [userSelection, cpuSelection, score])
-
-      // function matchResult() {
-      //   if (userSelection && cpuSelection) {
-      //     if (compareResult) {
-      //       setUserMatchResult(ShifumiResultObject.WIN);
-      //       setScore(score + 1);
-      //     } else if (userSelection === cpuSelection) {
-      //       setUserMatchResult(ShifumiResultObject.DRAW);
-      //     } else {
-      //       setUserMatchResult(ShifumiResultObject.LOOSE);
-      //       setScore(score - 1);
-      //     }
-      //   }
-      // }
-
-  
+      }, [userSelection, cpuSelection])
 
   function handleUserSelection(weapon) {
     setUserSelection(weapon);
@@ -94,7 +75,7 @@ export function GameContextProvider({ children }) {
     cpuSelection,
     userMatchResult,
     handleUserSelection,
-    handleCpuSelection,
+    randomCPUSelection,
     handlePlayAgain,
   };
 

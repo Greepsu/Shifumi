@@ -1,11 +1,11 @@
 export const ShifumiWeaponObject = Object.freeze({
-    paper: "Paper",
-    scissors: "Scissors",
-    rock: "Rock",
+    PAPER: "Paper",
+    SCISSORS: "Scissors",
+    ROCK: "Rock",
   });
   
  export const ShifumiResultObject = Object.freeze({
-    win: "Win",
-    loose: "Loose",
-    draw: "Draw",
+    WIN: "Win",
+    LOOSE: "Loose",
+    DRAW: "Draw",
   });
