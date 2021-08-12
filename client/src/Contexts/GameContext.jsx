@@ -31,24 +31,24 @@ export function GameContextProvider({ children }) {
   }
   
   //Set Match Result
-  const compareResult =
-    (userSelection === ShifumiWeaponObject.ROCK &&
-      cpuSelection === ShifumiWeaponObject.SCISSORS) ||
-    (userSelection === ShifumiWeaponObject.PAPER &&
-      cpuSelection === ShifumiWeaponObject.ROCK) ||
-    (userSelection === ShifumiWeaponObject.SCISSORS &&
-      cpuSelection === ShifumiWeaponObject.PAPER);
-
-      useEffect(() => {
+  
+  useEffect(() => {
+        const compareResult =
+          (userSelection === ShifumiWeaponObject.ROCK &&
+            cpuSelection === ShifumiWeaponObject.SCISSORS) ||
+          (userSelection === ShifumiWeaponObject.PAPER &&
+            cpuSelection === ShifumiWeaponObject.ROCK) ||
+          (userSelection === ShifumiWeaponObject.SCISSORS &&
+            cpuSelection === ShifumiWeaponObject.PAPER);
         if (userSelection && cpuSelection) {
           if (compareResult) {
             setUserMatchResult(ShifumiResultObject.WIN);
-            setScore(score + 1);
+            setScore((prevScore) => prevScore + 1);
           } else if (userSelection === cpuSelection) {
             setUserMatchResult(ShifumiResultObject.DRAW);
           } else {
             setUserMatchResult(ShifumiResultObject.LOOSE);
-            setScore(score - 1);
+            setScore((prevScore) => prevScore - 1)
           }
         }
       }, [userSelection, cpuSelection])
