@@ -1,39 +1,44 @@
-import React, { useContext } from 'react';
-import { GameContext } from '../Contexts/GameContext';
+import React, { useContext } from "react";
+import { GameContext } from "../Contexts/GameContext";
 
 import { ShifumiWeaponObject } from "../Enums/Shifumi";
 
-
 export default function Game() {
-    const {
-        score,
+  const {
+    score,
     userSelection,
     cpuSelection,
     userMatchResult,
     handleUserSelection,
     randomCPUSelection,
     handlePlayAgain,
-      } = useContext(GameContext);
+  } = useContext(GameContext);
 
-      console.log(userSelection)
-      console.log(cpuSelection)
+  console.log(userSelection);
+  console.log(cpuSelection);
 
-    return (
-        <div>
-            <h2>User Weapon: {userSelection} </h2>
-            <button onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)} >Rock</button>
-            <button onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}>Paper</button>
-            <button onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}>Scissors</button>
+  return (
+    <div>
+      <h2>User Weapon: {userSelection} </h2>
+      <button onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)}>
+        Rock
+      </button>
+      <button onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}>
+        Paper
+      </button>
+      <button onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}>
+        Scissors
+      </button>
 
-            <h2>Cpu Weapon: {cpuSelection} </h2>
+      <h2>Cpu Weapon: {cpuSelection} </h2>
 
-            <button onClick={randomCPUSelection}>Play</button>
+      <button onClick={randomCPUSelection}>Play</button>
 
-            <h2>Results: {userMatchResult} </h2>
+      <h2>Results: {userMatchResult} </h2>
 
-            <h2>Score: {score}</h2>
+      <h2>Score: {score}</h2>
 
-            <button onClick={handlePlayAgain} >Play again</button>
-        </div>
-    )
+      <button onClick={handlePlayAgain}>Play again</button>
+    </div>
+  );
 }
