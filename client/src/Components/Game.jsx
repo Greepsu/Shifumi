@@ -1,37 +1,64 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
+
+//Import styles
+import "../Styles/Game.css";
 
 //Import Contexts
-import { GameContext } from '../Contexts/GameContext';
+import { GameContext } from "../Contexts/GameContext";
 
 //Import enums
 import { ShifumiWeaponObject } from "../Enums/Shifumi";
 
-
 export default function Game() {
-    const {
-        score,
+  const {
+    score,
     userSelection,
     cpuSelection,
     userMatchResult,
     handleUserSelection,
     randomCPUSelection,
-      } = useContext(GameContext);
+  } = useContext(GameContext);
 
-    return (
-        <div>
-            <h2>User Weapon: {userSelection} </h2>
-            <button onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)} >Rock</button>
-            <button onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}>Paper</button>
-            <button onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}>Scissors</button>
-
-            <h2>Cpu Weapon: {cpuSelection} </h2>
-
-            <button onClick={randomCPUSelection}>Play</button>
-
-            <h2>Results: {userMatchResult} </h2>
-
-            <h2>Score: {score}</h2>
-
+  return (
+    <div className="game-container">
+      <div className="match-container">
+        <div className="user-container">
+          <span>User</span>
+          <span>{userSelection}</span>
+          <div className="user-selection">
+            <div
+              className="selection-rock"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)}
+            >
+              <span>Rock</span>
+            </div>
+            <div
+              className="selection-paper"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}
+            >
+              <span>Paper</span>
+            </div>
+            <div
+              className="selection-scissors"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}
+            >
+              <span>Scissors</span>
+            </div>
+          </div>
         </div>
-    )
+        <div className="score-container">
+          <span>{score}</span>
+          <span>{userMatchResult}</span>
+        </div>
+        <div className="cpu-container">
+          <span>CPU</span>
+          <span>{cpuSelection}</span>
+          <div></div>
+        </div>
+      </div>
+      <div className="play-container">
+        <div onClick={randomCPUSelection}><span>Play !</span></div>
+      </div>
+    </div>
+  );
 }
