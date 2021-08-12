@@ -55,6 +55,7 @@ export function GameContextProvider({ children }) {
 
   function handleUserSelection(weapon) {
     setUserSelection(weapon);
+    handleCpuSelection(undefined)
   }
 
   function handleCpuSelection(weapon) {
