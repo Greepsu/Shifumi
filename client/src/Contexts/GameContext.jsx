@@ -19,45 +19,45 @@ export function GameContextProvider({ children }) {
     const result = generateRandomNumber();
     switch (result) {
       case 0:
-        handleCpuSelection(ShifumiWeaponObject.ROCK)
+        handleCpuSelection(ShifumiWeaponObject.ROCK);
         break;
       case 1:
-        handleCpuSelection(ShifumiWeaponObject.PAPER)
+        handleCpuSelection(ShifumiWeaponObject.PAPER);
         break;
       case 2:
-        handleCpuSelection(ShifumiWeaponObject.SCISSORS)
+        handleCpuSelection(ShifumiWeaponObject.SCISSORS);
         break;
       default:
         console.log(`Sorry, Bot have some issues`);
     }
   }
-  
+
   //Set Match Result
   useEffect(() => {
-        const compareResult =
-          (userSelection === ShifumiWeaponObject.ROCK &&
-            cpuSelection === ShifumiWeaponObject.SCISSORS) ||
-          (userSelection === ShifumiWeaponObject.PAPER &&
-            cpuSelection === ShifumiWeaponObject.ROCK) ||
-          (userSelection === ShifumiWeaponObject.SCISSORS &&
-            cpuSelection === ShifumiWeaponObject.PAPER);
-        if (userSelection && cpuSelection) {
-          if (compareResult) {
-            setUserMatchResult(ShifumiResultObject.WIN);
-            setScore((prevScore) => prevScore + 1);
-          } else if (userSelection === cpuSelection) {
-            setUserMatchResult(ShifumiResultObject.DRAW);
-          } else {
-            setUserMatchResult(ShifumiResultObject.LOOSE);
-            setScore((prevScore) => prevScore - 1)
-          }
-        }
-      }, [userSelection, cpuSelection])
+    const compareResult =
+      (userSelection === ShifumiWeaponObject.ROCK &&
+        cpuSelection === ShifumiWeaponObject.SCISSORS) ||
+      (userSelection === ShifumiWeaponObject.PAPER &&
+        cpuSelection === ShifumiWeaponObject.ROCK) ||
+      (userSelection === ShifumiWeaponObject.SCISSORS &&
+        cpuSelection === ShifumiWeaponObject.PAPER);
+    if (userSelection && cpuSelection) {
+      if (compareResult) {
+        setUserMatchResult(ShifumiResultObject.WIN);
+        setScore((prevScore) => prevScore + 1);
+      } else if (userSelection === cpuSelection) {
+        setUserMatchResult(ShifumiResultObject.DRAW);
+      } else {
+        setUserMatchResult(ShifumiResultObject.LOOSE);
+        setScore((prevScore) => prevScore - 1);
+      }
+    }
+  }, [userSelection, cpuSelection]);
 
   function handleUserSelection(weapon) {
     setUserSelection(weapon);
-    handleCpuSelection(undefined)
-    setUserMatchResult(undefined)
+    handleCpuSelection(undefined);
+    setUserMatchResult(undefined);
   }
 
   function handleCpuSelection(weapon) {

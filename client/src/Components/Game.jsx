@@ -57,7 +57,9 @@ export default function Game() {
         </div>
       </div>
       <div className="play-container">
-        <div onClick={randomCPUSelection}><span>Play !</span></div>
+        <div onClick={randomCPUSelection}>
+          <span>Play !</span>
+        </div>
       </div>
     </div>
   );
