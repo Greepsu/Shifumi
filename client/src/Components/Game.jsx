@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
+
+//Import Contexts
 import { GameContext } from '../Contexts/GameContext';
 
+//Import enums
 import { ShifumiWeaponObject } from "../Enums/Shifumi";
 
 
@@ -12,11 +15,7 @@ export default function Game() {
     userMatchResult,
     handleUserSelection,
     randomCPUSelection,
-    handlePlayAgain,
       } = useContext(GameContext);
-
-      console.log(userSelection)
-      console.log(cpuSelection)
 
     return (
         <div>
@@ -33,7 +32,6 @@ export default function Game() {
 
             <h2>Score: {score}</h2>
 
-            <button onClick={handlePlayAgain} >Play again</button>
         </div>
     )
 }
