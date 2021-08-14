@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useState, useEffect, useContext, createContext } from "react";
 
 //Import random number generator for determine CPU selection
 import { generateRandomNumber, compareResult } from "../Components/Helper";
 
 //Import enums
 import { ShifumiWeaponObject, ShifumiResultObject } from "../Enums/Shifumi";
-
 
 export const GameContext = createContext({});
 
@@ -73,6 +72,8 @@ export function GameContextProvider({ children }) {
 export function useGameContext() {
   const context = useContext(GameContext);
   if (!context)
-    throw new Error('useGameContext should be used within a GameContextProvider');
+    throw new Error(
+      "useGameContext should be used within a GameContextProvider"
+    );
   return context;
 }
