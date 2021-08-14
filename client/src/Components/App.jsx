@@ -2,6 +2,7 @@
 // import { io } from "socket.io-client";
 import "../Styles/App.css";
 import Game from "./Game";
+import MainLobby from "./MainLobby";
 
 function App() {
   // const socket = io("http://localhost:5001");
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <Game />
+      <MainLobby />
     </div>
   );
 }
