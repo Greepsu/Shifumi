@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 
 //Import random number generator for determine CPU selection
-import { generateRandomNumber } from "../Components/Helper";
+import { generateRandomNumber, compareResult } from "../Components/Helper";
 
 //Import enums
 import { ShifumiWeaponObject, ShifumiResultObject } from "../Enums/Shifumi";
+
 
 export const GameContext = createContext({});
 
@@ -34,15 +35,8 @@ export function GameContextProvider({ children }) {
 
   //Set Match Result
   useEffect(() => {
-    const compareResult =
-      (userSelection === ShifumiWeaponObject.ROCK &&
-        cpuSelection === ShifumiWeaponObject.SCISSORS) ||
-      (userSelection === ShifumiWeaponObject.PAPER &&
-        cpuSelection === ShifumiWeaponObject.ROCK) ||
-      (userSelection === ShifumiWeaponObject.SCISSORS &&
-        cpuSelection === ShifumiWeaponObject.PAPER);
     if (userSelection && cpuSelection) {
-      if (compareResult) {
+      if (compareResult(userSelection, cpuSelection)) {
         setUserMatchResult(ShifumiResultObject.WIN);
         setScore((prevScore) => prevScore + 1);
       } else if (userSelection === cpuSelection) {
