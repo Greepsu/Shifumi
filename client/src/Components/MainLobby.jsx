@@ -3,9 +3,6 @@ import React from "react";
 //import style
 import "../Styles/MainLobby.css";
 
-//import components
-import Game from "../Components/Game";
-
 //Import react-router
 import { Link } from "react-router-dom";
 
@@ -25,7 +22,9 @@ export default function MainLobby() {
           </div>
           <span>or</span>
           <div className="play-online-button">
-            <span>Play against user</span>
+            <Link to="/user">
+              <span>Play against user</span>
+            </Link>
           </div>
         </div>
       </div>

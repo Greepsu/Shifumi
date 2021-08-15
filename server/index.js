@@ -23,6 +23,12 @@ app.use(express.json());
 //Socket.io
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  socket.on('create', (room) => {
+    console.log(`Socket ${socket.id} joining ${room}`);
+    socket.join(room);
+  });
+  
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });

@@ -6,6 +6,7 @@ import "../Styles/App.css";
 //Import components
 import Game from "./Game";
 import MainLobby from "./MainLobby";
+import Room from "./Room";
 
 //Import react-router
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/cpu">
             <Game />
+          </Route>
+          <Route path="/user">
+            <Room />
           </Route>
         </Switch>
       </div>
