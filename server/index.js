@@ -1,18 +1,18 @@
 //Import and use express
-const express = require("express");
+const express = require('express');
 const app = express();
 
 const port = 5000;
 
 //Import CORS
-const cors = require("cors");
+const cors = require('cors');
 
 //Import Socket.io
-const server = require("http").Server(app);
-const io = require("socket.io")(server, {
+const server = require('http').Server(app);
+const io = require('socket.io')(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
   },
 });
 
@@ -21,16 +21,16 @@ app.use(cors());
 app.use(express.json());
 
 //Socket.io
-io.on("connection", (socket) => {
-  console.log("a user connected");
+io.on('connection', (socket) => {
+  console.log('a user connected');
 
   socket.on('create', (room) => {
     console.log(`Socket ${socket.id} joining ${room}`);
     socket.join(room);
   });
-  
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
   });
 });
 
