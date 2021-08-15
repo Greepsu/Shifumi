@@ -3,6 +3,17 @@ import React from "react";
 //import style
 import "../Styles/MainLobby.css";
 
+//import components
+import Game from '../Components/Game'
+
+//Import react-router
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 export default function MainLobby() {
   return (
     <div className="main-lobby">
@@ -13,7 +24,9 @@ export default function MainLobby() {
         </div>
         <div className="lobby-button-container">
           <div className="play-cpu-button">
+          <Link to="/cpu">
             <span>Play against CPU</span>
+          </Link>
           </div>
           <span>or</span>
           <div className="play-online-button">
@@ -22,5 +35,8 @@ export default function MainLobby() {
         </div>
       </div>
     </div>
+  
+
+
   );
 }

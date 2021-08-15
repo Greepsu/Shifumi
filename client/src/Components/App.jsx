@@ -3,6 +3,13 @@
 import "../Styles/App.css";
 import Game from "./Game";
 import MainLobby from "./MainLobby";
+//Import react-router
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   // const socket = io("http://localhost:5001");
@@ -16,9 +23,19 @@ function App() {
   // });
 
   return (
-    <div className="App">
-      <MainLobby />
-    </div>
+    <Router>
+
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <MainLobby />
+          </Route>
+          <Route path="/cpu">
+            <Game />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
