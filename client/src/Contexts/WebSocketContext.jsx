@@ -8,7 +8,11 @@ export const WebSocketContext = createContext({});
 export function WebSocketContextProvider({ children }) {
   const [webSocket, setWebSocket] = useState(io("http://localhost:5001"));
   const values = webSocket;
-  return <WebSocketContext.Provider value={values}>{children}</WebSocketContext.Provider>;
+  return (
+    <WebSocketContext.Provider value={values}>
+      {children}
+    </WebSocketContext.Provider>
+  );
 }
 
 export function useWebSocketContext() {

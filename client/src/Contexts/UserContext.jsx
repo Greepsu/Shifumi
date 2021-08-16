@@ -9,22 +9,22 @@ export function UserContextProvider({ children }) {
   const webSocket = useContext(WebSocketContext);
   const [user, setUser] = useState();
 
-  console.log("loaded")
+  console.log("loaded");
 
   useEffect(() => {
     webSocket.on("connect", () => {
-      setUser(webSocket.id)
-      console.log(`User with ${webSocket.id} ID connected`);
+      setUser(webSocket.id);
+      console.log(`User with ${webSocket.id} ID connected on Front`);
     });
 
-    webSocket.on('message', (data) => {
-      console.log(data)
-    })
+    webSocket.on("message", (data) => {
+      console.log(data);
+    });
 
     webSocket.emit("create", "room1");
 
     return webSocket.on("disconnect", () => {
-      console.log(`User with ${webSocket.id} ID disconnected`);
+      console.log(`User with ${webSocket.id} ID disconnected on Front`);
     });
   }, [webSocket]);
 

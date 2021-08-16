@@ -22,7 +22,7 @@ app.use(express.json());
 
 //Socket.io
 io.on('connection', (socket) => {
-  console.log(`User with ${socket.id} ID connected`);
+  console.log(`User with ${socket.id} ID connected on Back`);
 
   socket.on('create', (room) => {
     socket.join(room);
@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log(`User with ${socket.id} ID disconnected`);
+    console.log(`User with ${socket.id} ID disconnected on Back`);
   });
 
   socket.on('message', (data, room) => {
