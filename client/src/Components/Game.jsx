@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 
 //Import styles
 import "../Styles/Game.css";
 
 //Import Contexts
-import { GameContext } from "../Contexts/GameContext";
+import { useGameContext } from "../Contexts/GameContext";
 
 //Import enums
 import { ShifumiWeaponObject } from "../Enums/Shifumi";
@@ -17,7 +17,7 @@ export default function Game() {
     userMatchResult,
     handleUserSelection,
     randomCPUSelection,
-  } = useContext(GameContext);
+  } = useGameContext();
 
   return (
     <div className="game-container">

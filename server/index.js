@@ -40,11 +40,6 @@ io.on('connection', (socket) => {
   })
 });
 
-
-console.log(io.clients)
-
-
-
 //Listen
 server.listen(5001, () => {
   console.log(`Server started: socket.io`);

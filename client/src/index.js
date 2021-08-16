@@ -4,12 +4,18 @@ import "./index.css";
 import App from "./Components/App.jsx";
 
 import { GameContextProvider } from "../src/Contexts/GameContext";
+import { UserContextProvider } from "../src/Contexts/UserContext";
+import { WebSocketContextProvider } from "../src/Contexts/WebSocketContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GameContextProvider>
-      <App />
-    </GameContextProvider>
+    <WebSocketContextProvider>
+      <UserContextProvider>
+        <GameContextProvider>
+          <App />
+        </GameContextProvider>
+      </UserContextProvider>
+    </WebSocketContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 
 export const WebSocketContext = createContext({});
 
-export default function WebSocketContextProvider() {
+export function WebSocketContextProvider({ children }) {
   const [webSocket, setWebSocket] = useState(io("http://localhost:5001"));
   const values = webSocket;
   return <WebSocketContext.Provider value={values}>{children}</WebSocketContext.Provider>;
