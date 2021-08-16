@@ -8,7 +8,7 @@ export const WebSocketContext = createContext({});
 export default function WebSocketContextProvider() {
   const [webSocket, setWebSocket] = useState(io("http://localhost:5001"));
   const values = webSocket;
-  return <GameContext.Provider value={values}>{children}</GameContext.Provider>;
+  return <WebSocketContext.Provider value={values}>{children}</WebSocketContext.Provider>;
 }
 
 export function useWebSocketContext() {
