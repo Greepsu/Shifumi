@@ -22,17 +22,28 @@ app.use(express.json());
 
 //Socket.io
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log(`User with ${socket.id} ID connected`);
 
   socket.on('create', (room) => {
-    console.log(`Socket ${socket.id} joining ${room}`);
     socket.join(room);
+    console.log(`Socket ${socket.id} joining ${room}`);
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    console.log(`User with ${socket.id} ID disconnected`);
   });
+
+  socket.on('message', (data, room) => {
+    if(room) {
+      socket.broadcast.emit('message', data)
+    }
+  })
 });
+
+
+console.log(io.clients)
+
+
 
 //Listen
 server.listen(5001, () => {

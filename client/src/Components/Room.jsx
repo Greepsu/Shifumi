@@ -1,39 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 //Import style
 import "../Styles/Room.css";
 
-//Import socket.io client
-import { io } from "socket.io-client";
-
 export default function Room() {
-  useEffect(() => {
-    const socket = io("http://localhost:5001");
+  const [user, setUser] = useState()
+  const [message, setMessage] = useState()
+  const [input, setInput] = useState('')
 
-    const connectSocket = function() {
-        socket.on("connect", () => {
-        console.log("User connected");
-        });
-    }
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     setUser(socket.id)
+  //     console.log(`User with ${socket.id} ID connected`);
+  //   });
 
-    const disconnectSocket = function() {
-        socket.on("disconnect", () => {
-          console.log("User disconnected");
-        });
-    }
+  //   socket.on('message', (data) => {
+  //     setMessage(data)
+  //   })
 
-    const createRoom = () => socket.emit("create", "room1");
+  //   socket.emit("create", "room1");
 
-    console.log(socket.id)
+  //   return socket.on("disconnect", () => {
+  //     console.log(`User with ${socket.id} ID disconnected`);
+  //   });
+  // }, []);
 
-  }, []);
+  // const sendMessage = () => {
+  //   socket.emit("message", input);
+  // };
 
   return (
-    <div className="room">
-      {/* <h2>{socket.id}</h2> */}
-      <button>Connect</button>
-      <button>Disco</button>
-      <button></button>
-    </div>
-  );
+  <div className="room">
+    <h2>{`${user}: ${message}`}</h2>
+    <h3>{input}</h3>
+    <input type="text" value={input} onInput={e => setInput(e.target.value)} />
+    {/* <button onClick={sendMessage} >Prout</button> */}
+  </div>);
 }
