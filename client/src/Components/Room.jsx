@@ -24,7 +24,7 @@ export default function Room() {
 
     const createRoom = () => socket.emit("create", "room1");
 
-    console.log(socket.io)
+    console.log(socket.id)
 
   }, []);
 
