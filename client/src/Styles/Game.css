@@ -1,0 +1,162 @@
+.game-container {
+    width: 100%;
+    height: 100vh;
+    color: white;
+}
+
+.match-container {
+    height: 70vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3%;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    height: 40%;
+    font-size: 42px;
+}
+
+.user-selection {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-selection div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    outline: none;
+    border: 0.2px solid white;
+    color: white;
+    width: 30px;
+    height: 15px;
+    padding: 20px 60px;
+    cursor: pointer;
+    font-size: 21px;
+}
+
+.selection-rock, .selection-paper, .selection-scissors {
+    position: relative;
+    overflow: hidden;
+}
+
+.selection-rock:hover::before, .selection-paper:hover::before, .selection-scissors:hover::before {
+    width: 100%;
+}
+
+.selection-rock::before, .selection-paper::before, .selection-scissors::before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    content: '';
+    width: 0%;
+    height: 100%;
+    transition: ease 0.8s;
+}
+
+.selection-rock::before {
+    background: #F3788D;
+}
+
+.selection-paper::before {
+    background: #4cf846;
+}
+
+.selection-scissors::before {
+    background: #9978f3;
+}
+
+.user-selection span {
+    z-index: 1;
+}
+
+.score-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+    font-size: 38px;
+
+}
+
+.score-container span {
+    font-weight: 400;
+}
+
+.score-container span:last-of-type {
+    font-size: 48px;
+}
+
+.cpu-container {
+    width: 30%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 42px;
+}
+
+.cpu-container div {
+    height: 15px;
+}
+
+.cpu-container span:first-of-type , .user-container span:first-of-type {
+    font-size: 26px;
+}
+
+.play-container {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.play-container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.2px solid white;
+    color: white;
+    width: 270px;
+    height: 80px;
+    padding: 1px;
+    cursor: pointer;
+    font-size: 38px;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.play-container div::before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    content: '';
+    width: 0%;
+    height: 100%;
+    transition: ease 0.8s;
+    background: white;
+}
+
+.play-container div:hover::before {
+    width: 100%;
+}
+
+.play-container div:hover span {
+    color: black;
+    transition: 0.8s ease-in-out;
+}
+
+.play-container div span {
+    z-index: 1;
+}

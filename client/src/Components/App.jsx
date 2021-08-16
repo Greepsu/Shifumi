@@ -1,25 +1,33 @@
-import { useEffect, useState } from 'react'
-import { io } from "socket.io-client";
-import '../Styles/App.css';
-import Game from './Game';
+import React from "react";
+
+//Import styles
+import "../Styles/App.css";
+
+//Import components
+import Game from "./Game";
+import MainLobby from "./MainLobby";
+import Room from "./Room";
+
+//Import react-router
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-
-  // const socket = io("http://localhost:5001");
-
-  // socket.on("connect", () => {
-  //   console.log("User connected");
-  // });
-
-  // socket.on("disconnect", () => {
-  //   console.log("User disconnected");
-  // });
-
-
   return (
-    <div className="App">
-      <Game />
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <MainLobby />
+          </Route>
+          <Route path="/cpu">
+            <Game />
+          </Route>
+          <Route path="/user">
+            <Room />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

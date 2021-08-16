@@ -1,59 +1,66 @@
-import React, { useState } from 'react'
+import React, { useContext } from "react";
+
+//Import styles
+import "../Styles/Game.css";
+
+//Import Contexts
+import { GameContext } from "../Contexts/GameContext";
+
+//Import enums
+import { ShifumiWeaponObject } from "../Enums/Shifumi";
 
 export default function Game() {
-    const [userSelection, setUserSelection] = useState()
-    const [cpuSelection, setCpuSelection] = useState()
-    const [userMatchResult, setUserMatchResult] = useState()
+  const {
+    score,
+    userSelection,
+    cpuSelection,
+    userMatchResult,
+    handleUserSelection,
+    randomCPUSelection,
+  } = useContext(GameContext);
 
-    //Set CPU choice
-    const randomCPUSelection = () => {
-        const result = Math.floor(Math.random() * 3);
-        switch (result) {
-            case 0:
-                setCpuSelection("Rock")
-                break
-            case 1:
-                setCpuSelection("Paper")
-                break
-            case 2:
-                setCpuSelection("Scissors")
-                break
-            default:
-              console.log(`Sorry, Bot have some issues`);
-        }
-
-        matchResult()
-    }
-
-    //Set Match Result
-    const matchResult = () => {
-        if((userSelection === "Rock" && cpuSelection ==="Scissors") 
-        || (userSelection === "Paper" && cpuSelection ==="Rock") 
-        || (userSelection === "Scissors" && cpuSelection ==="Paper")) {
-            setUserMatchResult("You win !")
-        }else if(userSelection === cpuSelection){
-            setUserMatchResult("Draw !")
-        }else {
-            setUserMatchResult("You loose !")
-        }
-    }
-
-    console.log(`${userSelection} vs ${cpuSelection} = ${userMatchResult}`)
-
-
-
-    return (
-        <div>
-            <h2>{userSelection}</h2>
-            <button onClick={() => setUserSelection("Rock")} >Rock</button>
-            <button onClick={() => setUserSelection("Paper")}>Paper</button>
-            <button onClick={() => setUserSelection("Scissors")}>Scissors</button>
-
-            <h2>{cpuSelection}</h2>
-
-            <button onClick={randomCPUSelection}>Play</button>
-
-            <h2>{userMatchResult}</h2>
+  return (
+    <div className="game-container">
+      <div className="match-container">
+        <div className="user-container">
+          <span>User</span>
+          <span>{userSelection}</span>
+          <div className="user-selection">
+            <div
+              className="selection-rock"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)}
+            >
+              <span>Rock</span>
+            </div>
+            <div
+              className="selection-paper"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}
+            >
+              <span>Paper</span>
+            </div>
+            <div
+              className="selection-scissors"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}
+            >
+              <span>Scissors</span>
+            </div>
+          </div>
         </div>
-    )
+        <div className="score-container">
+          <span>{score}</span>
+          <span>{userMatchResult}</span>
+        </div>
+        <div className="cpu-container">
+          <span>CPU</span>
+          <span>{cpuSelection}</span>
+          <div></div>
+        </div>
+      </div>
+      <div className="play-container">
+        <div onClick={randomCPUSelection}>
+          <span>Play !</span>
+        </div>
+      </div>
+    </div>
+  );
 }
