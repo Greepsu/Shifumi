@@ -9,8 +9,6 @@ export function UserContextProvider({ children }) {
   const webSocket = useContext(WebSocketContext);
   const [user, setUser] = useState();
 
-  console.log("loaded");
-
   useEffect(() => {
     webSocket.on("connect", () => {
       setUser(webSocket.id);

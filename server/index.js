@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
 
   socket.on('create', (room) => {
     socket.join(room);
-    console.log(`Socket ${socket.id} joining ${room}`);
+    console.log(`User with ${socket.id} ID joining ${room}`);
   });
 
   socket.on('disconnect', () => {
