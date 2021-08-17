@@ -7,7 +7,7 @@ import "./index.css";
 //Import App
 import App from "./Components/App.jsx";
 
-//Import COntexts
+//Import Contexts
 import { GameContextProvider } from "../src/Contexts/GameContext";
 import { UserContextProvider } from "../src/Contexts/UserContext";
 import { WebSocketContextProvider } from "../src/Contexts/WebSocketContext";

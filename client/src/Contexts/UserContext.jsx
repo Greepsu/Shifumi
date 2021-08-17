@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 
 //Import WebSocketContext
-import { WebSocketContext } from "./WebSocketContext";
+import { useWebSocketContext } from "./WebSocketContext";
 
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
-  const webSocket = useContext(WebSocketContext);
+  const webSocket = useWebSocketContext();
   const [user, setUser] = useState();
 
   useEffect(() => {

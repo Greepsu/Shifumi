@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 
 //Import style
 import "../Styles/Room.css";
 
 //Import Contexts
-import { UserContext } from "../Contexts/UserContext";
+import { useUserContext } from "../Contexts/UserContext";
 
 export default function Room() {
-  const user = useContext(UserContext);
+  const user = useUserContext();
 
   return (
     <div className="room">
