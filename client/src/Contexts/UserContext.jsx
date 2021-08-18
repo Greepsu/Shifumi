@@ -32,7 +32,7 @@ export function UserContextProvider({ children }) {
 
   const values = user;
 
-  return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={values}>{user ? children : <div>Loading</div>}</UserContext.Provider>;
 }
 
 export function useUserContext() {

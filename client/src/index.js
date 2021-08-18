@@ -8,9 +8,9 @@ import "./index.css";
 import App from "./Components/App.jsx";
 
 //Import Contexts
-import { GameContextProvider } from "../src/Contexts/GameContext";
-import { UserContextProvider } from "../src/Contexts/UserContext";
 import { WebSocketContextProvider } from "../src/Contexts/WebSocketContext";
+import { UserContextProvider } from "../src/Contexts/UserContext";
+import { GameContextProvider } from "../src/Contexts/GameContext";
 
 ReactDOM.render(
   <React.StrictMode>
