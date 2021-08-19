@@ -21,7 +21,10 @@ app.use(cors());
 app.use(express.json());
 
 //Socket.io
+let numUsers = 0;
+
 io.on('connection', (socket) => {
+
   console.log(`User with ${socket.id} ID connected on Back`);
 
   socket.on('create', (room) => {
@@ -38,7 +41,26 @@ io.on('connection', (socket) => {
       socket.broadcast.emit('weapon', data)
     }
   })
+
+    // when the client emits 'add user', this listens and executes
+    socket.on('add user', (username) => {  
+      // we store the username in the socket session for this client
+      socket.username = username;
+      ++numUsers;
+      socket.emit('login', {
+        numUsers: numUsers
+      });
+
+      // echo globally (all clients) that a person has connected
+      socket.broadcast.emit('user joined', {
+        username: socket.username,
+        numUsers: numUsers
+      });
+      console.log(username)
+    });
 });
+
+
 
 
 

@@ -15,7 +15,7 @@ export function WebSocketContextProvider({ children }) {
   }, [setWebSocket]);
   return (
     <WebSocketContext.Provider value={webSocket}>
-      {webSocket ? children : <div>Loading</div>}
+      {webSocket ? children : <div>Loading WebSocketContext</div>}
     </WebSocketContext.Provider>
   );
 }

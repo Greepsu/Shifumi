@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 
+//Import Components
+import Login from "../Components/Login";
+
 //Import WebSocketContext
 import { useWebSocketContext } from "./WebSocketContext";
 
@@ -7,30 +10,45 @@ export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
   const webSocket = useWebSocketContext();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState('');
 
   useEffect(() => {
-    webSocket.on("connect", () => {
-      setUser(webSocket.id);
-      console.log(`User with ${webSocket.id} ID connected on Front`);
-    });
 
-    webSocket.on("weapon", (data) => {
-      console.log(data);
-    });
+    console.log(`UserContext : user = ${user}`)
 
-    return webSocket.on("disconnect", () => {
-      console.log(`User with ${webSocket.id} ID disconnected on Front`);
-    });
-  }, [webSocket]);
+    if (user === '') {
+      console.log("No user")
+    } else {
+      //Connect to socket
+      webSocket.on("connect", () => {
+        webSocket.emit('add user', user);
+        console.log(`User ${user} connected on Front`);
+      });
 
-  const sendWeapon = (weapon) => webSocket.emit("weapon", weapon);
+      webSocket.on("weapon", (data) => {
+        console.log(data);
+      });
 
-  const joinRoom = () => webSocket.emit("create", "room1");
+      webSocket.emit("create", "room1");
 
-  const values = {user, joinRoom};
+      // Whenever the server emits 'login', log the login message
+      webSocket.on('login', (data) => {
+        // Display the welcome message
+        const message = 'Welcome to Socket.IO Chat – ';
+        console.log(data);
+      });
 
-  return <UserContext.Provider value={values}>{user ? children : <div>Loading</div>}</UserContext.Provider>;
+      return webSocket.on("disconnect", () => {
+        console.log(`User ${user} disconnected on Front`);
+      });
+    }
+  }, [webSocket, user]);
+
+  // const sendWeapon = (weapon) => webSocket.emit("weapon", weapon);
+
+  const values = { user, setUser };
+
+  return <UserContext.Provider value={values}>{user ? children : <Login />}</UserContext.Provider>;
 }
 
 export function useUserContext() {
