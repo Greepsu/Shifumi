@@ -15,22 +15,20 @@ export function UserContextProvider({ children }) {
       console.log(`User with ${webSocket.id} ID connected on Front`);
     });
 
-    webSocket.on("message", (data) => {
+    webSocket.on("weapon", (data) => {
       console.log(data);
     });
-
-    webSocket.emit("create", "room1");
 
     return webSocket.on("disconnect", () => {
       console.log(`User with ${webSocket.id} ID disconnected on Front`);
     });
   }, [webSocket]);
 
-  const sendMessage = () => {
-    webSocket.emit("message", "test");
-  };
+  const sendWeapon = (weapon) => webSocket.emit("weapon", weapon);
 
-  const values = user;
+  const joinRoom = () => webSocket.emit("create", "room1");
+
+  const values = {user, joinRoom};
 
   return <UserContext.Provider value={values}>{user ? children : <div>Loading</div>}</UserContext.Provider>;
 }

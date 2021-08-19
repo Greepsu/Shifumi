@@ -7,11 +7,12 @@ import "../Styles/Room.css";
 import { useUserContext } from "../Contexts/UserContext";
 
 export default function Room() {
-  const user = useUserContext();
+  const {user, weapon, joinRoom} = useUserContext();
 
   return (
     <div className="room">
-      <h2>{`User ID: ${user}`}</h2>
+      <h2>{`User ID: ${user} choose ${weapon}`}</h2>
+      <button onClick={joinRoom} >Send</button>
     </div>
   );
 }

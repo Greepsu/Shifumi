@@ -33,12 +33,14 @@ io.on('connection', (socket) => {
     console.log(`User with ${socket.id} ID disconnected on Back`);
   });
 
-  socket.on('message', (data, room) => {
+  socket.on('weapon', (data, room) => {
     if(room) {
-      socket.broadcast.emit('message', data)
+      socket.broadcast.emit('weapon', data)
     }
   })
 });
+
+
 
 //Listen
 server.listen(5001, () => {
