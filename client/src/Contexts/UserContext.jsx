@@ -19,7 +19,6 @@ export function UserContextProvider({ children }) {
     if (user === '') {
       console.log("No user")
     } else {
-      //Connect to socket
       webSocket.on("connect", () => {
         webSocket.emit('add user', user);
         console.log(`User ${user} connected on Front`);
@@ -31,9 +30,7 @@ export function UserContextProvider({ children }) {
 
       webSocket.emit("create", "room1");
 
-      // Whenever the server emits 'login', log the login message
       webSocket.on('login', (data) => {
-        // Display the welcome message
         const message = 'Welcome to Socket.IO Chat – ';
         console.log(data);
       });
