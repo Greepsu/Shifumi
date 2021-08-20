@@ -42,14 +42,9 @@ io.on("connection", (socket) => {
     console.log(`User ${socket.username} disconnected on Back`);
   });
 
-  socket.on("weapon", (data, room) => {
-    if (room) {
-      socket.broadcast.emit("weapon", data);
-    }
+  socket.on("weapon", (weapon) => {
+      console.log(weapon)
   });
-
-  
-
   
 });
 
