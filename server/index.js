@@ -35,15 +35,15 @@ io.on("connection", (socket) => {
 
   socket.on("create", (room) => {
     socket.join(room);
-    console.log(`User ${socket.username} joining ${room}`);
+    console.log(`${socket.username} joining ${room}`);
   });
 
   socket.on("disconnect", () => {
-    console.log(`User ${socket.username} disconnected on Back`);
+    console.log(`${socket.username} disconnected on Back`);
   });
 
   socket.on("weapon", (weapon) => {
-      console.log(weapon)
+      console.log(`${socket.username} choose ${weapon}`)
   });
   
 });
