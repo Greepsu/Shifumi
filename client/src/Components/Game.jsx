@@ -50,8 +50,8 @@ export default function Game() {
           <span>{score}</span>
           <span>{userMatchResult}</span>
         </div>
-        <div className="cpu-container">
-          <span>CPU</span>
+        <div className="opponent-container">
+          <span>opponent</span>
           <span>{cpuSelection}</span>
           <div></div>
         </div>
