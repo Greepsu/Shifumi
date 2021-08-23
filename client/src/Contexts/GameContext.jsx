@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 
+//Import WebSocketContext
+import { useWebSocketContext } from "./WebSocketContext";
+
 //Import random number generator for determine CPU selection
 import { generateRandomNumber, compareResult } from "../Components/Helper";
 
@@ -9,6 +12,7 @@ import { ShifumiWeaponObject, ShifumiResultObject } from "../Enums/Shifumi";
 export const GameContext = createContext({});
 
 export function GameContextProvider({ children }) {
+  const webSocket = useWebSocketContext();
   const [userSelection, setUserSelection] = useState();
   const [cpuSelection, setCpuSelection] = useState();
   const [userMatchResult, setUserMatchResult] = useState();
@@ -31,6 +35,11 @@ export function GameContextProvider({ children }) {
         console.log(`Sorry, Bot have some issues`);
     }
   }
+
+  //Send User Weapon to the backend
+  useEffect(() => {
+    webSocket.emit('weapon', userSelection);
+  }, [webSocket, userSelection])
 
   //Set Match Result
   useEffect(() => {

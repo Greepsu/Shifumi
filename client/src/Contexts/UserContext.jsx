@@ -22,10 +22,6 @@ export function UserContextProvider({ children }) {
       });
     webSocket.emit('add user', user);
 
-    webSocket.on("weapon", (data) => {
-      console.log(data);
-    });
-
     webSocket.emit("create", "room1");
 
     return webSocket.on("disconnect", () => {
