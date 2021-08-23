@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 
 //Import WebSocketContext
 import { useWebSocketContext } from "./WebSocketContext";
+import { useUserContext } from "./UserContext";
 
 //Import random number generator for determine CPU selection
 import { generateRandomNumber, compareResult } from "../Components/Helper";
@@ -13,10 +14,33 @@ export const GameContext = createContext({});
 
 export function GameContextProvider({ children }) {
   const webSocket = useWebSocketContext();
+  const { user } = useUserContext();
+
   const [userSelection, setUserSelection] = useState();
+  const [selection, setSelection] = useState({ name: user, weapon: userSelection })
+  const [all, setAll] = useState([])
+
+
   const [cpuSelection, setCpuSelection] = useState();
+
+
+  const [opponentSelection, setOpponentSelection] = useState();
   const [userMatchResult, setUserMatchResult] = useState();
   const [score, setScore] = useState(0);
+
+  console.log(all)
+
+
+  useEffect(() => {
+    const { name } = selection
+    const weapon = userSelection
+    webSocket.emit("selection", { name, weapon })
+    setAll([...all, { name, weapon }])
+
+    return webSocket.on("disconnect", () => {
+      console.log(`${user} disconnected on Front`);
+    });
+  }, [webSocket, userSelection, selection]);
 
   //Set CPU choice
   function randomCPUSelection() {
@@ -36,10 +60,6 @@ export function GameContextProvider({ children }) {
     }
   }
 
-  //Send User Weapon to the backend
-  useEffect(() => {
-    webSocket.emit('weapon', userSelection);
-  }, [webSocket, userSelection])
 
   //Set Match Result
   useEffect(() => {
@@ -73,6 +93,7 @@ export function GameContextProvider({ children }) {
     userMatchResult,
     handleUserSelection,
     randomCPUSelection,
+    all
   };
 
   return <GameContext.Provider value={values}>{children}</GameContext.Provider>;

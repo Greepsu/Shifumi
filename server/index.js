@@ -23,27 +23,14 @@ app.use(express.json());
 //Socket.io
 
 io.on("connection", (socket) => {
-  socket.on("add user", (username) => {
-    socket.username = username;
 
-    console.log(`User ${socket.username} connected on Back`);
-    
-    socket.broadcast.emit("user joined", {
-      username: socket.username,
-    });
-  });
-
-  socket.on("create", (room) => {
-    socket.join(room);
-    console.log(`${socket.username} joining ${room}`);
-  });
+  socket.on('selection', (selection) => {
+    console.log(selection)
+    io.emit('selection', selection)
+  })
 
   socket.on("disconnect", () => {
     console.log(`${socket.username} disconnected on Back`);
-  });
-
-  socket.on("weapon", (weapon) => {
-      console.log(`${socket.username} choose ${weapon}`)
   });
   
 });

@@ -17,10 +17,18 @@ export default function Game() {
     userMatchResult,
     handleUserSelection,
     randomCPUSelection,
+    all,
   } = useGameContext();
 
   return (
     <div className="game-container">
+      <div>{all.map(({ name, weapon }, index) => (
+        <div key={index}>
+          <h3>
+            {name}: <span>{weapon}</span>
+          </h3>
+        </div>
+      ))}</div>
       <div className="match-container">
         <div className="user-container">
           <span>User</span>
