@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //Import Contexts
 import { useUserContext } from "../Contexts/UserContext";
@@ -8,16 +8,15 @@ import { useWebSocketContext } from "../Contexts/WebSocketContext";
 
 export default function Login() {
     const webSocket = useWebSocketContext();
-    const { setUser } = useUserContext();
-    const [input, setInput] = useState('')
+    const [login, setLogin] = useState('');
 
-    const handleInput = (e) => setInput(e.target.value)
-    const handleUser = () => setUser(input)
+    const handleInput = (e) => setLogin(e.target.value)
+    const handleLogin = () => webSocket.emit('add user', login);
 
     return (
         <div>
-            <input value={input} onChange={handleInput} />
-            <button onClick={handleUser} >Login</button>
+            <input value={login} onChange={handleInput} />
+            <button onClick={handleLogin} >Login</button>
         </div>
     )
 }

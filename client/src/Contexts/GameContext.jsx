@@ -16,31 +16,30 @@ export function GameContextProvider({ children }) {
   const webSocket = useWebSocketContext();
   const { user } = useUserContext();
 
-  const [userSelection, setUserSelection] = useState();
-  const [selection, setSelection] = useState({ name: user, weapon: userSelection })
+  const [userSelection, setUserSelection] = useState('');
   const [all, setAll] = useState([])
 
+  const [opponent, setOpponent] = useState('')
 
   const [cpuSelection, setCpuSelection] = useState();
-
-
-  const [opponentSelection, setOpponentSelection] = useState();
   const [userMatchResult, setUserMatchResult] = useState();
   const [score, setScore] = useState(0);
 
   console.log(all)
+  console.log(userSelection)
 
 
   useEffect(() => {
-    const { name } = selection
-    const weapon = userSelection
-    webSocket.emit("selection", { name, weapon })
-    setAll([...all, { name, weapon }])
+    webSocket.on("selection", ({ name: user, weapon: userSelection }) => {
+      setAll([...all, { name: user, weapon: userSelection }])
+    })
 
-    return webSocket.on("disconnect", () => {
-      console.log(`${user} disconnected on Front`);
-    });
-  }, [webSocket, userSelection, selection]);
+
+  }, [webSocket, userSelection]);
+
+  const start = () => {
+    webSocket.emit("selection", { name: user, weapon: userSelection })
+  }
 
   //Set CPU choice
   function randomCPUSelection() {
@@ -93,7 +92,8 @@ export function GameContextProvider({ children }) {
     userMatchResult,
     handleUserSelection,
     randomCPUSelection,
-    all
+    all,
+    start
   };
 
   return <GameContext.Provider value={values}>{children}</GameContext.Provider>;

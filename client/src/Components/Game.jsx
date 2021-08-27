@@ -4,12 +4,14 @@ import React from "react";
 import "../Styles/Game.css";
 
 //Import Contexts
+import { useUserContext } from "../Contexts/UserContext";
 import { useGameContext } from "../Contexts/GameContext";
 
 //Import enums
 import { ShifumiWeaponObject } from "../Enums/Shifumi";
 
 export default function Game() {
+  const { user } = useUserContext();
   const {
     score,
     userSelection,
@@ -18,6 +20,7 @@ export default function Game() {
     handleUserSelection,
     randomCPUSelection,
     all,
+    start
   } = useGameContext();
 
   return (
@@ -31,7 +34,7 @@ export default function Game() {
       ))}</div>
       <div className="match-container">
         <div className="user-container">
-          <span>User</span>
+          <span>{user}</span>
           <span>{userSelection}</span>
           <div className="user-selection">
             <div
@@ -65,7 +68,7 @@ export default function Game() {
         </div>
       </div>
       <div className="play-container">
-        <div onClick={randomCPUSelection}>
+        <div onClick={start}>
           <span>Play !</span>
         </div>
       </div>

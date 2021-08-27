@@ -22,17 +22,71 @@ app.use(express.json());
 
 //Socket.io
 
-io.on("connection", (socket) => {
+users = [];
+connections = [];
+choices = [];
 
-  socket.on('selection', (selection) => {
-    console.log(selection)
-    io.emit('selection', selection)
-  })
+io.on("connection", (socket) => {
+  connections.push(socket);
+  console.log("Connected: %s sockets connected", connections.length);
+
+  socket.on("add user", (data) => {
+    console.log(data)
+
+    //Define socket.username
+    socket.username = data;
+
+    //Emit username to the front (user state)
+    socket.emit('get user', socket.username)
+
+    //Emit username for new connection
+    io.emit("connected", socket.username);
+
+    //Push new user in the array of all users
+    users.push(socket.username);
+
+    //Emit all the users in the array
+    socket.emit("get users", users);
+
+    //Launch game if 2 players in the array
+    if (users.length === 2) {
+      io.emit("game start");
+    }
+    console.log(users)
+  });
+
+  socket.on("player choice", function (username, choice) {
+    choices.push({ user: username, choice: choice });
+    console.log("%s chose %s.", username, choice);
+
+    if (choices.length == 2) {
+      console.log("[socket.io] Both players have made choices.");
+      io.emit(choices);
+      choices = [];
+    }
+  });
+
+  // socket.on('selection', (selection) => {
+  //   // if (!choice1) {
+  //   //   choice1 = selection
+  //   // }else if (!choice2) {
+  //   //   choice2 = selection
+  //   // }else if(typeof choice1 === "object" && typeof choice2 === "object") {
+  //   //   console.log(`First log: ${choice1.name} choose ${choice1.weapon}`)
+  //   //   console.log(`Second log: ${choice2.name} choose ${choice2.weapon}`)
+  //   // }
+
+  //   // socket.broadcast.emit('selection', selection)
+  // })
 
   socket.on("disconnect", () => {
-    console.log(`${socket.username} disconnected on Back`);
+    users.splice(users.indexOf(socket.username), 1);
+    io.sockets.emit("get user", users);
+
+    connections.splice(connections.indexOf(socket), 1);
+    io.emit("disconnected", socket.username);
+    console.log("Disconnected: %s sockets connected", connections.length);
   });
-  
 });
 
 //Listen
@@ -40,4 +94,4 @@ server.listen(5001, () => {
   console.log(`Server started: socket.io`);
 });
 
-app.listen(port, () => console.log(`Blog app listening on port ${port} !`));
+app.listen(port, () => console.log(`Shifumi app listening on port ${port} !`));
