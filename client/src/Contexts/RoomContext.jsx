@@ -8,6 +8,7 @@ export const RoomContext = createContext({});
 export function RoomContextProvider({ children }) {
   const webSocket = useWebSocketContext();
   const [users, setUsers] = useState([]);
+  console.log(`Users: ${users}`);
 
   useEffect(() => {
     webSocket.on("get users", (usernames) => {

@@ -3,7 +3,6 @@ import React from "react";
 //Import Styles
 import "../Styles/App.css";
 
-
 //Import Component
 import Routes from "./Routes";
 import Login from "./Login";

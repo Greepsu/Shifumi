@@ -45,11 +45,13 @@ io.on("connection", (socket) => {
     //Push new user in the array of all users
     users.push(socket.username);
 
+    socket.emit("get users", users);
+
+
 
     console.log(users)
   });
 
-  socket.emit("get users", users);
 
 
 
