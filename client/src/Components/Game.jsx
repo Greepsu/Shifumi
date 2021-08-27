@@ -7,7 +7,7 @@ import "../Styles/Game.css";
 import { useUserContext } from "../Contexts/UserContext";
 import { useGameContext } from "../Contexts/GameContext";
 
-//Import enums
+//Import Enums
 import { ShifumiWeaponObject } from "../Enums/Shifumi";
 
 export default function Game() {
@@ -18,20 +18,11 @@ export default function Game() {
     cpuSelection,
     userMatchResult,
     handleUserSelection,
-    randomCPUSelection,
-    all,
-    start
+    start,
   } = useGameContext();
 
   return (
     <div className="game-container">
-      <div>{all.map(({ name, weapon }, index) => (
-        <div key={index}>
-          <h3>
-            {name}: <span>{weapon}</span>
-          </h3>
-        </div>
-      ))}</div>
       <div className="match-container">
         <div className="user-container">
           <span>{user}</span>

@@ -45,15 +45,18 @@ io.on("connection", (socket) => {
     //Push new user in the array of all users
     users.push(socket.username);
 
-    //Emit all the users in the array
-    socket.emit("get users", users);
 
-    //Launch game if 2 players in the array
-    if (users.length === 2) {
-      io.emit("game start");
-    }
     console.log(users)
   });
+
+  socket.emit("get users", users);
+
+
+
+  //Launch game if 2 players are connected
+  if (users.length === 2) {
+    io.emit("game start");
+  }
 
   socket.on("player choice", function (username, choice) {
     choices.push({ user: username, choice: choice });

@@ -1,11 +1,18 @@
 import React from "react";
 
-//Import style
+//Import Style
 import "../Styles/Room.css";
 
-import Game from "../Components/Game"
+//Import Contexts
+import { useRoomContext } from "../Contexts/RoomContext";
+
+//Import Components
+import Game from "../Components/Game";
 
 export default function Room() {
+  const { users } = useRoomContext();
+
+  console.log(users);
 
   return (
     <div className="room">

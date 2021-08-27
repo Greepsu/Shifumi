@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+
 //Import components
 import Game from "./Game";
 import MainLobby from "./MainLobby";
@@ -8,17 +9,17 @@ import Room from "./Room";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
 export default function Routes() {
-    return (
-        <Switch>
-        <Route exact path="/">
-          <MainLobby />
-        </Route>
-        <Route path="/cpu">
-          <Game />
-        </Route>
-        <Route path="/user">
-          <Room />
-        </Route>
-      </Switch>
-    )
+  return (
+    <Switch>
+      <Route exact path="/">
+        <MainLobby />
+      </Route>
+      <Route path="/cpu">
+        <Game />
+      </Route>
+      <Route path="/user">
+        <Room />
+      </Route>
+    </Switch>
+  );
 }

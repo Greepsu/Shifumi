@@ -10,15 +10,18 @@ import App from "./Components/App.jsx";
 //Import Contexts
 import { WebSocketContextProvider } from "../src/Contexts/WebSocketContext";
 import { UserContextProvider } from "../src/Contexts/UserContext";
+import { RoomContextProvider } from "./Contexts/RoomContext";
 import { GameContextProvider } from "../src/Contexts/GameContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <WebSocketContextProvider>
       <UserContextProvider>
-        <GameContextProvider>
-          <App />
-        </GameContextProvider>
+        <RoomContextProvider>
+          <GameContextProvider>
+            <App />
+          </GameContextProvider>
+        </RoomContextProvider>
       </UserContextProvider>
     </WebSocketContextProvider>
   </React.StrictMode>,

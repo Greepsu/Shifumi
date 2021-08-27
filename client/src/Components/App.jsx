@@ -1,23 +1,25 @@
 import React from "react";
 
-//Import styles
+//Import Styles
 import "../Styles/App.css";
 
+
+//Import Component
 import Routes from "./Routes";
+import Login from "./Login";
 
 //Import Contexts
 import { useUserContext } from "../Contexts/UserContext";
 
 //Import react-router
 import { BrowserRouter as Router } from "react-router-dom";
-import Login from "./Login";
 
 function App() {
-  const {user} = useUserContext();
+  const { user } = useUserContext();
   return (
     <Router>
       <div className="App">
-        {user ? <Routes/> : <Login />}
+        {user ? <Routes /> : <Login />}
       </div>
     </Router>
   );
