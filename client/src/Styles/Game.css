@@ -43,22 +43,16 @@
   font-size: 21px;
 }
 
-.selection-rock,
-.selection-paper,
-.selection-scissors {
+.selection-weapon {
   position: relative;
   overflow: hidden;
 }
 
-.selection-rock:hover::before,
-.selection-paper:hover::before,
-.selection-scissors:hover::before {
+.selection-weapon:hover::before {
   width: 100%;
 }
 
-.selection-rock::before,
-.selection-paper::before,
-.selection-scissors::before {
+.selection-weapon::before {
   position: absolute;
   top: 0px;
   left: 0px;

@@ -29,19 +29,19 @@ export default function Game() {
           <span>{userSelection}</span>
           <div className="user-selection">
             <div
-              className="selection-rock"
+              className="selection-weapon selection-rock"
               onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)}
             >
               <span>Rock</span>
             </div>
             <div
-              className="selection-paper"
+              className="selection-weapon selection-paper"
               onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}
             >
               <span>Paper</span>
             </div>
             <div
-              className="selection-scissors"
+              className="selection-weapon selection-scissors"
               onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}
             >
               <span>Scissors</span>
