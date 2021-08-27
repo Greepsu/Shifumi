@@ -1,32 +1,36 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from 'react';
 
 //Import WebSocketContext
-import { useWebSocketContext } from "./WebSocketContext";
+import { useWebSocketContext } from './WebSocketContext';
 
 //Import Components
-import Login from "../Components/Login";
+import Login from '../Components/Login';
+import { useHistory } from 'react-router-dom';
 
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
   const webSocket = useWebSocketContext();
   const [user, setUser] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     if (user) {
-      webSocket.on("connected", (username) => {
+      webSocket.on('connected', (username) => {
         console.log(`${username} joined the room`);
       });
+    } else {
+      history.push('/');
     }
 
-    webSocket.on("get user", (username) => {
+    webSocket.on('get user', (username) => {
       setUser(username);
     });
 
-    return webSocket.on("disconnected", (username) => {
+    return webSocket.on('disconnected', (username) => {
       console.log(`${username} left the room`);
     });
-  }, [webSocket, user]);
+  }, [webSocket, user, history]);
 
   const values = { user };
 
@@ -40,6 +44,6 @@ export function UserContextProvider({ children }) {
 export function useUserContext() {
   const context = useContext(UserContext);
   if (!context)
-    throw new Error("UserContext should be used within a UserContextProvider");
+    throw new Error('UserContext should be used within a UserContextProvider');
   return context;
 }

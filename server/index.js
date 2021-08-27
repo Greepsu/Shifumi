@@ -1,18 +1,18 @@
 //Import and use express
-const express = require("express");
+const express = require('express');
 const app = express();
 
 const port = 5000;
 
 //Import CORS
-const cors = require("cors");
+const cors = require('cors');
 
 //Import Socket.io
-const server = require("http").Server(app);
-const io = require("socket.io")(server, {
+const server = require('http').Server(app);
+const io = require('socket.io')(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
   },
 });
 
@@ -22,50 +22,56 @@ app.use(express.json());
 
 //Socket.io
 
-users = [];
-connections = [];
-choices = [];
+const rooms = [];
+const users = [];
+const connections = [];
+const choices = [];
 
-io.on("connection", (socket) => {
+export const SocketEvents = Object.freeze({
+  ADD_USER: 'add_user',
+  GET_USER: 'get_users',
+});
+
+io.on('connection', (socket) => {
   connections.push(socket);
-  console.log("Connected: %s sockets connected", connections.length);
+  console.log('Connected: %s sockets connected', connections.length);
 
-  socket.on("add user", (data) => {
-    console.log(data)
+  socket.on(SocketEvents.ADD_USER, (data) => {
+    console.log(data);
 
     //Define socket.username
-    socket.username = data;
+    socket.data = { username: 'Didier', id: socket.id, roomId: socket.id };
+
+    const room = {
+      id: socket.id,
+      state: 'idle',
+    };
 
     //Emit username to the front (user state)
-    socket.emit('get user', socket.username)
+    socket.emit('get user', socket.username);
 
     //Emit username for new connection
-    io.emit("connected", socket.username);
+    io.emit('connected', socket.username);
 
     //Push new user in the array of all users
-    users.push(socket.username);
+    users.push(socket.data);
 
-    socket.emit("get users", users);
+    socket.emit('get users', users);
 
-
-
-    console.log(users)
+    console.log(users);
   });
-
-
-
 
   //Launch game if 2 players are connected
   if (users.length === 2) {
-    io.emit("game start");
+    io.emit('game start');
   }
 
-  socket.on("player choice", function (username, choice) {
+  socket.on('player choice', function (username, choice) {
     choices.push({ user: username, choice: choice });
-    console.log("%s chose %s.", username, choice);
+    console.log('%s chose %s.', username, choice);
 
     if (choices.length == 2) {
-      console.log("[socket.io] Both players have made choices.");
+      console.log('[socket.io] Both players have made choices.');
       io.emit(choices);
       choices = [];
     }
@@ -84,13 +90,13 @@ io.on("connection", (socket) => {
   //   // socket.broadcast.emit('selection', selection)
   // })
 
-  socket.on("disconnect", () => {
+  socket.on('disconnect', () => {
     users.splice(users.indexOf(socket.username), 1);
-    io.sockets.emit("get user", users);
+    io.sockets.emit('get user', users);
 
     connections.splice(connections.indexOf(socket), 1);
-    io.emit("disconnected", socket.username);
-    console.log("Disconnected: %s sockets connected", connections.length);
+    io.emit('disconnected', socket.username);
+    console.log('Disconnected: %s sockets connected', connections.length);
   });
 });
 

@@ -10,9 +10,9 @@ import { useRoomContext } from "../Contexts/RoomContext";
 import Game from "../Components/Game";
 
 export default function Room() {
-  const { users } = useRoomContext();
+  const users = useRoomContext();
 
-  console.log(users);
+  console.log("ROOM : ", users);
 
   return (
     <div className="room">

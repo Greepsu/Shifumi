@@ -11,16 +11,13 @@ import Login from "./Login";
 import { useUserContext } from "../Contexts/UserContext";
 
 //Import react-router
-import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const { user } = useUserContext();
   return (
-    <Router>
       <div className="App">
         {user ? <Routes /> : <Login />}
       </div>
-    </Router>
   );
 }
 
