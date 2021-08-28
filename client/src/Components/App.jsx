@@ -14,11 +14,7 @@ import { useUserContext } from "../Contexts/UserContext";
 
 function App() {
   const { user } = useUserContext();
-  return (
-      <div className="App">
-        {user ? <Routes /> : <Login />}
-      </div>
-  );
+  return <div className="App">{user ? <Routes /> : <Login />}</div>;
 }
 
 export default App;

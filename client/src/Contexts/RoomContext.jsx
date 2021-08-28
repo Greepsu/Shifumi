@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useState, useEffect, useContext, createContext } from "react";
 
 //Import Contexts
-import { useWebSocketContext } from './WebSocketContext';
+import { useWebSocketContext } from "./WebSocketContext";
 
 export const RoomContext = createContext({});
 
@@ -11,7 +11,7 @@ export function RoomContextProvider({ children }) {
   console.log(`Users: ${users}`);
 
   useEffect(() => {
-    webSocket.on('get users', (usernames) => {
+    webSocket.on("get users", (usernames) => {
       console.log(`Data: ${usernames}`);
       setUsers(usernames);
     });
@@ -23,6 +23,8 @@ export function RoomContextProvider({ children }) {
 export function useRoomContext() {
   const context = useContext(RoomContext);
   if (!context)
-    throw new Error('useRoomContext should be used within a RoomContextProvider');
+    throw new Error(
+      "useRoomContext should be used within a RoomContextProvider"
+    );
   return context;
 }
