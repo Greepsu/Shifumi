@@ -13,17 +13,22 @@ import { UserContextProvider } from "../src/Contexts/UserContext";
 import { RoomContextProvider } from "./Contexts/RoomContext";
 import { GameContextProvider } from "../src/Contexts/GameContext";
 
+//Import react-router
+import { BrowserRouter as Router } from "react-router-dom";
+
 ReactDOM.render(
   <React.StrictMode>
-    <WebSocketContextProvider>
-      <UserContextProvider>
-        <RoomContextProvider>
-          <GameContextProvider>
-            <App />
-          </GameContextProvider>
-        </RoomContextProvider>
-      </UserContextProvider>
-    </WebSocketContextProvider>
+    <Router>
+      <WebSocketContextProvider>
+        <UserContextProvider>
+          <RoomContextProvider>
+            <GameContextProvider>
+              <App />
+            </GameContextProvider>
+          </RoomContextProvider>
+        </UserContextProvider>
+      </WebSocketContextProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

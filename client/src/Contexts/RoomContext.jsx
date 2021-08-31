@@ -7,17 +7,22 @@ export const RoomContext = createContext({});
 
 export function RoomContextProvider({ children }) {
   const webSocket = useWebSocketContext();
-  const [users, setUsers] = useState([]);
-  console.log(`Users: ${users}`);
+  const [room, setRoom] = useState([]);
+  const [opponent, setOpponent] = useState()
 
   useEffect(() => {
     webSocket.on("get users", (usernames) => {
       console.log(`Data: ${usernames}`);
-      setUsers(usernames);
+      setRoom(usernames);
     });
-  }, [webSocket]);
 
-  return <RoomContext.Provider value={users}>{children}</RoomContext.Provider>;
+    if(room.length === 2)
+    setOpponent(room[0]) //A CHANGER C'EST POUR TESTER
+  }, [webSocket, room]);
+
+  const values = {room, opponent}
+
+  return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;
 }
 
 export function useRoomContext() {

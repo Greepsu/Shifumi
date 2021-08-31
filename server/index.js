@@ -22,22 +22,22 @@ app.use(express.json());
 
 //Socket.io
 
-users = [];
-connections = [];
-choices = [];
+const users = [];
+const connections = [];
+const choices = [];
 
 io.on("connection", (socket) => {
   connections.push(socket);
   console.log("Connected: %s sockets connected", connections.length);
 
   socket.on("add user", (data) => {
-    console.log(data)
+    console.log(data);
 
     //Define socket.username
     socket.username = data;
 
     //Emit username to the front (user state)
-    socket.emit('get user', socket.username)
+    socket.emit("get user", socket.username);
 
     //Emit username for new connection
     io.emit("connected", socket.username);
@@ -47,42 +47,27 @@ io.on("connection", (socket) => {
 
     socket.emit("get users", users);
 
-
-
-    console.log(users)
+    console.log(users);
   });
-
-
-
 
   //Launch game if 2 players are connected
   if (users.length === 2) {
     io.emit("game start");
   }
 
-  socket.on("player choice", function (username, choice) {
-    choices.push({ user: username, choice: choice });
-    console.log("%s chose %s.", username, choice);
+  socket.on("player choice", (username, weapon) => {
+    console.log(`Username: ${username}`);
+    console.log(`Weapon: ${weapon}`);
+    choices.push({ user: username, weapon: weapon });
+    console.log(`${username} choose ${weapon}`);
+    console.log(choices);
 
     if (choices.length == 2) {
       console.log("[socket.io] Both players have made choices.");
-      io.emit(choices);
+      socket.emit("player choice", choices);
       choices = [];
     }
   });
-
-  // socket.on('selection', (selection) => {
-  //   // if (!choice1) {
-  //   //   choice1 = selection
-  //   // }else if (!choice2) {
-  //   //   choice2 = selection
-  //   // }else if(typeof choice1 === "object" && typeof choice2 === "object") {
-  //   //   console.log(`First log: ${choice1.name} choose ${choice1.weapon}`)
-  //   //   console.log(`Second log: ${choice2.name} choose ${choice2.weapon}`)
-  //   // }
-
-  //   // socket.broadcast.emit('selection', selection)
-  // })
 
   socket.on("disconnect", () => {
     users.splice(users.indexOf(socket.username), 1);

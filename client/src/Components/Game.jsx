@@ -12,10 +12,11 @@ import { ShifumiWeaponObject } from "../Enums/Shifumi";
 
 export default function Game() {
   const { user } = useUserContext();
+  
   const {
     score,
     userSelection,
-    cpuSelection,
+    opponent,
     userMatchResult,
     handleUserSelection,
     start,
@@ -53,8 +54,8 @@ export default function Game() {
           <span>{userMatchResult}</span>
         </div>
         <div className="opponent-container">
-          <span>opponent</span>
-          <span>{cpuSelection}</span>
+          <span>{opponent}</span>
+          <span>Vide</span>
           <div></div>
         </div>
       </div>

@@ -5,14 +5,16 @@ import "../Styles/Room.css";
 
 //Import Contexts
 import { useRoomContext } from "../Contexts/RoomContext";
+import { useUserContext } from "../Contexts/UserContext";
+
 
 //Import Components
 import Game from "../Components/Game";
 
 export default function Room() {
-  const { users } = useRoomContext();
 
-  console.log(users);
+
+
 
   return (
     <div className="room">
