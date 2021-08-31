@@ -1,18 +1,18 @@
 //Import and use express
-const express = require("express");
+const express = require('express');
 const app = express();
 
 const port = 5000;
 
 //Import CORS
-const cors = require("cors");
+const cors = require('cors');
 
 //Import Socket.io
-const server = require("http").Server(app);
-const io = require("socket.io")(server, {
+const server = require('http').Server(app);
+const io = require('socket.io')(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
   },
 });
 
@@ -26,33 +26,43 @@ const users = [];
 const connections = [];
 const choices = [];
 
-io.on("connection", (socket) => {
-  connections.push(socket);
-  console.log("Connected: %s sockets connected", connections.length);
+export const SocketEvents = Object.freeze({
+  ADD_USER: 'add_user',
+  GET_USER: 'get_users',
+});
 
-  socket.on("add user", (data) => {
+io.on('connection', (socket) => {
+  connections.push(socket);
+  console.log('Connected: %s sockets connected', connections.length);
+
+  socket.on(SocketEvents.ADD_USER, (data) => {
     console.log(data);
 
     //Define socket.username
-    socket.username = data;
+    socket.data = { username: 'Didier', id: socket.id, roomId: socket.id };
+
+    const room = {
+      id: socket.id,
+      state: 'idle',
+    };
 
     //Emit username to the front (user state)
-    socket.emit("get user", socket.username);
+    socket.emit('get user', socket.username);
 
     //Emit username for new connection
-    io.emit("connected", socket.username);
+    io.emit('connected', socket.username);
 
     //Push new user in the array of all users
-    users.push(socket.username);
+    users.push(socket.data);
 
-    socket.emit("get users", users);
+    socket.emit('get users', users);
 
     console.log(users);
   });
 
   //Launch game if 2 players are connected
   if (users.length === 2) {
-    io.emit("game start");
+    io.emit('game start');
   }
 
   socket.on("player choice", (username, weapon) => {
@@ -71,11 +81,11 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     users.splice(users.indexOf(socket.username), 1);
-    io.sockets.emit("get user", users);
+    io.sockets.emit('get user', users);
 
     connections.splice(connections.indexOf(socket), 1);
-    io.emit("disconnected", socket.username);
-    console.log("Disconnected: %s sockets connected", connections.length);
+    io.emit('disconnected', socket.username);
+    console.log('Disconnected: %s sockets connected', connections.length);
   });
 });
 

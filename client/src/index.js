@@ -12,6 +12,7 @@ import { WebSocketContextProvider } from "../src/Contexts/WebSocketContext";
 import { UserContextProvider } from "../src/Contexts/UserContext";
 import { RoomContextProvider } from "./Contexts/RoomContext";
 import { GameContextProvider } from "../src/Contexts/GameContext";
+import { BrowserRouter as Router } from "react-router-dom";
 
 //Import react-router
 import { BrowserRouter as Router } from "react-router-dom";

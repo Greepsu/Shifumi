@@ -10,8 +10,10 @@ import Login from "./Login";
 //Import Contexts
 import { useUserContext } from "../Contexts/UserContext";
 
+//Import react-router
+
 function App() {
-  const user = useUserContext();
+  const { user } = useUserContext();
   return <div className="App">{user ? <Routes /> : <Login />}</div>;
 }
 
