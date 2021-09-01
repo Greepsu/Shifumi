@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from 'react';
 
 //Import WebSocketContext
-import { useWebSocketContext } from "./WebSocketContext";
-import { useUserContext } from "./UserContext";
-import { useRoomContext } from "../Contexts/RoomContext";
+import { useWebSocketContext } from './WebSocketContext';
+import { useUserContext } from './UserContext';
+import { useRoomContext } from '../Contexts/RoomContext';
 
 //Import random number generator for determine CPU selection
-import { generateRandomNumber, compareResult } from "../Components/Helper";
+import { compareResult } from '../Components/Helper';
 
 //Import enums
-import { ShifumiWeaponObject, ShifumiResultObject } from "../Enums/Shifumi";
+import { ShifumiResultObject } from '../Enums/Shifumi';
+import { SocketEvents } from '../Enums/Shifumi';
 
 export const GameContext = createContext({});
 
@@ -19,11 +20,11 @@ export function GameContextProvider({ children }) {
   const { opponent } = useRoomContext();
 
   const [userSelection, setUserSelection] = useState();
-  const [opponentSelection, setOpponentSelection] = useState("");
+  const [opponentSelection, setOpponentSelection] = useState('');
   const [userMatchResult, setUserMatchResult] = useState();
   const [score, setScore] = useState(0);
 
-  webSocket.on("player choice", (data) => {
+  webSocket.on(SocketEvents.PLAYER_CHOICE, (data) => {
     console.log(`${data.user} choose ${data.weapon}`);
   });
 
@@ -34,7 +35,7 @@ export function GameContextProvider({ children }) {
   function start() {
     console.log(user);
     console.log(userSelection);
-    if (user) webSocket.emit("player choice", user, userSelection);
+    if (user) webSocket.emit(SocketEvents.PLAYER_CHOICE, user, userSelection);
   }
   // //Set CPU choice
   // function randomCPUSelection() {
@@ -98,7 +99,7 @@ export function useGameContext() {
   const context = useContext(GameContext);
   if (!context)
     throw new Error(
-      "useGameContext should be used within a GameContextProvider"
+      'useGameContext should be used within a GameContextProvider'
     );
   return context;
 }

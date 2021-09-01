@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 
 //Import styles
-import "../Styles/Game.css";
+import '../Styles/Game.css';
 
 //Import Contexts
-import { useUserContext } from "../Contexts/UserContext";
-import { useGameContext } from "../Contexts/GameContext";
+import { useUserContext } from '../Contexts/UserContext';
+import { useGameContext } from '../Contexts/GameContext';
 
 //Import Enums
-import { ShifumiWeaponObject } from "../Enums/Shifumi";
+import { ShifumiWeaponObject } from '../Enums/Shifumi';
 
 export default function Game() {
   const { user } = useUserContext();
-  
+
   const {
     score,
     userSelection,
