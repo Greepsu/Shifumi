@@ -24,7 +24,7 @@ export function UserContextProvider({ children }) {
       });
     }
 
-    webSocket.on(SocketEvents.GET_USERS, (username) => {
+    webSocket.on(SocketEvents.GET_USER, (username) => {
       console.log(username);
       setUser(username);
     });
