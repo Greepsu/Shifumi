@@ -22,7 +22,9 @@ app.use(cors());
 app.use(express.json());
 
 //Socket.io
-handleSocketConnection(io);
+io.on(SocketEvents.CONNECTION, (socket) => {
+  handleSocketConnection(socket, io);
+});
 
 //Listen
 server.listen(5001, () => {
