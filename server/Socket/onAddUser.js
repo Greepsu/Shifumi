@@ -1,12 +1,9 @@
 const { v4: uuidv4 } = require("uuid");
 const SocketEvents = require("../Enums/events");
 
-function onAddUser(data, socket, io) {
-  console.log(`Data: ${data}`);
-  console.log(`SocketID: ${socket.id}`);
-
+function onAddUser(username, socket, io) {
   //Define socket.username
-  socket.user = { username: data, id: socket.id, roomId: uuidv4() };
+  socket.user = { username, id: socket.id, roomId: uuidv4() };
 
   socket.username = socket.user.username;
 

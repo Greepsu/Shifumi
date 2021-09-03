@@ -15,12 +15,10 @@ export function UserContextProvider({ children }) {
   const webSocket = useWebSocketContext();
   const [user, setUser] = useState();
 
-  console.log(user);
-
   useEffect(() => {
     if (user) {
       webSocket.on(SocketEvents.CONNECTED, (username) => {
-        console.log(`${username} joined the room`);
+        console.log(`${username} connected`);
       });
     }
 

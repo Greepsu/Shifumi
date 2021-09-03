@@ -1,16 +1,14 @@
-import React from "react";
+import React from 'react';
 
 //Import Styles
-import "../Styles/App.css";
+import '../Styles/App.css';
 
 //Import Component
-import Routes from "./Routes";
-import Login from "./Login";
+import Routes from './Routes';
+import Login from './Login';
 
 //Import Contexts
-import { useUserContext } from "../Contexts/UserContext";
-
-//Import react-router
+import { useUserContext } from '../Contexts/UserContext';
 
 function App() {
   const { user } = useUserContext();

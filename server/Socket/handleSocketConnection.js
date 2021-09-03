@@ -2,17 +2,18 @@ const SocketEvents = require("../Enums/events");
 const onAddUser = require("./onAddUser");
 const onGameStart = require("./onGameStart");
 const onDisconnect = require("./onDisconnect");
-const onRoom = require("./onRoom");
+const onCreateRoom = require("./onCreateRoom");
+const onJoinRoom = require("./onJoinRoom");
+const onConnected = require("./onConnected");
 
 function handleSocketConnection(socket, io) {
   function onSocket(event, callback) {
     socket.on(event, (data) => callback(data, socket, io));
   }
-  // function onJoin(event, callback) {
-  //   socket.join(event, (data) => callback(data, socket, io));
-  // }
+  onSocket(SocketEvents.CONNECTED, onConnected);
   onSocket(SocketEvents.ADD_USER, onAddUser);
-  // onJoin(SocketEvents.ROOM, onRoom);
+  onSocket(SocketEvents.CREATE_ROOM, onCreateRoom);
+  onSocket(SocketEvents.JOIN_ROOM, onJoinRoom);
   onSocket(SocketEvents.GAME_START, onGameStart);
   onSocket(SocketEvents.DISCONNECT, onDisconnect);
 }

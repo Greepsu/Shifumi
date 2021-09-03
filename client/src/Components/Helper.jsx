@@ -1,5 +1,5 @@
 //Import enums
-import { ShifumiWeaponObject } from "../Enums/Shifumi";
+import { ShifumiWeaponObject } from '../Enums/Shifumi';
 
 //Genrate a random number for determine a CPU choice
 export const generateRandomNumber = () => Math.floor(Math.random() * 3);

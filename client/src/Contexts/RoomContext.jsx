@@ -1,28 +1,28 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useContext, createContext } from 'react';
 
 //Import Contexts
 import { useWebSocketContext } from './WebSocketContext';
 
 //Import ENUM
 import { SocketEvents } from '../Enums/Shifumi';
+import { useUserContext } from './UserContext';
 
 export const RoomContext = createContext({});
 
 export function RoomContextProvider({ children }) {
   const webSocket = useWebSocketContext();
-  const [room, setRoom] = useState([]);
-  const [opponent, setOpponent] = useState();
+  const { user } = useUserContext();
 
-  useEffect(() => {
-    webSocket.on(SocketEvents.GET_USERS, (usernames) => {
-      console.log(`Data: ${usernames}`);
-      setRoom(usernames);
-    });
+  function createRoom() {
+    webSocket.emit(SocketEvents.CREATE_ROOM, user.roomId);
+  }
 
-    if (room.length === 2) setOpponent(room[0]); //A CHANGER C'EST POUR TESTER
-  }, [webSocket, room]);
+  function joinRoom(roomId) {
+    webSocket.emit(SocketEvents.JOIN_ROOM, roomId);
+    console.log('join room');
+  }
 
-  const values = { room, opponent };
+  const values = { createRoom, joinRoom };
 
   return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;
 }

@@ -26,7 +26,7 @@ export default function Game() {
     <div className="game-container">
       <div className="match-container">
         <div className="user-container">
-          <span>{user}</span>
+          <span>{user.username}</span>
           <span>{userSelection}</span>
           <div className="user-selection">
             <div
