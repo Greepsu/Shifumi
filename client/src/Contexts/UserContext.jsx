@@ -28,7 +28,7 @@ export function UserContextProvider({ children }) {
     });
 
     webSocket.on(SocketEvents.DISCONNECTED, (username) => {
-      console.log(`${username} left the room`);
+      console.log(`${username} left`);
     });
   }, [webSocket, user]);
 
