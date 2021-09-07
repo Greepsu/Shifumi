@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useEffect } from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
 
 //Import Contexts
 import { useWebSocketContext } from './WebSocketContext';
@@ -12,18 +12,21 @@ export const RoomContext = createContext({});
 export function RoomContextProvider({ children }) {
   const webSocket = useWebSocketContext();
   const { user } = useUserContext();
+  const [room, setRoom] = useState([]);
+  console.log(room);
 
-  function createRoom() {
-    webSocket.emit(SocketEvents.CREATE_ROOM, user.roomId);
-    console.log(`Room with ${user.roomId} ID just created by ${user.username}`);
+  useEffect(() => {
+    webSocket.on(SocketEvents.GET_ROOM, (roomUsers) => {
+      setRoom(roomUsers);
+    });
+  }, [webSocket]);
+
+  function joinRoom(id) {
+    webSocket.emit(SocketEvents.JOIN_ROOM, id);
+    console.log(`Room with ${id} ID just joined by ${user.username}`);
   }
 
-  function joinRoom(roomId) {
-    webSocket.emit(SocketEvents.JOIN_ROOM, roomId);
-    console.log(`Room with ${roomId} ID Joined by ${user.username}`);
-  }
-
-  const values = { createRoom, joinRoom };
+  const values = { joinRoom };
 
   return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;
 }
