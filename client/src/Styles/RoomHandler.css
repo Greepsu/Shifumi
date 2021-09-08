@@ -1,0 +1,17 @@
+.roomhandler {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 20%;
+  color: white;
+}
+
+.roomhandler button {
+  padding: 5px;
+  width: fit-content;
+}
+
+.roomhandler-user div {
+  display: flex;
+  flex-direction: column;
+}

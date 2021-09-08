@@ -13,6 +13,7 @@ export function RoomContextProvider({ children }) {
   const webSocket = useWebSocketContext();
   const { user } = useUserContext();
   const [room, setRoom] = useState([]);
+  const [showId, setShowId] = useState(false);
   console.log(room);
 
   useEffect(() => {
@@ -23,10 +24,11 @@ export function RoomContextProvider({ children }) {
 
   function joinRoom(id) {
     webSocket.emit(SocketEvents.JOIN_ROOM, id);
+    setShowId(true);
     console.log(`Room with ${id} ID just joined by ${user.username}`);
   }
 
-  const values = { joinRoom };
+  const values = { joinRoom, room, showId };
 
   return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;
 }
