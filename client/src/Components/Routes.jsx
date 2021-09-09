@@ -19,8 +19,10 @@ export default function Routes() {
         <Game />
       </Route>
       <Route path="/user">
-        {/* <Room /> */}
         <RoomHandler />
+      </Route>
+      <Route path="/room/:roomId">
+        <Room />
       </Route>
     </Switch>
   );

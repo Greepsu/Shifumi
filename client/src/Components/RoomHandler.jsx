@@ -5,37 +5,32 @@ import '../Styles/RoomHandler.css';
 import { useRoomContext } from '../Contexts/RoomContext';
 import { useUserContext } from '../Contexts/UserContext';
 
+//Import react-router
+import { Link } from 'react-router-dom';
+
 export default function RoomHandler() {
-  const { joinRoom, room, showId } = useRoomContext();
+  const { joinRoom } = useRoomContext();
   const { user } = useUserContext();
   const [roomId, setRoomId] = useState('');
-
-  console.log(roomId);
 
   const handleInput = (e) => setRoomId(e.target.value);
 
   return (
     <div className="roomhandler">
-      <button onClick={() => joinRoom(user.id)}>Create Room</button>
-      {showId ? (
-        <div>
-          <h2>Share this ID to your opponent to start playing !</h2>
-          <p>{`Room ID: ${user.roomId}`}</p>
+      <div className="card">
+        <div className="create-room">
+          <h2>Create a room</h2>
+          <Link to={`/room/${user.roomId}`}>
+            <button onClick={() => joinRoom(user.roomId)}>Create Room</button>
+          </Link>
         </div>
-      ) : (
-        ''
-      )}
-
-      <div>
-        <span>Join Room with ID</span>
-        <input value={roomId} onChange={handleInput} />
-        <button onClick={() => joinRoom(roomId)}>Join</button>
-      </div>
-
-      <div className="roomhandler-user">
-        <div>
-          User in the room:{' '}
-          {room ? room.map((id) => <div key={id}>{id}</div>) : 'none'}
+        <span>OR</span>
+        <div className="join-room">
+          <h2>Join Room with ID</h2>
+          <input value={roomId} onChange={handleInput} />
+          <Link to={`/room/${roomId}`}>
+            <button onClick={() => joinRoom(roomId)}>Join</button>
+          </Link>
         </div>
       </div>
     </div>
