@@ -3,23 +3,28 @@ const rooms = []; //Pas trouvé de meilleur solution pour exporter le contenu de
 
 function onJoinRoom(userInfo, socket, io) {
   const user = userInfo.userInfo;
-  console.log(user);
   socket.join(userInfo.roomId);
+  console.log(
+    `Room with ${userInfo.roomId} ID just joined by ${user.username}`
+  );
   const roomUsers = io.sockets.adapter.rooms.get(userInfo.roomId);
 
   roomUsers.forEach((id) => {
     if (id === user.id) {
       rooms.push(user.username);
     }
-    console.log(rooms);
+  });
+
+  socket.on(SocketEvents.DISCONNECT, () => {
+    console.log(`${user.username} left the room`);
+    const index = rooms.indexOf(user.username);
+    if (index > -1) {
+      rooms.splice(index, 1);
+    }
+    io.emit(SocketEvents.GET_ROOM, rooms);
   });
 
   io.emit(SocketEvents.GET_ROOM, rooms);
-  // socket.emit("get room", roomUsers);
-  // console.log(socket);
-  console.log(
-    `Room with ${userInfo.roomId} ID just created by ${userInfo.username}`
-  );
 }
 
 module.exports = onJoinRoom;

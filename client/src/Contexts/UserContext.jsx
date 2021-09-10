@@ -27,7 +27,7 @@ export function UserContextProvider({ children }) {
       setUser(username);
     });
 
-    webSocket.on(SocketEvents.DISCONNECTED, (username) => {
+    webSocket.on(SocketEvents.DISCONNECT, (username) => {
       console.log(`${username} left`);
     });
   }, [webSocket, user]);
