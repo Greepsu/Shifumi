@@ -5,13 +5,11 @@ import { useWebSocketContext } from './WebSocketContext';
 
 //Import ENUM
 import { SocketEvents } from '../Enums/Shifumi';
-import { useUserContext } from './UserContext';
 
 export const RoomContext = createContext({});
 
 export function RoomContextProvider({ children }) {
   const webSocket = useWebSocketContext();
-  const { user } = useUserContext();
   const [room, setRoom] = useState([]);
   const [showId, setShowId] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -27,14 +25,14 @@ export function RoomContextProvider({ children }) {
     });
   }, [webSocket]);
 
-  function joinRoom(id) {
-    webSocket.emit(SocketEvents.JOIN_ROOM, id);
+  function joinRoom(roomId, userInfo) {
+    webSocket.emit(SocketEvents.JOIN_ROOM, { roomId, userInfo });
     setShowId(true);
-    console.log(`Room with ${id} ID just joined by ${user.username}`);
+    console.log(`Room with ${roomId} ID just joined by ${userInfo.username}`);
   }
 
   function getReady() {
-    webSocket.emit('set ready', 'az');
+    webSocket.emit(SocketEvents.SET_READY, 'az');
     setDisabled(true);
   }
 

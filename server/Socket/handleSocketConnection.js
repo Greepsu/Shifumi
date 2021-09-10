@@ -13,7 +13,7 @@ function handleSocketConnection(socket, io) {
   onSocket(SocketEvents.CONNECTED, onConnected);
   onSocket(SocketEvents.ADD_USER, onAddUser);
   onSocket(SocketEvents.JOIN_ROOM, onJoinRoom);
-  onSocket("set ready", onSetReady);
+  onSocket(SocketEvents.SET_READY, onSetReady);
   onSocket(SocketEvents.GAME_START, onGameStart);
   onSocket(SocketEvents.DISCONNECT, onDisconnect);
 }

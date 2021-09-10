@@ -18,6 +18,7 @@ export const SocketEvents = Object.freeze({
   CREATE_ROOM: 'create room',
   GET_ROOM: 'get room',
   JOIN_ROOM: 'join room',
+  SET_READY: 'set ready',
   GAME_START: 'game start',
   PLAYER_CHOICE: 'player choice',
   DISCONNECT: 'disconnect',

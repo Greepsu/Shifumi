@@ -23,7 +23,7 @@ export default function Game() {
   } = useGameContext();
 
   return (
-    <div className="game-container">
+    <div className="game">
       <div className="match-container">
         <div className="user-container">
           <span>{user.username}</span>

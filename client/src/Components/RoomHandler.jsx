@@ -21,7 +21,9 @@ export default function RoomHandler() {
         <div className="create-room">
           <h2>Create a room</h2>
           <Link to={`/room/${user.roomId}`}>
-            <button onClick={() => joinRoom(user.roomId)}>Create Room</button>
+            <button onClick={() => joinRoom(user.roomId, user)}>
+              Create Room
+            </button>
           </Link>
         </div>
         <span>OR</span>
@@ -29,7 +31,7 @@ export default function RoomHandler() {
           <h2>Join Room with ID</h2>
           <input value={roomId} onChange={handleInput} />
           <Link to={`/room/${roomId}`}>
-            <button onClick={() => joinRoom(roomId)}>Join</button>
+            <button onClick={() => joinRoom(roomId, user)}>Join</button>
           </Link>
         </div>
       </div>
