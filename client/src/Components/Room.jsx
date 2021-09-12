@@ -9,8 +9,16 @@ import { useParams } from 'react-router-dom';
 
 export default function Room() {
   const { roomId } = useParams();
-  const { room, showId, getReady, disabled, userReady } = useRoomContext();
+  const { room, showId, getReady, readyCount, ready } = useRoomContext();
 
+  const buttonColor = {
+    Ready: {
+      backgroundColor: 'green',
+    },
+    UnReady: {
+      backgroundColor: 'transparent',
+    },
+  };
   return (
     <div className="room">
       <div className="container">
@@ -26,8 +34,11 @@ export default function Room() {
           User in the room:{' '}
           {room ? room.map((id) => <div key={id}>{id}</div>) : 'none'}
         </div>
-        <span>{`User Ready: (${userReady}/2)`}</span>
-        <button disabled={disabled} onClick={() => getReady()}>
+        <span>{`User Ready: (${readyCount}/2)`}</span>
+        <button
+          style={ready ? buttonColor.Ready : buttonColor.UnReady}
+          onClick={() => getReady()}
+        >
           Play
         </button>
       </div>

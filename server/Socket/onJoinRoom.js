@@ -10,9 +10,7 @@ function onJoinRoom(userInfo, socket, io) {
   const roomUsers = io.sockets.adapter.rooms.get(userInfo.roomId);
 
   roomUsers.forEach((id) => {
-    if (id === user.id) {
-      rooms.push(user.username);
-    }
+    if (id === user.id) rooms.push(user.username);
   });
 
   socket.on(SocketEvents.DISCONNECT, () => {
