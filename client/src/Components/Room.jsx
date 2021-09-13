@@ -21,7 +21,7 @@ export default function Room() {
   };
 
   if (!room) {
-    return null;
+    return <p>loading</p>;
   }
 
   return (
