@@ -2,11 +2,13 @@ const SocketEvents = require("../Enums/events");
 const rooms = []; //Pas trouvé de meilleur solution pour exporter le contenu de la room sur le front
 
 function onJoinRoom(userInfo, socket, io) {
+  console.log(userInfo);
   const user = userInfo.userInfo;
   socket.join(userInfo.roomId);
   console.log(
     `Room with ${userInfo.roomId} ID just joined by ${user.username}`
   );
+  console.log(io.sockets.adapter.rooms);
   const roomUsers = io.sockets.adapter.rooms.get(userInfo.roomId);
 
   roomUsers.forEach((id) => {

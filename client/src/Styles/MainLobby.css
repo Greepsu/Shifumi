@@ -44,9 +44,15 @@
 
 .lobby-button-container span {
   font-size: 34px;
+  text-decoration: none;
+}
+
+.lobby-button-container a {
+  text-decoration: none;
 }
 
 .lobby-button-container div span {
   width: 100%;
   font-size: 22px;
+  color: white;
 }
