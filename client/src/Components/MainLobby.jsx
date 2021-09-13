@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 //import style
-import "../Styles/MainLobby.css";
+import '../Styles/MainLobby.css';
 
 //Import react-router
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function MainLobby() {
   return (

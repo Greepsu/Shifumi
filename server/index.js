@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 
 const port = 5000;
+const SocketEvents = require("./Enums/events");
 
 //Import CORS
 const cors = require("cors");
@@ -15,42 +16,15 @@ const io = require("socket.io")(server, {
     methods: ["GET", "POST"],
   },
 });
+const handleSocketConnection = require("./Socket/handleSocketConnection");
 
 //Middlewares
 app.use(cors());
 app.use(express.json());
 
 //Socket.io
-
-io.on("connection", (socket) => {
-  socket.on("add user", (username) => {
-    socket.username = username;
-
-    console.log(`User ${socket.username} connected on Back`);
-    
-    socket.broadcast.emit("user joined", {
-      username: socket.username,
-    });
-  });
-
-  socket.on("create", (room) => {
-    socket.join(room);
-    console.log(`User ${socket.username} joining ${room}`);
-  });
-
-  socket.on("disconnect", () => {
-    console.log(`User ${socket.username} disconnected on Back`);
-  });
-
-  socket.on("weapon", (data, room) => {
-    if (room) {
-      socket.broadcast.emit("weapon", data);
-    }
-  });
-
-  
-
-  
+io.on(SocketEvents.CONNECTION, (socket) => {
+  handleSocketConnection(socket, io);
 });
 
 //Listen
@@ -58,4 +32,4 @@ server.listen(5001, () => {
   console.log(`Server started: socket.io`);
 });
 
-app.listen(port, () => console.log(`Blog app listening on port ${port} !`));
+app.listen(port, () => console.log(`Shifumi app listening on port ${port} !`));

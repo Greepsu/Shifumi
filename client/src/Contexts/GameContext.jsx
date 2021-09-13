@@ -1,69 +1,95 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from 'react';
+
+//Import WebSocketContext
+import { useWebSocketContext } from './WebSocketContext';
+import { useUserContext } from './UserContext';
+import { useRoomContext } from '../Contexts/RoomContext';
 
 //Import random number generator for determine CPU selection
-import { generateRandomNumber, compareResult } from "../Components/Helper";
+import { compareResult } from '../Components/Helper';
 
 //Import enums
-import { ShifumiWeaponObject, ShifumiResultObject } from "../Enums/Shifumi";
+import { ShifumiResultObject } from '../Enums/Shifumi';
+import { SocketEvents } from '../Enums/Shifumi';
 
 export const GameContext = createContext({});
 
 export function GameContextProvider({ children }) {
+  const webSocket = useWebSocketContext();
+  const { user } = useUserContext();
+  const { opponent } = useRoomContext();
+
   const [userSelection, setUserSelection] = useState();
-  const [cpuSelection, setCpuSelection] = useState();
+  const [opponentSelection, setOpponentSelection] = useState('');
   const [userMatchResult, setUserMatchResult] = useState();
   const [score, setScore] = useState(0);
 
-  //Set CPU choice
-  function randomCPUSelection() {
-    const result = generateRandomNumber();
-    switch (result) {
-      case 0:
-        handleCpuSelection(ShifumiWeaponObject.ROCK);
-        break;
-      case 1:
-        handleCpuSelection(ShifumiWeaponObject.PAPER);
-        break;
-      case 2:
-        handleCpuSelection(ShifumiWeaponObject.SCISSORS);
-        break;
-      default:
-        console.log(`Sorry, Bot have some issues`);
-    }
+  webSocket.on(SocketEvents.PLAYER_CHOICE, (data) => {
+    console.log(`${data.user} choose ${data.weapon}`);
+  });
+
+  // const start = () => {
+  //   webSocket.emit("selection", { name: user, weapon: userSelection });
+  // };
+
+  function start() {
+    console.log(user);
+    console.log(userSelection);
+    if (user) webSocket.emit(SocketEvents.PLAYER_CHOICE, user, userSelection);
   }
+  // //Set CPU choice
+  // function randomCPUSelection() {
+  //   const result = generateRandomNumber();
+  //   switch (result) {
+  //     case 0:
+  //       handleCpuSelection(ShifumiWeaponObject.ROCK);
+  //       break;
+  //     case 1:
+  //       handleCpuSelection(ShifumiWeaponObject.PAPER);
+  //       break;
+  //     case 2:
+  //       handleCpuSelection(ShifumiWeaponObject.SCISSORS);
+  //       break;
+  //     default:
+  //       console.log(`Sorry, Bot have some issues`);
+  //   }
+  // }
 
   //Set Match Result
   useEffect(() => {
-    if (userSelection && cpuSelection) {
-      if (compareResult(userSelection, cpuSelection)) {
+    if (userSelection && opponentSelection) {
+      if (compareResult(userSelection, opponentSelection)) {
         setUserMatchResult(ShifumiResultObject.WIN);
         setScore((prevScore) => prevScore + 1);
-      } else if (userSelection === cpuSelection) {
+      } else if (userSelection === opponentSelection) {
         setUserMatchResult(ShifumiResultObject.DRAW);
       } else {
         setUserMatchResult(ShifumiResultObject.LOOSE);
         setScore((prevScore) => prevScore - 1);
       }
     }
-  }, [userSelection, cpuSelection]);
+  }, [userSelection, opponentSelection]);
 
   function handleUserSelection(weapon) {
     setUserSelection(weapon);
-    handleCpuSelection(undefined);
     setUserMatchResult(undefined);
   }
 
-  function handleCpuSelection(weapon) {
-    setCpuSelection(weapon);
-  }
+  // function handleOpponentSelection() {
+  //   webSocket.on("player choice")
+  // }
+
+  // function handleCpuSelection(weapon) {
+  //   setCpuSelection(weapon);
+  // }
 
   const values = {
     score,
     userSelection,
-    cpuSelection,
+    opponent,
     userMatchResult,
     handleUserSelection,
-    randomCPUSelection,
+    start,
   };
 
   return <GameContext.Provider value={values}>{children}</GameContext.Provider>;
@@ -73,7 +99,7 @@ export function useGameContext() {
   const context = useContext(GameContext);
   if (!context)
     throw new Error(
-      "useGameContext should be used within a GameContextProvider"
+      'useGameContext should be used within a GameContextProvider'
     );
   return context;
 }

@@ -1,48 +1,49 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
-
-//Import Components
-import Login from "../Components/Login";
+import React, { useState, useEffect, useContext, createContext } from 'react';
 
 //Import WebSocketContext
-import { useWebSocketContext } from "./WebSocketContext";
+import { useWebSocketContext } from './WebSocketContext';
+
+//Import ENUM
+import { SocketEvents } from '../Enums/Shifumi';
+
+// Import Components
+import Login from '../Components/Login';
 
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
   const webSocket = useWebSocketContext();
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState();
 
   useEffect(() => {
-
-    console.log(`UserContext : user = ${user}`)
-
-    if (user)
-      webSocket.on("connect", () => {
-        console.log(`User ${user} connected on Front`);
+    if (user) {
+      webSocket.on(SocketEvents.CONNECTED, (username) => {
+        console.log(`${username} connected`);
       });
-    webSocket.emit('add user', user);
+    }
 
-    webSocket.on("weapon", (data) => {
-      console.log(data);
+    webSocket.on(SocketEvents.GET_USER, (username) => {
+      console.log(username);
+      setUser(username);
     });
 
-    webSocket.emit("create", "room1");
-
-    return webSocket.on("disconnect", () => {
-      console.log(`User ${user} disconnected on Front`);
+    webSocket.on(SocketEvents.DISCONNECT, (username) => {
+      console.log(`${username} left`);
     });
   }, [webSocket, user]);
 
-  // const sendWeapon = (weapon) => webSocket.emit("weapon", weapon);
+  const values = { user };
 
-  const values = { user, setUser };
-
-  return <UserContext.Provider value={values}>{user ? children : <Login />}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={values}>
+      {user ? children : <Login />}
+    </UserContext.Provider>
+  );
 }
 
 export function useUserContext() {
   const context = useContext(UserContext);
   if (!context)
-    throw new Error("UserContext should be used within a UserContextProvider");
+    throw new Error('UserContext should be used within a UserContextProvider');
   return context;
 }

@@ -1,26 +1,18 @@
-import React from "react";
+import React from 'react';
 
-//Import styles
-import "../Styles/App.css";
+//Import Styles
+import '../Styles/App.css';
 
-import Routes from "./Routes";
+//Import Component
+import Routes from './Routes';
+import Login from './Login';
 
 //Import Contexts
-import { useUserContext } from "../Contexts/UserContext";
-
-//Import react-router
-import { BrowserRouter as Router } from "react-router-dom";
-import Login from "./Login";
+import { useUserContext } from '../Contexts/UserContext';
 
 function App() {
-  const {user} = useUserContext();
-  return (
-    <Router>
-      <div className="App">
-        {user ? <Routes/> : <Login />}
-      </div>
-    </Router>
-  );
+  const { user } = useUserContext();
+  return <div className="App">{user ? <Routes /> : <Login />}</div>;
 }
 
 export default App;

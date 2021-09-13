@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-//Import Contexts
-import { useUserContext } from "../Contexts/UserContext";
+//Import WebSocketContext
+import { useWebSocketContext } from '../Contexts/WebSocketContext';
 
+//Import ENUM
+import { SocketEvents } from '../Enums/Shifumi';
 
 export default function Login() {
-    const { user, setUser } = useUserContext();
-    const [input, setInput] = useState('')
+  const webSocket = useWebSocketContext();
+  const [username, setUsername] = useState('');
 
-    const handleInput = (e) => setInput(e.target.value)
-    const handleUser = () => setUser(input)
+  const handleInput = (e) => setUsername(e.target.value);
+  const handleUsername = () => webSocket.emit(SocketEvents.ADD_USER, username);
 
-    console.log(`Component LOGIN : user = ${user}`)
-
-    return (
-        <div>
-            <input value={input} onChange={handleInput} />
-            <button onClick={handleUser} >Login</button>
-        </div>
-    )
+  return (
+    <div>
+      <input value={username} onChange={handleInput} />
+      <button onClick={handleUsername}>Login</button>
+    </div>
+  );
 }
