@@ -10,14 +10,15 @@ export const RoomContext = createContext({});
 
 export function RoomContextProvider({ children }) {
   const webSocket = useWebSocketContext();
-  const [room, setRoom] = useState([]);
+  const [room, setRoom] = useState();
   const [showId, setShowId] = useState(false);
   const [ready, setReady] = useState(false);
   const [readyCount, setReadyCount] = useState(0);
 
   useEffect(() => {
-    webSocket.on(SocketEvents.GET_ROOM, (roomUsers) => {
-      setRoom(roomUsers);
+    webSocket.on(SocketEvents.GET_ROOM, (room) => {
+      console.log({ room });
+      setRoom(room);
     });
 
     webSocket.on(SocketEvents.SET_READY, (isReady) => {

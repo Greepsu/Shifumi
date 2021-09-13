@@ -19,6 +19,11 @@ export default function Room() {
       backgroundColor: 'transparent',
     },
   };
+
+  if (!room) {
+    return null;
+  }
+
   return (
     <div className="room">
       <div className="container">
@@ -32,7 +37,11 @@ export default function Room() {
         )}
         <div className="user-list">
           User in the room:{' '}
-          {room ? room.map((id) => <div key={id}>{id}</div>) : 'none'}
+          {room
+            ? room.players.map(({ username }) => (
+                <div key={username}>{username}</div>
+              ))
+            : 'none'}
         </div>
         <span>{`User Ready: (${readyCount}/2)`}</span>
         <button
