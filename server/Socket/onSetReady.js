@@ -1,25 +1,19 @@
-const SocketEvents = require('../Enums/events');
-const getRoom = require('../data/getRoom');
-
-const userReady = [];
+const SocketEvents = require("../Enums/events");
+const getRoom = require("../data/getRoom");
 
 function onSetReady(data, socket, io) {
-  if (socket?.user) {
-    // Stock everything inside the io.users
-    io.users[socket.id].isReady = !socket.user.isReady;
-    socket.user.isReady = !socket.user.isReady;
-  }
+  // Stock everything inside the io.users
+  // io.users[socket.id].isReady = !io.users[socket.id].isReady;
+  socket.user.isReady = !socket.user.isReady;
 
   const roomId = socket.user.roomId;
 
-  const room = getRoom(userInfo.roomId, io);
+  const room = getRoom(roomId, io);
 
-  io.to(socket.user.roomId).emit(
+  io.to(roomId).emit(
     SocketEvents.SET_READY,
     room.players.filter((p) => p.isReady).length
   );
-
-  io.emit(SocketEvents.SET_READY, userReady.length);
 }
 
 module.exports = onSetReady;

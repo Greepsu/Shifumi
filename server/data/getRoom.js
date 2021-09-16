@@ -5,6 +5,7 @@ function getRoom(roomId, io) {
   };
 
   // TODO: try this `room.socketId.forEach(id => io.users[id])`
+
   Object.keys(io.users).forEach((key) => {
     const user = io.users[key];
 
