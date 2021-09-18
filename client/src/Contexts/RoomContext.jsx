@@ -14,21 +14,26 @@ export function RoomContextProvider({ children }) {
   const [showId, setShowId] = useState(false);
   const [ready, setReady] = useState(false);
   const [readyCount, setReadyCount] = useState(0);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
     webSocket.on(SocketEvents.GET_ROOM, (room) => {
-      console.log({ room });
+      console.log(room.players.length);
       setRoom(room);
     });
 
     webSocket.on(SocketEvents.SET_READY, (isReady) => {
       setReadyCount(isReady);
     });
-    console.log(ready);
+
+    webSocket.on(SocketEvents.GAME_START, () => {
+      setStart(true);
+    });
   }, [webSocket, ready]);
 
   function joinRoom(roomId, userInfo) {
     webSocket.emit(SocketEvents.JOIN_ROOM, { roomId, userInfo });
+
     setShowId(true);
     console.log(`Room with ${roomId} ID just joined by ${userInfo.username}`);
   }
@@ -38,7 +43,15 @@ export function RoomContextProvider({ children }) {
     setReady(!ready);
   }
 
-  const values = { joinRoom, room, showId, getReady, readyCount, ready };
+  const values = {
+    joinRoom,
+    room,
+    showId,
+    getReady,
+    readyCount,
+    ready,
+    start,
+  };
 
   return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;
 }
