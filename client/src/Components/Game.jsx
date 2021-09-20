@@ -15,8 +15,6 @@ export default function Game() {
   const { user } = useUserContext();
   const { opponent } = useRoomContext();
 
-  if (opponent) console.log(opponent[0].username);
-
   const { score, userSelection, userMatchResult, handleUserSelection, start } =
     useGameContext();
 

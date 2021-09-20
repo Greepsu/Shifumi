@@ -14,7 +14,6 @@ function onSetReady(data, socket, io) {
 
   if (filterReady.length === 2) {
     room.state = "playing";
-    console.log(room);
     io.to(roomId).emit(SocketEvents.GAME_START, room);
   }
 }

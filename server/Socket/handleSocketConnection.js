@@ -5,6 +5,7 @@ const onDisconnect = require("./onDisconnect");
 const onJoinRoom = require("./onJoinRoom");
 const onConnected = require("./onConnected");
 const onSetReady = require("./onSetReady");
+const onPlayerChoice = require("./onPlayerChoice");
 
 function handleSocketConnection(socket, io) {
   function onSocket(event, callback) {
@@ -16,6 +17,7 @@ function handleSocketConnection(socket, io) {
   onSocket(SocketEvents.JOIN_ROOM, onJoinRoom);
   onSocket(SocketEvents.SET_READY, onSetReady);
   onSocket(SocketEvents.GAME_START, onGameStart);
+  onSocket(SocketEvents.PLAYER_CHOICE, onPlayerChoice);
   onSocket(SocketEvents.DISCONNECT, onDisconnect);
 }
 

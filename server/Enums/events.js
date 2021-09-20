@@ -5,6 +5,7 @@ const SocketEvents = Object.freeze({
   GET_USER: "get user",
   CREATE_ROOM: "create room",
   GET_ROOM: "get room",
+  UPDATE_ROOM: "update room",
   JOIN_ROOM: "join room",
   SET_READY: "set ready",
   GAME_START: "game start",

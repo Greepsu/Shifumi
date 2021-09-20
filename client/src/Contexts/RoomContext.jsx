@@ -23,6 +23,17 @@ export function RoomContextProvider({ children }) {
       setRoom(room);
     });
 
+    webSocket.on(SocketEvents.UPDATE_ROOM, (roomUpdate) => {
+      // ! LE CHANTIER
+      if (room) {
+        const filterRoom = room.players.filter((player) => {
+          if (player.id === roomUpdate.id) player.weapon = roomUpdate.weapon;
+        });
+        setRoom(filterRoom);
+        console.log(room);
+      }
+    });
+
     webSocket.on(SocketEvents.SET_READY, (isReady) => {
       setReadyCount(isReady);
     });

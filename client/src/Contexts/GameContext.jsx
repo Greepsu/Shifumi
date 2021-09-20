@@ -24,18 +24,12 @@ export function GameContextProvider({ children }) {
   const [userMatchResult, setUserMatchResult] = useState();
   const [score, setScore] = useState(0);
 
-  webSocket.on(SocketEvents.PLAYER_CHOICE, (data) => {
-    console.log(`${data.user} choose ${data.weapon}`);
+  webSocket.on(SocketEvents.PLAYER_CHOICE, (player) => {
+    console.log(player);
   });
 
-  // const start = () => {
-  //   webSocket.emit("selection", { name: user, weapon: userSelection });
-  // };
-
   function start() {
-    console.log(user);
-    console.log(userSelection);
-    if (user) webSocket.emit(SocketEvents.PLAYER_CHOICE, user, userSelection);
+    webSocket.emit(SocketEvents.PLAYER_CHOICE, userSelection);
   }
   // //Set CPU choice
   // function randomCPUSelection() {

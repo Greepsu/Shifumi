@@ -3,7 +3,13 @@ const SocketEvents = require("../Enums/events");
 
 function onAddUser(username, socket, io) {
   //Define socket.user
-  socket.user = { username, id: socket.id, roomId: uuidv4(), isReady: false };
+  socket.user = {
+    username,
+    id: socket.id,
+    roomId: uuidv4(),
+    isReady: false,
+    weapon: undefined,
+  };
 
   // TODO: delete this user on disconected
   if (io.users === undefined) {
