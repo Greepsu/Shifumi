@@ -5,20 +5,21 @@ import { useWebSocketContext } from './WebSocketContext';
 
 //Import ENUM
 import { SocketEvents } from '../Enums/Shifumi';
+import { useUserContext } from './UserContext';
 
 export const RoomContext = createContext({});
 
 export function RoomContextProvider({ children }) {
+  const { user } = useUserContext();
   const webSocket = useWebSocketContext();
   const [room, setRoom] = useState();
   const [showId, setShowId] = useState(false);
   const [ready, setReady] = useState(false);
   const [readyCount, setReadyCount] = useState(0);
-  const [start, setStart] = useState(false);
+  const [opponent, setOpponent] = useState();
 
   useEffect(() => {
     webSocket.on(SocketEvents.GET_ROOM, (room) => {
-      console.log(room.players.length);
       setRoom(room);
     });
 
@@ -26,10 +27,16 @@ export function RoomContextProvider({ children }) {
       setReadyCount(isReady);
     });
 
-    webSocket.on(SocketEvents.GAME_START, () => {
-      setStart(true);
+    webSocket.on(SocketEvents.GAME_START, (room) => {
+      if (room) {
+        const filterRoom = room.players.filter(
+          (player) => player.id !== user.id
+        );
+        setOpponent(filterRoom);
+        setRoom(room);
+      }
     });
-  }, [webSocket, ready]);
+  }, [webSocket, ready, room]);
 
   function joinRoom(roomId, userInfo) {
     webSocket.emit(SocketEvents.JOIN_ROOM, { roomId, userInfo });
@@ -50,7 +57,7 @@ export function RoomContextProvider({ children }) {
     getReady,
     readyCount,
     ready,
-    start,
+    opponent,
   };
 
   return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;

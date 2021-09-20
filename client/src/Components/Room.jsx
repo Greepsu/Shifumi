@@ -11,7 +11,7 @@ import Game from '../Components/Game';
 
 export default function Room() {
   const { roomId } = useParams();
-  const { room, showId, getReady, readyCount, ready, start } = useRoomContext();
+  const { room, showId, getReady, readyCount, ready } = useRoomContext();
 
   const buttonColor = {
     Ready: {
@@ -26,7 +26,9 @@ export default function Room() {
     return <p>loading</p>;
   }
 
-  return !start ? (
+  return room.state === 'playing' ? (
+    <Game />
+  ) : (
     <div className="room">
       <div className="container">
         {showId ? (
@@ -54,7 +56,5 @@ export default function Room() {
         </button>
       </div>
     </div>
-  ) : (
-    <Game />
   );
 }

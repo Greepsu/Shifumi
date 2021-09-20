@@ -12,7 +12,11 @@ function onSetReady(data, socket, io) {
 
   io.to(roomId).emit(SocketEvents.SET_READY, filterReady.length);
 
-  if (filterReady.length === 2) io.to(roomId).emit(SocketEvents.GAME_START);
+  if (filterReady.length === 2) {
+    room.state = "playing";
+    console.log(room);
+    io.to(roomId).emit(SocketEvents.GAME_START, room);
+  }
 }
 
 module.exports = onSetReady;

@@ -86,7 +86,6 @@ export function GameContextProvider({ children }) {
   const values = {
     score,
     userSelection,
-    opponent,
     userMatchResult,
     handleUserSelection,
     start,

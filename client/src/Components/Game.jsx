@@ -9,18 +9,16 @@ import { useGameContext } from '../Contexts/GameContext';
 
 //Import Enums
 import { ShifumiWeaponObject } from '../Enums/Shifumi';
+import { useRoomContext } from '../Contexts/RoomContext';
 
 export default function Game() {
   const { user } = useUserContext();
+  const { opponent } = useRoomContext();
 
-  const {
-    score,
-    userSelection,
-    opponent,
-    userMatchResult,
-    handleUserSelection,
-    start,
-  } = useGameContext();
+  if (opponent) console.log(opponent[0].username);
+
+  const { score, userSelection, userMatchResult, handleUserSelection, start } =
+    useGameContext();
 
   return (
     <div className="game">
@@ -54,7 +52,7 @@ export default function Game() {
           <span>{userMatchResult}</span>
         </div>
         <div className="opponent-container">
-          <span>{opponent}</span>
+          <span>{opponent[0].username}</span>
           <span>Vide</span>
           <div></div>
         </div>
