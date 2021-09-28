@@ -4,13 +4,10 @@ import React from 'react';
 import '../Styles/MainLobby.css';
 import playPicture from '../Assets/Images/undraw_select_player_64ca.svg';
 
-import { useUserContext } from '../Contexts/UserContext';
-
 //Import react-router
 import { Link } from 'react-router-dom';
 
 export default function MainLobby() {
-  const { user } = useUserContext();
   return (
     <div className="main-lobby">
       <div className="main-lobby-container">
