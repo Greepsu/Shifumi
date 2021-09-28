@@ -18,7 +18,7 @@ export default function Login() {
   return (
     <div className="login">
       <div>
-        <h2>Enter your name !</h2>
+        <p>Enter your name !</p>
         <input value={username} onChange={handleInput} autoFocus />
         <button onClick={handleUsername}>Login</button>
       </div>

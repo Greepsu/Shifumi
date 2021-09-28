@@ -1,23 +1,31 @@
 .main-lobby {
   color: white;
   height: 100%;
-  padding-top: 5%;
+  padding-top: 1%;
 }
 
 .main-lobby-container {
-  height: 65%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
+.main-lobby-container img {
+  width: 25%;
+}
+
 .lobby-title {
   text-align: center;
 }
 
+.lobby-title span {
+  color: var(--primary-blue);
+}
+
 .lobby-title p {
-  font-size: 45px;
+  font-size: 38px;
 }
 
 .welcome p {
@@ -31,34 +39,30 @@
   min-width: 40%;
 }
 
-.lobby-button-container div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  outline: none;
-  border: 0.2px solid white;
-  color: white;
-  width: 220px;
-  height: 80px;
-  padding: 20px 40px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.lobby-button-container span {
-  font-size: 34px;
-  text-decoration: none;
-}
-
 .lobby-button-container a {
   text-decoration: none;
 }
 
-.lobby-button-container div span {
-  width: 100%;
-  font-size: 22px;
+.lobby-button-container span {
+  font-size: 32px;
   color: white;
+}
+
+.lobby-button-container button {
+  background: transparent;
+  outline: none;
+  border: 1px solid var(--primary-blue);
+  color: white;
+  border-radius: 40px;
+  padding: 20px 40px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 26px;
+  transition: background-color 0.4s;
+}
+
+.lobby-button-container button:hover {
+  background-color: var(--primary-blue);
 }
 
 @media screen and (max-width: 1024px) {

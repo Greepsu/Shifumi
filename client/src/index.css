@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 *,
 ::after,
@@ -8,15 +9,30 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
+
+  --main-bg-color: #202443;
+  --side-bg-color: #2e325c;
+  --primary-blue: #2daac9;
 }
 
 h1 {
   font-size: 158px;
-  font-family: 'Merienda', cursive;
+  font-family: 'Open Sans', cursive;
 }
 
 h2 {
   font-size: 46px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h3 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+p,
+span,
+button {
+  font-family: 'Roboto', sans-serif;
 }
 
 @media screen and (max-width: 1024px) {

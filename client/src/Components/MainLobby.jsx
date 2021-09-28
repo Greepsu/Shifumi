@@ -2,6 +2,7 @@ import React from 'react';
 
 //import style
 import '../Styles/MainLobby.css';
+import playPicture from '../Assets/Images/undraw_select_player_64ca.svg';
 
 import { useUserContext } from '../Contexts/UserContext';
 
@@ -14,24 +15,20 @@ export default function MainLobby() {
     <div className="main-lobby">
       <div className="main-lobby-container">
         <div className="lobby-title">
-          <h1>Shifumi</h1>
-          <p>A Rocker Paper Scissors game !</p>
+          <h1>
+            <span>Shi</span>fumi
+          </h1>
+          <p>A Rock Paper Scissors game !</p>
         </div>
-        <div className="welcome">
-          <p>Welcome {user.username}</p>
-        </div>
+        <img src={playPicture} alt="" />
         <div className="lobby-button-container">
-          <div className="play-cpu-button">
-            <Link to="/cpu">
-              <span>Play against CPU</span>
-            </Link>
-          </div>
+          <Link to="/cpu">
+            <button>Play against CPU</button>
+          </Link>
           <span>or</span>
-          <div className="play-online-button">
-            <Link to="/user">
-              <span>Play against user</span>
-            </Link>
-          </div>
+          <Link to="/user">
+            <button>Play against user</button>
+          </Link>
         </div>
       </div>
     </div>
