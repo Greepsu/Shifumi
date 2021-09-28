@@ -5,49 +5,43 @@ import { useWebSocketContext } from './WebSocketContext';
 
 //Import ENUM
 import { SocketEvents } from '../Enums/Shifumi';
-import { useUserContext } from './UserContext';
 
 export const RoomContext = createContext({});
 
 export function RoomContextProvider({ children }) {
-  const { user } = useUserContext();
   const webSocket = useWebSocketContext();
   const [room, setRoom] = useState();
   const [showId, setShowId] = useState(false);
   const [ready, setReady] = useState(false);
   const [readyCount, setReadyCount] = useState(0);
-  const [opponent, setOpponent] = useState();
 
   useEffect(() => {
     webSocket.on(SocketEvents.GET_ROOM, (room) => {
       setRoom(room);
     });
 
-    webSocket.on(SocketEvents.UPDATE_ROOM, (roomUpdate) => {
-      // ! LE CHANTIER
-      if (room) {
-        const filterRoom = room.players.filter((player) => {
-          if (player.id === roomUpdate.id) player.weapon = roomUpdate.weapon;
-        });
-        setRoom(filterRoom);
-        console.log(room);
-      }
+    webSocket.on(SocketEvents.UPDATE_ROOM, (newPlayers) => {
+      setRoom((prevRoom) => {
+        const copy = { ...prevRoom };
+        copy.players = newPlayers;
+        return copy;
+      });
     });
 
     webSocket.on(SocketEvents.SET_READY, (isReady) => {
       setReadyCount(isReady);
     });
 
-    webSocket.on(SocketEvents.GAME_START, (room) => {
-      if (room) {
-        const filterRoom = room.players.filter(
-          (player) => player.id !== user.id
-        );
-        setOpponent(filterRoom);
-        setRoom(room);
-      }
+    webSocket.on(SocketEvents.GAME_START, (roomState) => {
+      setRoom((prevRoom) => {
+        const copy = { ...prevRoom };
+        copy.state = roomState;
+        return copy;
+      });
+
+      setReady(false);
     });
-  }, [webSocket, ready, room]);
+  }, [webSocket]);
 
   function joinRoom(roomId, userInfo) {
     webSocket.emit(SocketEvents.JOIN_ROOM, { roomId, userInfo });
@@ -57,8 +51,8 @@ export function RoomContextProvider({ children }) {
   }
 
   function getReady() {
-    webSocket.emit(SocketEvents.SET_READY);
     setReady(!ready);
+    webSocket.emit(SocketEvents.SET_READY);
   }
 
   const values = {
@@ -68,7 +62,6 @@ export function RoomContextProvider({ children }) {
     getReady,
     readyCount,
     ready,
-    opponent,
   };
 
   return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;

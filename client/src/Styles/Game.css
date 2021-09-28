@@ -48,30 +48,9 @@
   overflow: hidden;
 }
 
-.selection-weapon:hover::before {
-  width: 100%;
-}
-
-.selection-weapon::before {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  content: '';
-  width: 0%;
-  height: 100%;
-  transition: ease 0.8s;
-}
-
-.selection-rock::before {
-  background: #f3788d;
-}
-
-.selection-paper::before {
-  background: #4cf846;
-}
-
-.selection-scissors::before {
-  background: #9978f3;
+.selection-weapon:hover {
+  background-color: white;
+  color: black;
 }
 
 .user-selection span {
@@ -132,28 +111,6 @@
   padding: 1px;
   cursor: pointer;
   font-size: 38px;
-  position: relative;
-  overflow: hidden;
-}
-
-.play-container div::before {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  content: '';
-  width: 0%;
-  height: 100%;
-  transition: ease 0.8s;
-  background: white;
-}
-
-.play-container div:hover::before {
-  width: 100%;
-}
-
-.play-container div:hover span {
-  color: black;
-  transition: 0.8s ease-in-out;
 }
 
 .play-container div span {

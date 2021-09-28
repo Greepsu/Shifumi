@@ -17,20 +17,28 @@ export const GameContext = createContext({});
 export function GameContextProvider({ children }) {
   const webSocket = useWebSocketContext();
   const { user } = useUserContext();
-  const { opponent } = useRoomContext();
+  const { room } = useRoomContext();
 
+  const [opponent, setOpponent] = useState();
   const [userSelection, setUserSelection] = useState();
-  const [opponentSelection, setOpponentSelection] = useState('');
   const [userMatchResult, setUserMatchResult] = useState();
   const [score, setScore] = useState(0);
+  const [readyCount, setReadyCount] = useState(0);
 
-  webSocket.on(SocketEvents.PLAYER_CHOICE, (player) => {
-    console.log(player);
-  });
+  useEffect(() => {
+    if (room) {
+      const copy = { ...room };
+      const filteredOpponent = copy.players.filter((player) => {
+        if (player.id !== user.id) return player;
+      });
+      setOpponent(filteredOpponent[0]);
+    }
 
-  function start() {
-    webSocket.emit(SocketEvents.PLAYER_CHOICE, userSelection);
-  }
+    webSocket.on(SocketEvents.SET_LOCKED, (isReady) => {
+      setReadyCount(isReady);
+    });
+  }, [webSocket, room, readyCount]);
+
   // //Set CPU choice
   // function randomCPUSelection() {
   //   const result = generateRandomNumber();
@@ -51,38 +59,31 @@ export function GameContextProvider({ children }) {
 
   //Set Match Result
   useEffect(() => {
-    if (userSelection && opponentSelection) {
-      if (compareResult(userSelection, opponentSelection)) {
+    if (userSelection && opponent.weapon) {
+      if (compareResult(userSelection, opponent.weapon)) {
         setUserMatchResult(ShifumiResultObject.WIN);
         setScore((prevScore) => prevScore + 1);
-      } else if (userSelection === opponentSelection) {
+      } else if (userSelection === opponent.weapon) {
         setUserMatchResult(ShifumiResultObject.DRAW);
       } else {
         setUserMatchResult(ShifumiResultObject.LOOSE);
         setScore((prevScore) => prevScore - 1);
       }
     }
-  }, [userSelection, opponentSelection]);
+  }, [userSelection, opponent]);
 
   function handleUserSelection(weapon) {
     setUserSelection(weapon);
     setUserMatchResult(undefined);
   }
 
-  // function handleOpponentSelection() {
-  //   webSocket.on("player choice")
-  // }
-
-  // function handleCpuSelection(weapon) {
-  //   setCpuSelection(weapon);
-  // }
-
   const values = {
     score,
     userSelection,
     userMatchResult,
     handleUserSelection,
-    start,
+    opponent,
+    readyCount,
   };
 
   return <GameContext.Provider value={values}>{children}</GameContext.Provider>;

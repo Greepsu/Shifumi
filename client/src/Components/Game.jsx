@@ -1,22 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 //Import styles
 import '../Styles/Game.css';
 
 //Import Contexts
+import { useWebSocketContext } from '../Contexts/WebSocketContext';
 import { useUserContext } from '../Contexts/UserContext';
 import { useGameContext } from '../Contexts/GameContext';
 
 //Import Enums
 import { ShifumiWeaponObject } from '../Enums/Shifumi';
-import { useRoomContext } from '../Contexts/RoomContext';
+import { SocketEvents } from '../Enums/Shifumi';
 
 export default function Game() {
+  const webSocket = useWebSocketContext();
   const { user } = useUserContext();
-  const { opponent } = useRoomContext();
+  const {
+    score,
+    userSelection,
+    userMatchResult,
+    handleUserSelection,
+    opponent,
+    readyCount,
+  } = useGameContext();
+  const [ready, setReady] = useState(false);
 
-  const { score, userSelection, userMatchResult, handleUserSelection, start } =
-    useGameContext();
+  useEffect(() => {
+    webSocket.on(SocketEvents.RESET_BUTTON, () => {
+      setReady(false);
+    });
+  }, [webSocket]);
+
+  function weaponLocked() {
+    if (userSelection) {
+      setReady(!ready);
+      webSocket.emit(SocketEvents.SET_LOCKED, userSelection);
+      console.log(ready);
+    }
+    // webSocket.emit(SocketEvents.PLAYER_CHOICE, userSelection);
+  }
+
+  const buttonColor = {
+    Ready: {
+      backgroundColor: 'green',
+    },
+    UnReady: {
+      backgroundColor: 'transparent',
+    },
+  };
 
   return (
     <div className="game">
@@ -46,18 +77,22 @@ export default function Game() {
           </div>
         </div>
         <div className="score-container">
-          <span>{score}</span>
+          <span>Score: {score}</span>
+          <span>Ready: {readyCount}/2</span>
           <span>{userMatchResult}</span>
         </div>
         <div className="opponent-container">
-          <span>{opponent[0].username}</span>
-          <span>Vide</span>
+          <span>{opponent.username}</span>
+          <span>{opponent.weapon}</span>
           <div></div>
         </div>
       </div>
       <div className="play-container">
-        <div onClick={start}>
-          <span>Play !</span>
+        <div
+          style={ready ? buttonColor.Ready : buttonColor.UnReady}
+          onClick={weaponLocked}
+        >
+          <span>Validate</span>
         </div>
       </div>
     </div>
