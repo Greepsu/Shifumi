@@ -3,16 +3,22 @@ import React from 'react';
 //import style
 import '../Styles/MainLobby.css';
 
+import { useUserContext } from '../Contexts/UserContext';
+
 //Import react-router
 import { Link } from 'react-router-dom';
 
 export default function MainLobby() {
+  const { user } = useUserContext();
   return (
     <div className="main-lobby">
       <div className="main-lobby-container">
         <div className="lobby-title">
           <h1>Shifumi</h1>
           <p>A Rocker Paper Scissors game !</p>
+        </div>
+        <div className="welcome">
+          <p>Welcome {user.username}</p>
         </div>
         <div className="lobby-button-container">
           <div className="play-cpu-button">
