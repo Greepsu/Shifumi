@@ -13,7 +13,6 @@ export function RoomContextProvider({ children }) {
   const [room, setRoom] = useState();
   const [showId, setShowId] = useState(false);
   const [ready, setReady] = useState(false);
-  const [readyCount, setReadyCount] = useState(0);
 
   useEffect(() => {
     webSocket.on(SocketEvents.GET_ROOM, (room) => {
@@ -26,10 +25,6 @@ export function RoomContextProvider({ children }) {
         copy.players = newPlayers;
         return copy;
       });
-    });
-
-    webSocket.on(SocketEvents.SET_READY, (isReady) => {
-      setReadyCount(isReady);
     });
 
     webSocket.on(SocketEvents.GAME_START, (roomState) => {
@@ -60,7 +55,6 @@ export function RoomContextProvider({ children }) {
     room,
     showId,
     getReady,
-    readyCount,
     ready,
   };
 

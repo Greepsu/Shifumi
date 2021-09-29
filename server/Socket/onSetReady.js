@@ -2,7 +2,6 @@ const SocketEvents = require("../Enums/events");
 const getRoom = require("../data/getRoom");
 
 function onSetReady(data, socket, io) {
-  // io.users[socket.id].isReady = !io.users[socket.id].isReady;
   socket.user.isReady = !socket.user.isReady;
 
   const roomId = socket.user.roomId;

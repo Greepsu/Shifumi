@@ -23,10 +23,8 @@ function onAddUser(username, socket, io) {
 
   socket.username = socket.user.username;
 
-  // emit ONLY TO OWN socket the socket
   io.to(socket.id).emit(SocketEvents.GET_USER, socket.user);
 
-  // Emit username for new connection
   io.to(socket.id).emit(SocketEvents.CONNECTED, socket.username);
 }
 
