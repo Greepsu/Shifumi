@@ -36,9 +36,11 @@ export default function Room() {
     return <p>loading</p>;
   }
 
-  return room.state === 'playing' ? (
-    <Game />
-  ) : (
+  if (room.state === 'playing') {
+    return <Game />;
+  }
+
+  return (
     <div className="room">
       <div className="container">
         {showId ? (
