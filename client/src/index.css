@@ -13,6 +13,7 @@
   --main-bg-color: #202443;
   --side-bg-color: #2e325c;
   --primary-blue: #2daac9;
+  --white: #e9e7e7;
 }
 
 h1 {
@@ -35,6 +36,10 @@ p,
 span,
 button {
   font-family: 'Roboto', sans-serif;
+}
+
+.blue-word {
+  color: var(--primary-blue);
 }
 
 @media screen and (max-width: 1024px) {

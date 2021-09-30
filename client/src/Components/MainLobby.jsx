@@ -13,7 +13,7 @@ export default function MainLobby() {
       <div className="main-lobby-container">
         <div className="lobby-title">
           <h1>
-            <span>Shi</span>fumi
+            <span className="blue-word">Shi</span>fumi
           </h1>
           <p>A Rock Paper Scissors game !</p>
         </div>

@@ -23,11 +23,11 @@ export default function RoomHandler() {
       <div className="card">
         <div className="create-room">
           <div className="img-header">
-            <img src={createPicture} alt="" />
+            <img src={createPicture} alt="man picking" />
           </div>
           <div className="text">
             <h3>
-              <span>Create</span> a room
+              <span className="blue-word">Create</span> a room
             </h3>
             <p>
               Create a room and share your game code to start playing with your
@@ -43,11 +43,11 @@ export default function RoomHandler() {
         <span>OR</span>
         <div className="join-room">
           <div className="img-header">
-            <img src={joinPicture} alt="" />
+            <img src={joinPicture} alt="two person working on computer" />
           </div>
           <div className="text">
             <h3>
-              <span>Join</span> Room with ID
+              <span className="blue-word">Join</span> Room with ID
             </h3>
             <input value={roomId} onChange={handleInput} />
             <Link to={`/room/${roomId}`}>

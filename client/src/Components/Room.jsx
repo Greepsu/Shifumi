@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 //Import Style
 import '../Styles/Room.css';
 
+import clipboard from '../Assets/Images/clipboard.svg';
+
 import { useWebSocketContext } from '../Contexts/WebSocketContext';
 import { useRoomContext } from '../Contexts/RoomContext';
 
@@ -26,10 +28,16 @@ export default function Room() {
   const buttonColor = {
     Ready: {
       backgroundColor: 'green',
+      border: '1px solid transparent',
     },
     UnReady: {
-      backgroundColor: 'transparent',
+      backgroundColor: '',
     },
+  };
+
+  const copy = async () => {
+    await navigator.clipboard.writeText(roomId);
+    alert('Text copied');
   };
 
   if (!room) {
@@ -42,25 +50,49 @@ export default function Room() {
 
   return (
     <div className="room">
-      <div className="container">
+      <div className="left-section">
+        <h3>
+          <span className="blue-word">Users</span> in the room:
+        </h3>
+        {room
+          ? room.players.map(({ username }) => (
+              <div className="player" key={username}>
+                {username}
+              </div>
+            ))
+          : 'none'}
+        <p>{`User Ready: (${readyCount}/2)`}</p>
+      </div>
+      <div className="right-section">
         {showId ? (
           <div className="room-id">
-            <h2>Share this ID to your opponent to start playing !</h2>
-            <p>{roomId}</p>
+            <h3>
+              <span className="blue-word">Share</span> this ID to your opponent
+              to start playing !
+            </h3>
+            <div className="room-id-copy">
+              <p>{roomId}</p>
+              <button className="copy" onClick={copy}>
+                <img src={clipboard} alt="" />
+              </button>
+            </div>
           </div>
         ) : (
           ''
         )}
-        <div className="user-list">
-          User in the room:{' '}
-          {room
-            ? room.players.map(({ username }) => (
-                <div key={username}>{username}</div>
-              ))
-            : 'none'}
+        <div className="rules">
+          <h3>How to play:</h3>
+          <div className="rules-text">
+            <p>
+              <h4>The rules are simple:</h4>
+              Rock smashes Scissors <br />
+              Scissors cuts Paper <br />
+              Paper covers Rock
+            </p>
+          </div>
         </div>
-        <span>{`User Ready: (${readyCount}/2)`}</span>
         <button
+          className="start-btn"
           style={ready ? buttonColor.Ready : buttonColor.UnReady}
           onClick={() => getReady()}
         >

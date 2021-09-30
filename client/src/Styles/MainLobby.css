@@ -20,10 +20,6 @@
   text-align: center;
 }
 
-.lobby-title span {
-  color: var(--primary-blue);
-}
-
 .lobby-title p {
   font-size: 38px;
 }
