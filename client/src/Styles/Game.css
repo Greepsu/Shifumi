@@ -1,56 +1,78 @@
 .game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 100vh;
   color: white;
+  padding-top: 40px;
 }
 
 .match-container {
-  height: 70vh;
+  height: 35vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 3%;
 }
 
-.user-container {
+.user-container,
+.opponent-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--side-bg-color);
+  border-radius: 20px;
+  padding: 20px 20px;
   width: 30%;
-  height: 40%;
+  height: 100%;
   font-size: 42px;
 }
 
 .user-selection {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
 }
 
 .user-selection div {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: none;
-  outline: none;
-  border: 0.2px solid white;
-  color: white;
-  width: 30px;
-  height: 15px;
-  padding: 20px 60px;
-  cursor: pointer;
-  font-size: 21px;
 }
 
 .selection-weapon {
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.2s;
 }
 
 .selection-weapon:hover {
-  background-color: white;
-  color: black;
+  transform: scale(1.1);
+}
+
+.selection-weapon img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+  width: 90px;
+  padding: 10px;
+  background: var(--white);
+  outline: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.selection-rock img {
+  border: 8px solid var(--primary-blue);
+}
+
+.selection-paper img {
+  border: 8px solid var(--green);
+}
+
+.selection-scissors img {
+  border: 8px solid var(--red);
 }
 
 .user-selection span {
@@ -59,29 +81,48 @@
 
 .score-container {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 20%;
+  align-self: center;
+  background-color: var(--main-bg-color);
+  width: 600px;
   font-size: 38px;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.score-container div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0ecec;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.score-container div p {
+  color: var(--side-bg-color);
+}
+
+.score-container div span {
+  color: var(--primary-blue);
 }
 
 .score-container span {
-  font-weight: 400;
+  font-weight: 700;
+  line-height: 50px;
+  font-family: 'roboto';
+  font-size: 48px !important;
 }
 
 .score-container span:last-of-type {
   font-size: 48px;
 }
 
-.opponent-container {
-  width: 30%;
-  height: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 42px;
+.match-result span {
+  font-size: 58px;
 }
 
 .opponent-container div {
@@ -90,7 +131,7 @@
 
 .opponent-container span:first-of-type,
 .user-container span:first-of-type {
-  font-size: 26px;
+  font-size: 36px;
 }
 
 .play-container {
@@ -100,19 +141,19 @@
   align-items: flex-start;
 }
 
-.play-container div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0.2px solid white;
+.play-container button {
+  background: transparent;
+  outline: none;
+  border: 1px solid var(--primary-blue);
   color: white;
-  width: 270px;
-  height: 80px;
-  padding: 1px;
+  border-radius: 40px;
+  padding: 14px 80px;
   cursor: pointer;
-  font-size: 38px;
+  text-align: center;
+  font-size: 36px;
+  transition: background-color 0.4s;
 }
 
-.play-container div span {
-  z-index: 1;
+.play-container button:hover {
+  background-color: var(--primary-blue);
 }

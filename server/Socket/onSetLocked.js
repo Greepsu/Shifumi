@@ -29,7 +29,7 @@ function onSetLocked(weapon, socket, io) {
 
   if (filterLocked.length === 2) {
     io.to(roomId).emit(SocketEvents.UPDATE_ROOM, filterWeapon);
-    setTimeout(reset, 2000);
+    setTimeout(reset, 3000);
   }
 }
 

@@ -12,6 +12,10 @@ import { useGameContext } from '../Contexts/GameContext';
 import { ShifumiWeaponObject } from '../Enums/Shifumi';
 import { SocketEvents } from '../Enums/Shifumi';
 
+import RockPicture from '../Assets/Images/icon-rock.svg';
+import PaperPicture from '../Assets/Images/icon-paper.svg';
+import ScissorsPicture from '../Assets/Images/icon-scissors.svg';
+
 export default function Game() {
   const webSocket = useWebSocketContext();
   const { user } = useUserContext();
@@ -37,63 +41,75 @@ export default function Game() {
       webSocket.emit(SocketEvents.SET_LOCKED, userSelection);
       console.log(ready);
     }
-    // webSocket.emit(SocketEvents.PLAYER_CHOICE, userSelection);
   }
 
   const buttonColor = {
     Ready: {
       backgroundColor: 'green',
+      border: '1px solid green',
     },
     UnReady: {
-      backgroundColor: 'transparent',
+      backgroundColor: '',
     },
   };
 
   return (
     <div className="game">
+      <div className="score-container">
+        <span>
+          <span className="blue-word">Shi</span>
+          <br />
+          Fu
+          <br />
+          Mi
+        </span>
+        <div>
+          <p>SCORE:</p>
+          <span>{score}</span>
+        </div>
+        {/* <span>Ready: {readyCount}/2</span> */}
+      </div>
       <div className="match-container">
         <div className="user-container">
-          <span>{user.username}</span>
+          <span className="username">{user.username}</span>
           <span>{userSelection}</span>
           <div className="user-selection">
             <div
               className="selection-weapon selection-rock"
               onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)}
             >
-              <span>Rock</span>
+              <img src={RockPicture} alt="" />
             </div>
             <div
               className="selection-weapon selection-paper"
               onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}
             >
-              <span>Paper</span>
+              <img src={PaperPicture} alt="" />
             </div>
             <div
               className="selection-weapon selection-scissors"
               onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}
             >
-              <span>Scissors</span>
+              <img src={ScissorsPicture} alt="" />
             </div>
           </div>
         </div>
-        <div className="score-container">
-          <span>Score: {score}</span>
-          <span>Ready: {readyCount}/2</span>
+        <div className="match-result">
           <span>{userMatchResult}</span>
         </div>
         <div className="opponent-container">
-          <span>{opponent.username}</span>
+          <span className="opponent-name">{opponent.username}</span>
           <span>{opponent.weapon}</span>
           <div></div>
         </div>
       </div>
       <div className="play-container">
-        <div
+        <button
           style={ready ? buttonColor.Ready : buttonColor.UnReady}
           onClick={weaponLocked}
         >
-          <span>Validate</span>
-        </div>
+          Validate
+        </button>
       </div>
     </div>
   );

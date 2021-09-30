@@ -5,9 +5,9 @@ export const ShifumiWeaponObject = Object.freeze({
 });
 
 export const ShifumiResultObject = Object.freeze({
-  WIN: 'Win',
-  LOOSE: 'Loose',
-  DRAW: 'Draw',
+  WIN: 'You Win !',
+  LOOSE: 'You Loose !',
+  DRAW: 'Draw !',
 });
 
 export const SocketEvents = Object.freeze({

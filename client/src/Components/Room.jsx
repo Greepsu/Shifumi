@@ -18,6 +18,7 @@ export default function Room() {
   const webSocket = useWebSocketContext();
   const { room, showId, getReady, ready } = useRoomContext();
   const [readyCount, setReadyCount] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     webSocket.on(SocketEvents.SET_READY, (isReady) => {
@@ -35,9 +36,21 @@ export default function Room() {
     },
   };
 
-  const copy = async () => {
-    await navigator.clipboard.writeText(roomId);
-    alert('Text copied');
+  const copiedSpan = {
+    Hidden: {
+      visibility: 'hidden',
+      opacity: 0,
+    },
+    Visible: {
+      visibility: 'visible',
+      opacity: 1,
+    },
+  };
+
+  const copy = () => {
+    navigator.clipboard.writeText(roomId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   if (!room) {
@@ -72,9 +85,14 @@ export default function Room() {
             </h3>
             <div className="room-id-copy">
               <p>{roomId}</p>
-              <button className="copy" onClick={copy}>
-                <img src={clipboard} alt="" />
-              </button>
+              <div className="copy-container">
+                <button className="copy" onClick={copy}>
+                  <img src={clipboard} alt="" />
+                </button>
+                <span style={copied ? copiedSpan.Visible : copiedSpan.Hidden}>
+                  Text copied !
+                </span>
+              </div>
             </div>
           </div>
         ) : (
