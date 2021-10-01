@@ -17,19 +17,14 @@ export function UserContextProvider({ children }) {
 
   useEffect(() => {
     if (user) {
-      webSocket.on(SocketEvents.CONNECTED, (username) => {
-        console.log(`${username} connected`);
-      });
+      webSocket.on(SocketEvents.CONNECTED);
     }
 
     webSocket.on(SocketEvents.GET_USER, (username) => {
-      console.log(username);
       setUser(username);
     });
 
-    webSocket.on(SocketEvents.DISCONNECT, (user) => {
-      console.log(`${user.username} left`);
-    });
+    webSocket.on(SocketEvents.DISCONNECT);
   }, [webSocket, user]);
 
   const values = { user };

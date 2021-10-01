@@ -39,7 +39,6 @@ export default function Game() {
     if (userSelection) {
       setReady(!ready);
       webSocket.emit(SocketEvents.SET_LOCKED, userSelection);
-      console.log(ready);
     }
   }
 

@@ -40,9 +40,7 @@ export function RoomContextProvider({ children }) {
 
   function joinRoom(roomId, userInfo) {
     webSocket.emit(SocketEvents.JOIN_ROOM, { roomId, userInfo });
-
     setShowId(true);
-    console.log(`Room with ${roomId} ID just joined by ${userInfo.username}`);
   }
 
   function getReady() {

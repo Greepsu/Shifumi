@@ -24,7 +24,6 @@ function onSetLocked(weapon, socket, io) {
     io.to(roomId).emit(SocketEvents.SET_LOCKED, 0);
     io.to(roomId).emit(SocketEvents.RESET_BUTTON);
     io.to(roomId).emit(SocketEvents.UPDATE_ROOM, filterWeapon);
-    console.log("reset done");
   }
 
   if (filterLocked.length === 2) {
