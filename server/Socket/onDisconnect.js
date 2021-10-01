@@ -1,4 +1,4 @@
-const SocketEvents = require("../Enums/events");
+const { SocketEvents } = require("../Enums/events");
 
 function onDisconnect(data, socket, io) {
   if (!socket.user) return;

@@ -15,9 +15,10 @@
   align-items: center;
   background-color: var(--side-bg-color);
   padding: 20px 3%;
-  width: 500px;
+  width: 25%;
   height: 80%;
   border-radius: 20px;
+  text-align: center;
 }
 
 .left-section p {
@@ -45,7 +46,7 @@
   text-align: center;
   padding: 20px 3%;
   background-color: var(--side-bg-color);
-  width: 1200px;
+  width: 68%;
   height: 80%;
   border-radius: 20px;
 }
@@ -129,6 +130,7 @@
 
 .rules-text {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   line-height: 40px;
@@ -158,4 +160,10 @@
 
 .start-btn:hover {
   background-color: var(--primary-blue);
+}
+
+@media screen and (max-width: 1424px) {
+  .room-id p {
+    font-size: 24px;
+  }
 }

@@ -15,9 +15,6 @@ export default function Routes() {
       <Route exact path="/">
         <MainLobby />
       </Route>
-      <Route path="/cpu">
-        <Game />
-      </Route>
       <Route path="/user">
         <RoomHandler />
       </Route>

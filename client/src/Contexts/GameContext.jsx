@@ -32,6 +32,12 @@ export function GameContextProvider({ children }) {
         if (player.id !== user.id) return player;
       });
       setOpponent(filteredOpponent[0]);
+
+      // if (!opponent) {
+      //   webSocket.on(SocketEvents.CPU, (cpu) => {
+      //     setOpponent(cpu);
+      //   });
+      // }
     }
 
     webSocket.on(SocketEvents.SET_LOCKED, (isReady) => {
@@ -39,23 +45,7 @@ export function GameContextProvider({ children }) {
     });
   }, [webSocket, room, readyCount]);
 
-  // //Set CPU choice
-  // function randomCPUSelection() {
-  //   const result = generateRandomNumber();
-  //   switch (result) {
-  //     case 0:
-  //       handleCpuSelection(ShifumiWeaponObject.ROCK);
-  //       break;
-  //     case 1:
-  //       handleCpuSelection(ShifumiWeaponObject.PAPER);
-  //       break;
-  //     case 2:
-  //       handleCpuSelection(ShifumiWeaponObject.SCISSORS);
-  //       break;
-  //     default:
-  //       console.log(`Sorry, Bot have some issues`);
-  //   }
-  // }
+  console.log(opponent);
 
   //Set Match Result
   useEffect(() => {

@@ -1,4 +1,4 @@
-const SocketEvents = require("../Enums/events");
+const { SocketEvents } = require("../Enums/events");
 const getRoom = require("../data/getRoom");
 
 function onSetLocked(weapon, socket, io) {

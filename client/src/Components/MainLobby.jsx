@@ -17,14 +17,10 @@ export default function MainLobby() {
           </h1>
           <p>A Rock Paper Scissors game !</p>
         </div>
-        <img src={playPicture} alt="" />
+        <img src={playPicture} alt="two person playing" />
         <div className="lobby-button-container">
-          <Link to="/cpu">
-            <button>Play against CPU</button>
-          </Link>
-          <span>or</span>
           <Link to="/user">
-            <button>Play against user</button>
+            <button>Play !</button>
           </Link>
         </div>
       </div>

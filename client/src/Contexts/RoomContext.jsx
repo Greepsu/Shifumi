@@ -50,12 +50,17 @@ export function RoomContextProvider({ children }) {
     webSocket.emit(SocketEvents.SET_READY);
   }
 
+  function vsCpu() {
+    webSocket.emit(SocketEvents.CPU);
+  }
+
   const values = {
     joinRoom,
     room,
     showId,
     getReady,
     ready,
+    vsCpu,
   };
 
   return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;

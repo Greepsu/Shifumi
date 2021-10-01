@@ -67,7 +67,6 @@ export default function Game() {
           <p>SCORE:</p>
           <span>{score}</span>
         </div>
-        {/* <span>Ready: {readyCount}/2</span> */}
       </div>
       <div className="match-container">
         <div className="user-container">
@@ -104,12 +103,15 @@ export default function Game() {
         </div>
       </div>
       <div className="play-container">
-        <button
-          style={ready ? buttonColor.Ready : buttonColor.UnReady}
-          onClick={weaponLocked}
-        >
-          Validate
-        </button>
+        <div className="button-container">
+          <button
+            style={ready ? buttonColor.Ready : buttonColor.UnReady}
+            onClick={weaponLocked}
+          >
+            Validate
+          </button>
+          <span>Ready: {readyCount}/2</span>
+        </div>
       </div>
     </div>
   );

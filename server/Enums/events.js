@@ -13,8 +13,15 @@ const SocketEvents = Object.freeze({
   RESET_BUTTON: "reset_button",
   GAME_START: "game_start",
   PLAYER_CHOICE: "player_choice",
+  CPU: "cpu",
   DISCONNECT: "disconnect",
   DISCONNECTED: "disconnected",
 });
 
-module.exports = SocketEvents;
+const ShifumiWeaponObject = Object.freeze({
+  PAPER: "Paper",
+  SCISSORS: "Scissors",
+  ROCK: "Rock",
+});
+
+module.exports = { SocketEvents, ShifumiWeaponObject };

@@ -13,8 +13,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  min-width: 30%;
   height: 50%;
+  padding: 10px;
   background: var(--side-bg-color);
   border-radius: 30px;
 }
@@ -26,7 +27,7 @@
 }
 
 .login div input {
-  width: 50%;
+  min-width: 70%;
   height: 40px;
   margin: 50px 0;
   background: var(--main-bg-color);

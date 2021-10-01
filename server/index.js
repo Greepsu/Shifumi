@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 const port = 5000;
-const SocketEvents = require("./Enums/events");
+const { SocketEvents } = require("./Enums/events");
 
 //Import CORS
 const cors = require("cors");

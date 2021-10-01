@@ -1,4 +1,4 @@
-const SocketEvents = require("../Enums/events");
+const { SocketEvents } = require("../Enums/events");
 
 function onConnected(data, socket, io) {
   console.log(io.users[socket.id]);

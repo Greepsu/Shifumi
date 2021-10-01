@@ -24,7 +24,7 @@ export default function Room() {
     webSocket.on(SocketEvents.SET_READY, (isReady) => {
       setReadyCount(isReady);
     });
-  }, []);
+  }, [webSocket]);
 
   const buttonColor = {
     Ready: {
@@ -47,11 +47,11 @@ export default function Room() {
     },
   };
 
-  const copy = () => {
+  function copy() {
     navigator.clipboard.writeText(roomId);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
+  }
 
   if (!room) {
     return <p>loading</p>;
@@ -101,8 +101,8 @@ export default function Room() {
         <div className="rules">
           <h3>How to play:</h3>
           <div className="rules-text">
+            <h4>The rules are simple:</h4>
             <p>
-              <h4>The rules are simple:</h4>
               Rock smashes Scissors <br />
               Scissors cuts Paper <br />
               Paper covers Rock
@@ -116,6 +116,9 @@ export default function Room() {
         >
           Play
         </button>
+        {/* <button className="cpu-btn" onClick={() => vsCpu()}>
+          Play against CPU
+        </button> */}
       </div>
     </div>
   );

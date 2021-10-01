@@ -25,6 +25,7 @@ export const SocketEvents = Object.freeze({
   RESET_BUTTON: 'reset_button',
   GAME_START: 'game_start',
   PLAYER_CHOICE: 'player_choice',
+  CPU: 'cpu',
   DISCONNECT: 'disconnect',
   DISCONNECTED: 'disconnected',
 });

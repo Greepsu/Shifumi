@@ -49,3 +49,9 @@ button {
     font-size: 128px;
   }
 }
+
+@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 88px;
+  }
+}

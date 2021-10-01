@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
-const SocketEvents = require("../Enums/events");
+const { SocketEvents } = require("../Enums/events");
 
 function onAddUser(username, socket, io) {
   //Define socket.user
