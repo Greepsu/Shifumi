@@ -27,21 +27,21 @@ export default function Room() {
   }, [webSocket]);
 
   const buttonColor = {
-    Ready: {
+    ready: {
       backgroundColor: 'green',
       border: '1px solid transparent',
     },
-    UnReady: {
+    unready: {
       backgroundColor: '',
     },
   };
 
   const copiedSpan = {
-    Hidden: {
+    hidden: {
       visibility: 'hidden',
       opacity: 0,
     },
-    Visible: {
+    visible: {
       visibility: 'visible',
       opacity: 1,
     },
@@ -89,7 +89,7 @@ export default function Room() {
                 <button className="copy" onClick={copy}>
                   <img src={clipboard} alt="" />
                 </button>
-                <span style={copied ? copiedSpan.Visible : copiedSpan.Hidden}>
+                <span style={copied ? copiedSpan.visible : copiedSpan.hidden}>
                   Text copied !
                 </span>
               </div>
@@ -102,23 +102,18 @@ export default function Room() {
           <h3>How to play:</h3>
           <div className="rules-text">
             <h4>The rules are simple:</h4>
-            <p>
-              Rock smashes Scissors <br />
-              Scissors cuts Paper <br />
-              Paper covers Rock
-            </p>
+            <p>Rock smashes Scissors </p>
+            <p>Scissors cuts Paper </p>
+            <p>Paper covers Rock</p>
           </div>
         </div>
         <button
           className="start-btn"
-          style={ready ? buttonColor.Ready : buttonColor.UnReady}
+          style={ready ? buttonColor.ready : buttonColor.unready}
           onClick={() => getReady()}
         >
           Play
         </button>
-        {/* <button className="cpu-btn" onClick={() => vsCpu()}>
-          Play against CPU
-        </button> */}
       </div>
     </div>
   );

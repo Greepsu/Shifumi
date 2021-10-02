@@ -24,4 +24,10 @@ const ShifumiWeaponObject = Object.freeze({
   ROCK: "Rock",
 });
 
-module.exports = { SocketEvents, ShifumiWeaponObject };
+const ShifumiResultObject = Object.freeze({
+  WIN: "You Win !",
+  LOOSE: "You Loose !",
+  DRAW: "Draw !",
+});
+
+module.exports = { SocketEvents, ShifumiWeaponObject, ShifumiResultObject };

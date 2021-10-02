@@ -43,11 +43,11 @@ export default function Game() {
   }
 
   const buttonColor = {
-    Ready: {
+    ready: {
       backgroundColor: 'green',
       border: '1px solid green',
     },
-    UnReady: {
+    unready: {
       backgroundColor: '',
     },
   };
@@ -126,7 +126,7 @@ export default function Game() {
       <div className="play-container">
         <div className="button-container">
           <button
-            style={ready ? buttonColor.Ready : buttonColor.UnReady}
+            style={ready ? buttonColor.ready : buttonColor.unready}
             onClick={weaponLocked}
           >
             Validate
