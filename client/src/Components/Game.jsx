@@ -37,7 +37,7 @@ export default function Game() {
 
   function weaponLocked() {
     if (userSelection) {
-      setReady(!ready);
+      setReady((prev) => !prev);
       webSocket.emit(SocketEvents.SET_LOCKED, userSelection);
     }
   }
@@ -71,25 +71,25 @@ export default function Game() {
         <div className="user-container">
           <span className="username">{user.username}</span>
           <span>{userSelection}</span>
-          <div className="user-selection">
-            <div
+          <div className="selection user">
+            <button
               className="selection-weapon selection-rock"
               onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)}
             >
-              <img src={RockPicture} alt="" />
-            </div>
-            <div
+              <img src={RockPicture} alt="Rock" />
+            </button>
+            <button
               className="selection-weapon selection-paper"
               onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}
             >
-              <img src={PaperPicture} alt="" />
-            </div>
-            <div
+              <img src={PaperPicture} alt="Paper" />
+            </button>
+            <button
               className="selection-weapon selection-scissors"
               onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}
             >
-              <img src={ScissorsPicture} alt="" />
-            </div>
+              <img src={ScissorsPicture} alt="Scissors" />
+            </button>
           </div>
         </div>
         <div className="match-result">
@@ -98,7 +98,29 @@ export default function Game() {
         <div className="opponent-container">
           <span className="opponent-name">{opponent.username}</span>
           <span>{opponent.weapon}</span>
-          <div></div>
+          <div className="selection opponent">
+            <button
+              className="selection-weapon selection-rock"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.ROCK)}
+              disabled
+            >
+              <img src={RockPicture} alt="Rock" />
+            </button>
+            <button
+              className="selection-weapon selection-paper"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.PAPER)}
+              disabled
+            >
+              <img src={PaperPicture} alt="Paper" />
+            </button>
+            <button
+              className="selection-weapon selection-scissors"
+              onClick={() => handleUserSelection(ShifumiWeaponObject.SCISSORS)}
+              disabled
+            >
+              <img src={ScissorsPicture} alt="Scissors" />
+            </button>
+          </div>
         </div>
       </div>
       <div className="play-container">

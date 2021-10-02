@@ -1,7 +1,6 @@
 import React from 'react';
 
 //Import components
-import Game from './Game';
 import MainLobby from './MainLobby';
 import Room from './Room';
 

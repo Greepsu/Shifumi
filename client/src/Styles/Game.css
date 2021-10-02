@@ -30,24 +30,33 @@
   font-size: 42px;
 }
 
-.user-selection {
+.selection {
   display: flex;
   justify-content: space-between;
   width: 80%;
 }
 
-.user-selection div {
+.selection button {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .selection-weapon {
-  transition: transform 0.2s;
+  background: none;
+  border: none;
+  outline: none;
+  transition: transform 0.3s, filter 0.3s;
+  filter: opacity(0.4);
 }
 
 .selection-weapon:hover {
-  transform: scale(1.1);
+  filter: opacity(1);
+}
+
+.selection-weapon:focus {
+  transform: scale(1.2);
+  filter: opacity(1);
 }
 
 .selection-weapon img {
@@ -75,8 +84,25 @@
   border: 8px solid var(--red);
 }
 
-.user-selection span {
+.selection span {
   z-index: 1;
+}
+
+.selection.opponent .selection-weapon {
+  background: none;
+  border: none;
+  outline: none;
+  transition: none;
+  filter: opacity(0.4);
+}
+
+.selection.opponent .selection-weapon:hover {
+  filter: opacity(0.4);
+}
+
+.selection.opponent .selection-weapon:focus {
+  transform: scale(1);
+  filter: opacity(0.4);
 }
 
 .score-container {
@@ -123,10 +149,6 @@
 
 .match-result span {
   font-size: 58px;
-}
-
-.opponent-container div {
-  height: 15px;
 }
 
 .opponent-container span:first-of-type,
