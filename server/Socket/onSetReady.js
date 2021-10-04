@@ -7,11 +7,18 @@ function onSetReady(data, socket, io) {
   const roomId = socket.user.roomId;
 
   const room = getRoom(roomId, io);
-  const filterReady = room.players.filter((p) => p.isReady);
+  const playersReady = room.players.filter((p) => {
+    p.isReady = false;
+    return p;
+  });
+  io.to(roomId).emit(SocketEvents.SET_READY, playersReady.length);
 
-  io.to(roomId).emit(SocketEvents.SET_READY, filterReady.length);
-
-  if (filterReady.length === 2) {
+  if (playersReady.length === 2) {
+    socket.user.isReady = false;
+    io.to(socket.user.id).emit(SocketEvents.UPDATE_USER, {
+      isReady: false,
+    });
+    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, playersReady);
     room.state = "playing";
     io.to(roomId).emit(SocketEvents.GAME_START, room.state);
   }

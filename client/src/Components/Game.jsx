@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 //Import styles
 import '../Styles/Game.css';
@@ -27,50 +27,31 @@ export default function Game() {
     opponent,
     readyCount,
   } = useGameContext();
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    webSocket.on(SocketEvents.RESET_BUTTON, () => {
-      setReady(false);
-    });
-  }, [webSocket]);
 
   function weaponLocked() {
     if (userSelection) {
-      setReady((prev) => !prev);
       webSocket.emit(SocketEvents.SET_LOCKED, userSelection);
+      user.isReady = !user.isReady;
     }
   }
-
-  const buttonColor = {
-    ready: {
-      backgroundColor: 'green',
-      border: '1px solid green',
-    },
-    unready: {
-      backgroundColor: '',
-    },
-  };
 
   return (
     <div className="game">
       <div className="score-container">
-        <span>
+        <span className="score-title">
           <span className="blue-word">Shi</span>
-          <br />
-          Fu
-          <br />
-          Mi
+          <p>Fu</p>
+          <p>Mi</p>
         </span>
         <div>
           <p>SCORE:</p>
-          <span>{score}</span>
+          <span className="score">{score}</span>
         </div>
       </div>
       <div className="match-container">
         <div className="user-container">
           <span className="username">{user.username}</span>
-          <span>{userSelection}</span>
+          <span className="weapon">{userSelection}</span>
           <div className="selection user">
             <button
               className="selection-weapon selection-rock"
@@ -97,7 +78,7 @@ export default function Game() {
         </div>
         <div className="opponent-container">
           <span className="opponent-name">{opponent.username}</span>
-          <span>{opponent.weapon}</span>
+          <span className="weapon">{opponent.weapon}</span>
           <div className="selection opponent">
             <button
               className="selection-weapon selection-rock"
@@ -126,7 +107,7 @@ export default function Game() {
       <div className="play-container">
         <div className="button-container">
           <button
-            style={ready ? buttonColor.ready : buttonColor.unready}
+            className={user.isReady ? 'ready' : ''}
             onClick={weaponLocked}
           >
             Validate

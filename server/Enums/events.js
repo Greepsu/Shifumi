@@ -3,6 +3,7 @@ const SocketEvents = Object.freeze({
   CONNECTED: "connected",
   ADD_USER: "add_user",
   GET_USER: "get_user",
+  UPDATE_USER: "update_user",
   CREATE_ROOM: "create_room",
   GET_ROOM: "get_room",
   UPDATE_ROOM: "update_room",

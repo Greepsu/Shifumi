@@ -8,7 +8,6 @@ function onAddUser(username, socket, io) {
     id: socket.id,
     roomId: uuidv4(),
     isReady: false,
-    isWeaponLocked: false,
     weapon: undefined,
   };
 

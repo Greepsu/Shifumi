@@ -30,10 +30,15 @@
   font-size: 42px;
 }
 
+.username,
+.opponent-name {
+  font-size: 36px;
+}
+
 .selection {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
 }
 
 .selection button {
@@ -46,7 +51,7 @@
   background: none;
   border: none;
   outline: none;
-  transition: transform 0.3s, filter 0.3s;
+  transition: transform 0.3s, filter 0.3s ease-in-out;
   filter: opacity(0.4);
 }
 
@@ -136,24 +141,30 @@
   color: var(--primary-blue);
 }
 
-.score-container span {
-  font-weight: 700;
-  line-height: 50px;
-  font-family: 'roboto';
-  font-size: 48px !important;
+.score-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.score-container span:last-of-type {
+.score-container div span {
+  font-weight: 700;
+  font-family: 'roboto';
   font-size: 48px;
+}
+
+/* .score-container span:last-of-type {
+} */
+
+.match-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .match-result span {
   font-size: 58px;
-}
-
-.opponent-container span:first-of-type,
-.user-container span:first-of-type {
-  font-size: 36px;
+  text-align: center;
 }
 
 .play-container {
@@ -186,6 +197,124 @@
   transition: background-color 0.4s;
 }
 
-.button-container button:hover {
+.button-container > button:hover {
   background-color: var(--primary-blue);
+}
+
+.button-container > button.ready {
+  border: '1px solid green';
+  background-color: green;
+}
+
+@media screen and (max-width: 1200px) {
+  .match-container {
+    width: 100%;
+  }
+
+  .match-result span {
+    font-size: 48px;
+  }
+
+  .user-container,
+  .opponent-container {
+    width: 60%;
+  }
+
+  .selection {
+    width: 90%;
+  }
+
+  .score-container {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .selection {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .game {
+    padding-top: 0;
+  }
+
+  .match-container {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .user-container,
+  .opponent-container {
+    height: 50%;
+    width: 90%;
+  }
+
+  .score-container div p {
+    font-size: 28px;
+  }
+
+  .score {
+    font-size: 38px !important;
+  }
+
+  .score-container {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0;
+  }
+
+  .play-container {
+    justify-content: center;
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .match-container {
+    justify-content: space-evenly;
+  }
+  .user-container,
+  .opponent-container {
+    height: 200px;
+  }
+  .selection-weapon img {
+    height: 70px;
+    width: 70px;
+    padding: 10px;
+    background: var(--white);
+    outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .username,
+  .opponent-name {
+    font-size: 26px;
+  }
+
+  .weapon {
+    font-size: 22px;
+  }
+
+  .score-container div p {
+    font-size: 16px;
+  }
+
+  .score-container {
+    height: 15%;
+    width: 70%;
+  }
+
+  .score-title {
+    flex-direction: row;
+    width: 130px;
+  }
+
+  .score-container div {
+    padding: 10px 10px;
+    height: 80px;
+    width: 100px;
+  }
 }

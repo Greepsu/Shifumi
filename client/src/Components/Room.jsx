@@ -22,6 +22,7 @@ export default function Room() {
 
   useEffect(() => {
     webSocket.on(SocketEvents.SET_READY, (isReady) => {
+      console.log(isReady);
       setReadyCount(isReady);
     });
   }, [webSocket]);

@@ -19,7 +19,7 @@ export function GameContextProvider({ children }) {
   const { user } = useUserContext();
   const { room } = useRoomContext();
 
-  const [opponent, setOpponent] = useState();
+  const [opponent, setOpponent] = useState({});
   const [userSelection, setUserSelection] = useState();
   const [userMatchResult, setUserMatchResult] = useState();
   const [score, setScore] = useState(0);
@@ -28,24 +28,17 @@ export function GameContextProvider({ children }) {
   useEffect(() => {
     if (room) {
       const copy = { ...room };
-      const filteredOpponent = copy.players.filter((player) => {
+      console.log(copy);
+      const filteredOpponent = copy.players.find((player) => {
         if (player.id !== user.id) return player;
       });
-      setOpponent(filteredOpponent[0]);
-
-      // if (!opponent) {
-      //   webSocket.on(SocketEvents.CPU, (cpu) => {
-      //     setOpponent(cpu);
-      //   });
-      // }
+      setOpponent(filteredOpponent);
     }
 
     webSocket.on(SocketEvents.SET_LOCKED, (isReady) => {
       setReadyCount(isReady);
     });
-  }, [webSocket, room, readyCount]);
-
-  console.log(opponent);
+  }, [webSocket, room]);
 
   //Set Match Result
   useEffect(() => {

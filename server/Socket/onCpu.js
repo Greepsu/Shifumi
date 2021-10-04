@@ -7,7 +7,6 @@ function onCpu(data, socket, io) {
     id: "1010100110101",
     roomId: "0",
     isReady: true,
-    isWeaponLocked: true,
     weapon: "rock",
   };
 

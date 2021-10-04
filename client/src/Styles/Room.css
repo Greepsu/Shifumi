@@ -5,7 +5,7 @@
   width: 100%;
   height: 100%;
   color: white;
-  padding: 0 3%;
+  padding: 0 20px;
 }
 
 .left-section {
@@ -14,7 +14,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--side-bg-color);
-  padding: 20px 3%;
+  padding: 20px 5px;
   width: 25%;
   height: 80%;
   border-radius: 20px;
@@ -164,5 +164,137 @@
 @media screen and (max-width: 1424px) {
   .room-id p {
     font-size: 24px;
+  }
+
+  .copy {
+    background-color: var(--primary-blue);
+  }
+
+  .start-btn {
+    background-color: var(--primary-blue);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .room {
+    flex-direction: column;
+  }
+
+  .left-section {
+    width: 100%;
+    height: 25%;
+  }
+
+  .right-section {
+    height: 70%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 665px) {
+  .left-section {
+    width: 100%;
+    height: 20%;
+  }
+
+  .left-section h3 {
+    font-size: 28px;
+  }
+
+  .left-section p {
+    font-size: 18px;
+  }
+
+  .player {
+    padding: 0;
+    width: 50%;
+    font-size: 26px;
+  }
+
+  .right-section {
+    height: 75%;
+  }
+
+  .right-section h3 {
+    font-size: 28px;
+  }
+
+  .room-id {
+    height: 30%;
+  }
+
+  .room-id-copy {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .room-id-copy p {
+    padding: 10px;
+    width: 100%;
+    font-size: 20px;
+  }
+
+  .copy-container {
+    width: 90%;
+  }
+
+  .copy-container span {
+    position: absolute;
+    width: 120px;
+    top: 50px;
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+  }
+
+  .copy {
+    width: 100%;
+    height: 40px;
+    border-radius: 30px;
+  }
+
+  .start-btn {
+    border-radius: 40px;
+    padding: 10px 80px;
+    width: 100%;
+    font-size: 30px;
+  }
+
+  .rules {
+    height: 40%;
+  }
+
+  .rules-text {
+    height: 90%;
+  }
+}
+
+@media screen and (max-width: 465px) {
+  .left-section h3,
+  .right-section h3 {
+    font-size: 23px;
+  }
+
+  .left-section {
+    height: 18%;
+  }
+
+  .right-section {
+    height: 75%;
+  }
+
+  .rules {
+    height: 35%;
+  }
+
+  .rules-text {
+    height: 90%;
+  }
+
+  .rules-text h4 {
+    font-size: 21px;
+  }
+
+  .rules-text p {
+    font-size: 18px;
   }
 }

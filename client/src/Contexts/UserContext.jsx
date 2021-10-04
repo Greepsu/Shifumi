@@ -20,12 +20,17 @@ export function UserContextProvider({ children }) {
       webSocket.on(SocketEvents.CONNECTED);
     }
 
-    webSocket.on(SocketEvents.GET_USER, (username) => {
-      setUser(username);
+    webSocket.on(SocketEvents.GET_USER, (user) => {
+      setUser(user);
+    });
+
+    webSocket.on(SocketEvents.UPDATE_USER, (user) => {
+      setUser((prev) => ({ ...prev, ...user }));
+      console.log(user);
     });
 
     webSocket.on(SocketEvents.DISCONNECT);
-  }, [webSocket, user]);
+  }, [webSocket]);
 
   const values = { user };
 
