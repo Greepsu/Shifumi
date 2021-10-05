@@ -13,6 +13,7 @@ const SocketEvents = Object.freeze({
   SET_LOCKED: "set_locked",
   RESET_BUTTON: "reset_button",
   GAME_START: "game_start",
+  SET_WINNER: "set_winner",
   PLAYER_CHOICE: "player_choice",
   CPU: "cpu",
   DISCONNECT: "disconnect",

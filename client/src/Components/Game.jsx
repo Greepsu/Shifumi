@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 //Import styles
 import '../Styles/Game.css';
@@ -20,7 +20,6 @@ export default function Game() {
   const webSocket = useWebSocketContext();
   const { user } = useUserContext();
   const {
-    score,
     userSelection,
     userMatchResult,
     handleUserSelection,
@@ -37,15 +36,28 @@ export default function Game() {
 
   return (
     <div className="game">
-      <div className="score-container">
-        <span className="score-title">
-          <span className="blue-word">Shi</span>
-          <p>Fu</p>
-          <p>Mi</p>
-        </span>
-        <div>
-          <p>SCORE:</p>
-          <span className="score">{score}</span>
+      <div className="score-section">
+        <div className="score-container">
+          <span className="score-title">
+            <span className="blue-word">Shi</span>
+            <p>Fu</p>
+            <p>Mi</p>
+          </span>
+          <div>
+            <p>SCORE:</p>
+            <span className="score">{user.score}</span>
+          </div>
+        </div>
+        <div className="score-container">
+          <span className="score-title">
+            <span className="blue-word">Shi</span>
+            <p>Fu</p>
+            <p>Mi</p>
+          </span>
+          <div>
+            <p>SCORE:</p>
+            <span className="score">{opponent.score}</span>
+          </div>
         </div>
       </div>
       <div className="match-container">

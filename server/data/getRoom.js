@@ -2,7 +2,6 @@ function getRoom(roomId, io) {
   const room = {
     id: roomId,
     state: "idle",
-    score: 0,
     players: [],
   };
 

@@ -5,11 +5,7 @@ import { useWebSocketContext } from './WebSocketContext';
 import { useUserContext } from './UserContext';
 import { useRoomContext } from '../Contexts/RoomContext';
 
-//Import random number generator for determine CPU selection
-import { compareResult } from '../Components/Helper';
-
 //Import enums
-import { ShifumiResultObject } from '../Enums/Shifumi';
 import { SocketEvents } from '../Enums/Shifumi';
 
 export const GameContext = createContext({});
@@ -22,7 +18,6 @@ export function GameContextProvider({ children }) {
   const [opponent, setOpponent] = useState({});
   const [userSelection, setUserSelection] = useState();
   const [userMatchResult, setUserMatchResult] = useState();
-  const [score, setScore] = useState(0);
   const [readyCount, setReadyCount] = useState(0);
 
   useEffect(() => {
@@ -38,22 +33,11 @@ export function GameContextProvider({ children }) {
     webSocket.on(SocketEvents.SET_LOCKED, (isReady) => {
       setReadyCount(isReady);
     });
-  }, [webSocket, room]);
 
-  //Set Match Result
-  useEffect(() => {
-    if (userSelection && opponent.weapon) {
-      if (compareResult(userSelection, opponent.weapon)) {
-        setUserMatchResult(ShifumiResultObject.WIN);
-        setScore((prevScore) => prevScore + 1);
-      } else if (userSelection === opponent.weapon) {
-        setUserMatchResult(ShifumiResultObject.DRAW);
-      } else {
-        setUserMatchResult(ShifumiResultObject.LOOSE);
-        setScore((prevScore) => prevScore - 1);
-      }
-    }
-  }, [userSelection, opponent]);
+    webSocket.on(SocketEvents.SET_WINNER, (winner) => {
+      console.log(`Winner: ${winner.username}`);
+    });
+  }, [webSocket, room]);
 
   function handleUserSelection(weapon) {
     setUserSelection(weapon);
@@ -61,7 +45,6 @@ export function GameContextProvider({ children }) {
   }
 
   const values = {
-    score,
     userSelection,
     userMatchResult,
     handleUserSelection,

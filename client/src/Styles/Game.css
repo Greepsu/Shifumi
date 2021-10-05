@@ -6,6 +6,7 @@
   height: 100vh;
   color: white;
   padding-top: 40px;
+  padding: 40px 100px 0;
 }
 
 .match-container {
@@ -13,7 +14,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 3%;
 }
 
 .user-container,
@@ -110,13 +110,20 @@
   filter: opacity(0.4);
 }
 
+.score-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .score-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-self: center;
   background-color: var(--main-bg-color);
-  width: 600px;
+  width: 30%;
   font-size: 38px;
   border: 1px solid white;
   padding: 10px 20px;

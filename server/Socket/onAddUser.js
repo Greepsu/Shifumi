@@ -9,6 +9,8 @@ function onAddUser(username, socket, io) {
     roomId: uuidv4(),
     isReady: false,
     weapon: undefined,
+    score: 0,
+    resultMatch: undefined,
   };
 
   // TODO: delete this user on disconected
