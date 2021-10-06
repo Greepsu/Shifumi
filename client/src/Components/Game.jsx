@@ -5,6 +5,7 @@ import '../Styles/Game.css';
 
 //Import Contexts
 import { useWebSocketContext } from '../Contexts/WebSocketContext';
+import { useRoomContext } from '../Contexts/RoomContext';
 import { useUserContext } from '../Contexts/UserContext';
 import { useGameContext } from '../Contexts/GameContext';
 
@@ -15,23 +16,35 @@ import { SocketEvents } from '../Enums/Shifumi';
 import RockPicture from '../Assets/Images/icon-rock.svg';
 import PaperPicture from '../Assets/Images/icon-paper.svg';
 import ScissorsPicture from '../Assets/Images/icon-scissors.svg';
+import WinningScreen from '../Components/WinningScreen';
 
 export default function Game() {
   const webSocket = useWebSocketContext();
   const { user } = useUserContext();
+  const { room } = useRoomContext();
   const {
     userSelection,
     userMatchResult,
     handleUserSelection,
     opponent,
     readyCount,
+    winner,
   } = useGameContext();
+
+  //TODO: PLEASE DON'T DO THIS FOR THE LOVE OF GOD
+  const userUpdated = room.players.find((player) => {
+    if (player.id === user.id) return player;
+  });
 
   function weaponLocked() {
     if (userSelection) {
       webSocket.emit(SocketEvents.SET_LOCKED, userSelection);
       user.isReady = !user.isReady;
     }
+  }
+
+  if (winner) {
+    return <WinningScreen />;
   }
 
   return (
@@ -45,7 +58,7 @@ export default function Game() {
           </span>
           <div>
             <p>SCORE:</p>
-            <span className="score">{user.score}</span>
+            <span className="score">{userUpdated.score}</span>
           </div>
         </div>
         <div className="score-container">

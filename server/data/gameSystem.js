@@ -1,34 +1,31 @@
 const { ShifumiWeaponObject, ShifumiResultObject } = require("../Enums/events");
 
-//Compare the result betwwen user choise and cpu choice to see if the user win
-function compareResult(roomWeapons) {
-  const playerOne = roomWeapons[0];
-  const playerTwo = roomWeapons[1];
+function setWin(user, opponent) {
   return (
-    (playerOne === ShifumiWeaponObject.ROCK &&
-      playerTwo === ShifumiWeaponObject.SCISSORS) ||
-    (playerOne === ShifumiWeaponObject.PAPER &&
-      playerTwo === ShifumiWeaponObject.ROCK) ||
-    (playerOne === ShifumiWeaponObject.SCISSORS &&
-      playerTwo === ShifumiWeaponObject.PAPER)
+    (user.weapon === ShifumiWeaponObject.ROCK &&
+      opponent.weapon === ShifumiWeaponObject.SCISSORS) ||
+    (user.weapon === ShifumiWeaponObject.PAPER &&
+      opponent.weapon === ShifumiWeaponObject.ROCK) ||
+    (user.weapon === ShifumiWeaponObject.SCISSORS &&
+      opponent.weapon === ShifumiWeaponObject.PAPER)
   );
 }
 
-//TODO: Issue here, only increment the 2nd player
-function setScore(roomWeapons) {
-  const playerOne = roomWeapons[0];
-  const playerTwo = roomWeapons[1];
-  if (compareResult(roomWeapons)) {
-    playerOne.score++;
-    playerOne.resultMatch = ShifumiResultObject.WIN;
-    playerTwo.resultMatch = ShifumiResultObject.LOOSE;
-  } else if (playerOne.weapon === playerTwo.weapon) {
-    playerTwo.resultMatch = ShifumiResultObject.DRAW;
-    playerOne.resultMatch = ShifumiResultObject.DRAW;
+function setScore(user, roomPlayers) {
+  const opponent = roomPlayers.find((player) => player.id !== user.id);
+  const win = setWin(user, opponent);
+  console.log(win);
+  if (win) {
+    user.score++;
+    user.resultMatch = ShifumiResultObject.WIN;
+    opponent.resultMatch = ShifumiResultObject.LOOSE;
+  } else if (user.weapon === opponent.weapon) {
+    opponent.resultMatch = ShifumiResultObject.DRAW;
+    user.resultMatch = ShifumiResultObject.DRAW;
   } else {
-    playerTwo.score++;
-    playerTwo.resultMatch = ShifumiResultObject.WIN;
-    playerOne.resultMatch = ShifumiResultObject.LOOSE;
+    opponent.score++;
+    opponent.resultMatch = ShifumiResultObject.WIN;
+    user.resultMatch = ShifumiResultObject.LOOSE;
   }
 }
 

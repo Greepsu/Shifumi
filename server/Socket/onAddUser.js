@@ -13,7 +13,6 @@ function onAddUser(username, socket, io) {
     resultMatch: undefined,
   };
 
-  // TODO: delete this user on disconected
   if (io.users === undefined) {
     io.users = {
       [socket.id]: socket.user,

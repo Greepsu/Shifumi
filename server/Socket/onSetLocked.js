@@ -1,7 +1,6 @@
 const { SocketEvents } = require("../Enums/events");
 const getRoom = require("../data/getRoom");
 const setScore = require("../data/gameSystem");
-const { reset } = require("../data/helper");
 
 function onSetLocked(weapon, socket, io) {
   socket.user.isReady = !socket.user.isReady;
@@ -11,10 +10,11 @@ function onSetLocked(weapon, socket, io) {
 
   //Manage weapon
   socket.user.weapon = weapon;
-  const weaponsPlayers = room.players.filter((player) => player.weapon);
+  const players = room.players.filter((player) => player.weapon);
 
   //Manage ready
   io.to(socket.user.id).emit(SocketEvents.UPDATE_USER, {
+    weapon: socket.user.weapon,
     isReady: socket.user.isReady,
   });
   const playersReady = room.players.filter((p) => p.isReady);
@@ -32,19 +32,24 @@ function onSetLocked(weapon, socket, io) {
     });
     io.to(roomId).emit(SocketEvents.RESET_BUTTON);
     io.to(roomId).emit(SocketEvents.SET_LOCKED, playersReady.length);
-    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, weaponsPlayers);
+    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
   }
 
   if (playersReady.length === 2) {
-    setScore(weaponsPlayers);
+    setScore(socket.user, players);
+    io.to(socket.user.id).emit(SocketEvents.UPDATE_USER, {
+      score: socket.user.score,
+    });
 
     room.players.filter((player) => {
       if (player.score === 2) {
         io.to(roomId).emit(SocketEvents.SET_WINNER, player);
+        // room.state = "idle";
+        // io.to(roomId).emit(SocketEvents.GAME_START, room.state);
       }
     });
 
-    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, weaponsPlayers);
+    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
     setTimeout(reset, 3000);
   }
 }

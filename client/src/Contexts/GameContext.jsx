@@ -19,6 +19,7 @@ export function GameContextProvider({ children }) {
   const [userSelection, setUserSelection] = useState();
   const [userMatchResult, setUserMatchResult] = useState();
   const [readyCount, setReadyCount] = useState(0);
+  const [winner, setWinner] = useState();
 
   useEffect(() => {
     if (room) {
@@ -35,7 +36,7 @@ export function GameContextProvider({ children }) {
     });
 
     webSocket.on(SocketEvents.SET_WINNER, (winner) => {
-      console.log(`Winner: ${winner.username}`);
+      setWinner(winner.username);
     });
   }, [webSocket, room]);
 
@@ -50,6 +51,7 @@ export function GameContextProvider({ children }) {
     handleUserSelection,
     opponent,
     readyCount,
+    winner,
   };
 
   return <GameContext.Provider value={values}>{children}</GameContext.Provider>;
