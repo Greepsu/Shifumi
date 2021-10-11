@@ -13,28 +13,28 @@ import { useGameContext } from '../Contexts/GameContext';
 import { ShifumiWeaponObject } from '../Enums/Shifumi';
 import { SocketEvents } from '../Enums/Shifumi';
 
+import { useWindowSize } from 'react-use';
+
 import RockPicture from '../Assets/Images/icon-rock.svg';
 import PaperPicture from '../Assets/Images/icon-paper.svg';
 import ScissorsPicture from '../Assets/Images/icon-scissors.svg';
 import WinningScreen from '../Components/WinningScreen';
+import GameMobile from './GameMobile';
 
 export default function Game() {
   const webSocket = useWebSocketContext();
   const { user } = useUserContext();
   const { room } = useRoomContext();
-  const {
-    userSelection,
-    userMatchResult,
-    handleUserSelection,
-    opponent,
-    readyCount,
-    winner,
-  } = useGameContext();
+  const { userSelection, handleUserSelection, opponent, readyCount, winner } =
+    useGameContext();
+  const { width } = useWindowSize();
 
-  //TODO: PLEASE DON'T DO THIS FOR THE LOVE OF GOD
+  //! PLEASE DON'T DO THIS FOR THE LOVE OF GOD
+  //Todo: Update the user (find why is not update correctly on SocketEvents.UPDATE_USER)
   const userUpdated = room.players.find((player) => {
     if (player.id === user.id) return player;
   });
+  //! PLEASE DON'T DO THIS FOR THE LOVE OF GOD
 
   function weaponLocked() {
     if (userSelection) {
@@ -47,7 +47,7 @@ export default function Game() {
     return <WinningScreen />;
   }
 
-  return (
+  return width > 768 ? (
     <div className="game">
       <div className="score-section">
         <div className="score-container">
@@ -99,7 +99,7 @@ export default function Game() {
           </div>
         </div>
         <div className="match-result">
-          <span>{userMatchResult}</span>
+          <span>{userUpdated.resultMatch}</span>
         </div>
         <div className="opponent-container">
           <span className="opponent-name">{opponent.username}</span>
@@ -131,15 +131,12 @@ export default function Game() {
       </div>
       <div className="play-container">
         <div className="button-container">
-          <button
-            className={user.isReady ? 'ready' : ''}
-            onClick={weaponLocked}
-          >
-            Validate
-          </button>
+          <button onClick={weaponLocked}>Validate</button>
           <span>Ready: {readyCount}/2</span>
         </div>
       </div>
     </div>
+  ) : (
+    <GameMobile />
   );
 }

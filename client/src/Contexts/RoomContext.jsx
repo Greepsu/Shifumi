@@ -33,7 +33,6 @@ export function RoomContextProvider({ children }) {
         copy.state = roomState;
         return copy;
       });
-
       setReady(false);
     });
   }, [webSocket]);

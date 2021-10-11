@@ -35,22 +35,21 @@ function onSetLocked(weapon, socket, io) {
     io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
   }
 
-  if (playersReady.length === 2) {
+  if (playersReady.length === 2 && socket.user.weapon) {
     setScore(socket.user, players);
     io.to(socket.user.id).emit(SocketEvents.UPDATE_USER, {
+      resultMatch: socket.user.resultMatch,
       score: socket.user.score,
     });
 
     room.players.filter((player) => {
-      if (player.score === 2) {
+      if (player.score === 10) {
         io.to(roomId).emit(SocketEvents.SET_WINNER, player);
-        // room.state = "idle";
-        // io.to(roomId).emit(SocketEvents.GAME_START, room.state);
       }
     });
 
     io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
-    setTimeout(reset, 3000);
+    setTimeout(reset, 2000);
   }
 }
 

@@ -5,6 +5,7 @@ const onJoinRoom = require("./onJoinRoom");
 const onConnected = require("./onConnected");
 const onSetReady = require("./onSetReady");
 const onSetLocked = require("./onSetLocked");
+const onClearGame = require("./onClearGame");
 const onCpu = require("./onCpu");
 
 function handleSocketConnection(socket, io) {
@@ -17,6 +18,7 @@ function handleSocketConnection(socket, io) {
   onSocket(SocketEvents.JOIN_ROOM, onJoinRoom);
   onSocket(SocketEvents.SET_READY, onSetReady);
   onSocket(SocketEvents.SET_LOCKED, onSetLocked);
+  onSocket(SocketEvents.CLEAR_GAME, onClearGame);
   onSocket(SocketEvents.CPU, onCpu);
   onSocket(SocketEvents.DISCONNECT, onDisconnect);
 }

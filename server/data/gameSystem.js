@@ -14,7 +14,6 @@ function setWin(user, opponent) {
 function setScore(user, roomPlayers) {
   const opponent = roomPlayers.find((player) => player.id !== user.id);
   const win = setWin(user, opponent);
-  console.log(win);
   if (win) {
     user.score++;
     user.resultMatch = ShifumiResultObject.WIN;

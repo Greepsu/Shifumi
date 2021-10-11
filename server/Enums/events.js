@@ -16,6 +16,7 @@ const SocketEvents = Object.freeze({
   SET_WINNER: "set_winner",
   PLAYER_CHOICE: "player_choice",
   CPU: "cpu",
+  CLEAR_GAME: "clear_game",
   DISCONNECT: "disconnect",
   DISCONNECTED: "disconnected",
 });

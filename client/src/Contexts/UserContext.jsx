@@ -32,8 +32,6 @@ export function UserContextProvider({ children }) {
     webSocket.on(SocketEvents.DISCONNECT);
   }, [webSocket]);
 
-  console.log(user);
-
   const values = { user };
 
   return (

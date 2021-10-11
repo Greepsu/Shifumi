@@ -17,14 +17,12 @@ export function GameContextProvider({ children }) {
 
   const [opponent, setOpponent] = useState({});
   const [userSelection, setUserSelection] = useState();
-  const [userMatchResult, setUserMatchResult] = useState();
   const [readyCount, setReadyCount] = useState(0);
   const [winner, setWinner] = useState();
 
   useEffect(() => {
     if (room) {
       const copy = { ...room };
-      console.log(copy);
       const filteredOpponent = copy.players.find((player) => {
         if (player.id !== user.id) return player;
       });
@@ -36,18 +34,20 @@ export function GameContextProvider({ children }) {
     });
 
     webSocket.on(SocketEvents.SET_WINNER, (winner) => {
-      setWinner(winner.username);
+      if (winner) setWinner(winner);
     });
+
+    return function cleanup() {
+      setReadyCount(0);
+    };
   }, [webSocket, room]);
 
   function handleUserSelection(weapon) {
     setUserSelection(weapon);
-    setUserMatchResult(undefined);
   }
 
   const values = {
     userSelection,
-    userMatchResult,
     handleUserSelection,
     opponent,
     readyCount,

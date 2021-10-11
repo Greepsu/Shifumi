@@ -25,7 +25,7 @@
   background-color: var(--side-bg-color);
   border-radius: 20px;
   padding: 20px 20px;
-  width: 30%;
+  width: 32%;
   height: 100%;
   font-size: 42px;
 }
@@ -123,7 +123,7 @@
   align-items: center;
   align-self: center;
   background-color: var(--main-bg-color);
-  width: 30%;
+  width: 32%;
   font-size: 38px;
   border: 1px solid white;
   padding: 10px 20px;
@@ -224,7 +224,7 @@
 
   .user-container,
   .opponent-container {
-    width: 60%;
+    width: 40%;
   }
 
   .selection {
@@ -232,96 +232,12 @@
   }
 
   .score-container {
-    width: 50%;
+    width: 40%;
   }
 }
 
 @media screen and (max-width: 1024px) {
   .selection {
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .game {
-    padding-top: 0;
-  }
-
-  .match-container {
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .user-container,
-  .opponent-container {
-    height: 50%;
-    width: 90%;
-  }
-
-  .score-container div p {
-    font-size: 28px;
-  }
-
-  .score {
-    font-size: 38px !important;
-  }
-
-  .score-container {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 10px 0;
-  }
-
-  .play-container {
-    justify-content: center;
-    padding-bottom: 0;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .match-container {
-    justify-content: space-evenly;
-  }
-  .user-container,
-  .opponent-container {
-    height: 200px;
-  }
-  .selection-weapon img {
-    height: 70px;
-    width: 70px;
-    padding: 10px;
-    background: var(--white);
-    outline: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  .username,
-  .opponent-name {
-    font-size: 26px;
-  }
-
-  .weapon {
-    font-size: 22px;
-  }
-
-  .score-container div p {
-    font-size: 16px;
-  }
-
-  .score-container {
-    height: 15%;
-    width: 70%;
-  }
-
-  .score-title {
-    flex-direction: row;
-    width: 130px;
-  }
-
-  .score-container div {
-    padding: 10px 10px;
-    height: 80px;
-    width: 100px;
   }
 }

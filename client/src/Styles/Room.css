@@ -36,6 +36,7 @@
   font-weight: 600;
   background-color: var(--white);
   color: var(--main-bg-color);
+  margin-bottom: 5px;
 }
 
 .right-section {
@@ -272,6 +273,7 @@
   .left-section h3,
   .right-section h3 {
     font-size: 23px;
+    margin-bottom: 10px;
   }
 
   .left-section {
@@ -283,7 +285,8 @@
   }
 
   .rules {
-    height: 35%;
+    height: 150px;
+    margin-top: 30px;
   }
 
   .rules-text {
@@ -296,5 +299,33 @@
 
   .rules-text p {
     font-size: 18px;
+  }
+
+  .right-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .room-id {
+    height: auto;
+  }
+
+  .room-id-copy {
+    height: auto;
+  }
+
+  .room-id-copy p {
+    margin-bottom: 10px;
+  }
+
+  .start-btn {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 20px 20px;
+    padding: 14px 0;
+    font-size: 36px;
   }
 }

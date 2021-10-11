@@ -18,6 +18,15 @@
   border-radius: 50px;
 }
 
+.winning-screen-card h3 {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.winning-screen-card img {
+  width: 500px;
+}
+
 .btn-section {
   display: flex;
   justify-content: space-between;

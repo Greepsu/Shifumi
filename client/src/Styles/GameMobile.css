@@ -1,0 +1,130 @@
+.mobile-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 5px 10px;
+  color: white;
+}
+
+.mobile-game h4 {
+  font-size: 45px;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 5px;
+}
+
+.mobile-game .user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+}
+
+.mobile-game .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50vh;
+}
+
+.mobile-game .weapon {
+  font-size: 44px;
+}
+
+.choice img {
+  height: 100px;
+  width: 100px;
+}
+
+.empty {
+  height: 85px;
+  width: 97px;
+}
+
+/* Score */
+
+.mobile-game .score-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score-name .name p {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.score-name .score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: var(--white);
+  color: var(--primary-blue);
+}
+
+.score-name .score span {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+/* Weapon */
+.mobile-game .selection-weapon img {
+  height: 90px;
+  width: 90px;
+}
+
+/* Result */
+
+.result {
+  height: 20vh;
+}
+
+.result p {
+  font-size: 67px;
+  z-index: 1;
+}
+
+.mobile-game .selection {
+  padding: 0 20px;
+}
+
+/* Play button */
+
+.mobile-game .play-btn button {
+  background: transparent;
+  outline: none;
+  border: 1px solid var(--primary-blue);
+  color: white;
+  border-radius: 40px;
+  padding: 8px 100px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 36px;
+  transition: background-color 0.4s;
+}
+
+.mobile-game .play-btn > button:hover {
+  background-color: var(--primary-blue);
+}
+
+.mobile-game .play-btn > button.ready {
+  border: '1px solid green';
+  background-color: green;
+}
+
+/* Separator */
+
+.separator {
+  width: 90%;
+  z-index: 0;
+  border: 1px solid var(--side-bg-color);
+}

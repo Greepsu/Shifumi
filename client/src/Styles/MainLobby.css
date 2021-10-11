@@ -68,14 +68,32 @@
   .main-lobby-container img {
     width: 400px;
   }
+
+  .lobby-button-container button {
+    background-color: var(--primary-blue);
+  }
 }
 
 @media screen and (max-width: 768px) {
+  .main-lobby {
+    padding: 10px 0 0 0;
+  }
+  .main-lobby-container {
+    height: 100%;
+  }
   .main-lobby-container img {
     width: 350px;
   }
 
+  .lobby-button-container,
+  .lobby-button-container a,
   .lobby-button-container button {
-    padding: 20px 50px;
+    width: 100%;
+  }
+
+  .lobby-button-container button {
+    padding: 10px 0;
+    font-size: 31px;
+    border-radius: 0;
   }
 }

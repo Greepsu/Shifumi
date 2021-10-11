@@ -22,9 +22,12 @@ export default function Room() {
 
   useEffect(() => {
     webSocket.on(SocketEvents.SET_READY, (isReady) => {
-      console.log(isReady);
       setReadyCount(isReady);
     });
+
+    return function cleanup() {
+      setReadyCount(0);
+    };
   }, [webSocket]);
 
   const buttonColor = {
@@ -88,7 +91,7 @@ export default function Room() {
               <p>{roomId}</p>
               <div className="copy-container">
                 <button className="copy" onClick={copy}>
-                  <img src={clipboard} alt="" />
+                  <img src={clipboard} alt="clipboard" />
                 </button>
                 <span style={copied ? copiedSpan.visible : copiedSpan.hidden}>
                   Text copied !
