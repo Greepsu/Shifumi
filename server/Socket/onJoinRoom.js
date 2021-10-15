@@ -5,7 +5,7 @@ function onJoinRoom(userInfo, socket, io) {
   io.users[socket.id].roomId = userInfo.roomId;
   const room = getRoom(userInfo.roomId, io);
   if (room.players.length > 2) {
-    return;
+    console.log(room.players);
   }
 
   socket.join(userInfo.roomId);

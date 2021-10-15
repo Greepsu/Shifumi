@@ -19,6 +19,7 @@ const SocketEvents = Object.freeze({
   CLEAR_GAME: "clear_game",
   DISCONNECT: "disconnect",
   DISCONNECTED: "disconnected",
+  DISCONNECTING: "disconnecting",
 });
 
 const ShifumiWeaponObject = Object.freeze({

@@ -22,10 +22,14 @@ export function GameContextProvider({ children }) {
 
   useEffect(() => {
     if (room) {
+      //! MEH
+      if (room.players.length !== 2) return <div>Loading</div>;
+      //! MEH
+
       const copy = { ...room };
-      const filteredOpponent = copy.players.find((player) => {
-        if (player.id !== user.id) return player;
-      });
+      const filteredOpponent = copy.players.find(
+        (player) => player.id !== user.id
+      );
       setOpponent(filteredOpponent);
     }
 

@@ -2,23 +2,21 @@ const { SocketEvents } = require("../Enums/events");
 const getRoom = require("../data/getRoom");
 
 function onSetReady(data, socket, io) {
-  socket.user.isReady = !socket.user.isReady;
-
   const roomId = socket.user.roomId;
-
   const room = getRoom(roomId, io);
-  const playersReady = room.players.filter((p) => {
-    p.isReady = false;
-    return p;
+
+  socket.user.isReady = !socket.user.isReady;
+  const players = room.players.filter((player) => player);
+  const playersReady = room.players.filter((player) => {
+    socket.user.isReady = false;
+    return player;
   });
-  io.to(roomId).emit(SocketEvents.SET_READY, playersReady.length);
+
+  io.to(socket).emit(SocketEvents.SET_READY, playersReady.length);
 
   if (playersReady.length === 2) {
     socket.user.isReady = false;
-    io.to(socket.user.id).emit(SocketEvents.UPDATE_USER, {
-      isReady: false,
-    });
-    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, playersReady);
+    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
     room.state = "playing";
     io.to(roomId).emit(SocketEvents.GAME_START, room.state);
   }

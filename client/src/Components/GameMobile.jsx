@@ -24,17 +24,12 @@ export default function GameMobile() {
   const { userSelection, handleUserSelection, opponent, readyCount, winner } =
     useGameContext();
 
-  //! PLEASE DON'T DO THIS FOR THE LOVE OF GOD
-  //Todo: Update the user (find why is not update correctly on SocketEvents.UPDATE_USER)
-  const userUpdated = room.players.find((player) => {
-    if (player.id === user.id) return player;
-  });
-  //! PLEASE DON'T DO THIS FOR THE LOVE OF GOD
+  const userInfo = room.players.find((player) => player.id === user.id);
 
   function weaponLocked() {
     if (userSelection) {
       webSocket.emit(SocketEvents.SET_LOCKED, userSelection);
-      user.isReady = !user.isReady;
+      userInfo.isReady = !userInfo.isReady;
     }
   }
 
@@ -87,7 +82,7 @@ export default function GameMobile() {
         <div className="empty"></div>
       </div>
       <div className="result">
-        <p>{userUpdated.resultMatch}</p>
+        <p>{userInfo.resultMatch}</p>
       </div>
       <div className="separator"></div>
       <div className="container">
@@ -100,7 +95,7 @@ export default function GameMobile() {
               <span>{user.score}</span>
             </div>
           </div>
-          {getPicture(userUpdated.weapon)}
+          {getPicture(userInfo.weapon)}
           <div className="empty"></div>
         </div>
         <div className="selection user">

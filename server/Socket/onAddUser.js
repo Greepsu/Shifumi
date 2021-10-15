@@ -7,10 +7,12 @@ function onAddUser(username, socket, io) {
     username,
     id: socket.id,
     roomId: uuidv4(),
-    isReady: false,
-    weapon: undefined,
-    score: 0,
-    resultMatch: undefined,
+  };
+
+  socket.info = {
+    username,
+    id: socket.user.id,
+    roomId: uuidv4(),
   };
 
   if (io.users === undefined) {
@@ -23,7 +25,7 @@ function onAddUser(username, socket, io) {
 
   socket.username = socket.user.username;
 
-  io.to(socket.id).emit(SocketEvents.GET_USER, socket.user);
+  io.to(socket.id).emit(SocketEvents.GET_USER, socket.info);
 
   io.to(socket.id).emit(SocketEvents.CONNECTED, socket.username);
 }

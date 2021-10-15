@@ -30,6 +30,8 @@ export default function Room() {
     };
   }, [webSocket]);
 
+  console.log(room);
+
   const buttonColor = {
     ready: {
       backgroundColor: 'green',

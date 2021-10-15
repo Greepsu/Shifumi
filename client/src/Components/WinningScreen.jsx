@@ -14,6 +14,10 @@ export default function WinningScreen() {
   const { room } = useRoomContext();
   const { winner } = useGameContext();
 
+  function clearGame() {
+    webSocket.emit(SocketEvents.CLEAR_GAME);
+  }
+
   if (winner)
     return (
       <div className="winning-screen">
@@ -25,7 +29,9 @@ export default function WinningScreen() {
           <img src={winningPicture} alt="trophy with happy people" />
           <div className="btn-section">
             <Link to="/">
-              <button className="btn menu-btn">Main Menu</button>
+              <button className="btn menu-btn" onClick={clearGame}>
+                Main Menu
+              </button>
             </Link>
             {/* <Link to={`/room/${room.id}`}>
               <button className="btn replay-btn" onClick={reset}>

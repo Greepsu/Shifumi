@@ -29,17 +29,12 @@ export default function Game() {
     useGameContext();
   const { width } = useWindowSize();
 
-  //! PLEASE DON'T DO THIS FOR THE LOVE OF GOD
-  //Todo: Update the user (find why is not update correctly on SocketEvents.UPDATE_USER)
-  const userUpdated = room.players.find((player) => {
-    if (player.id === user.id) return player;
-  });
-  //! PLEASE DON'T DO THIS FOR THE LOVE OF GOD
+  const userInfo = room.players.find((player) => player.id === user.id);
 
   function weaponLocked() {
     if (userSelection) {
       webSocket.emit(SocketEvents.SET_LOCKED, userSelection);
-      user.isReady = !user.isReady;
+      userInfo.isReady = !userInfo.isReady;
     }
   }
 
@@ -58,7 +53,7 @@ export default function Game() {
           </span>
           <div>
             <p>SCORE:</p>
-            <span className="score">{userUpdated.score}</span>
+            <span className="score">{userInfo.score}</span>
           </div>
         </div>
         <div className="score-container">
@@ -99,7 +94,7 @@ export default function Game() {
           </div>
         </div>
         <div className="match-result">
-          <span>{userUpdated.resultMatch}</span>
+          <span>{userInfo.resultMatch}</span>
         </div>
         <div className="opponent-container">
           <span className="opponent-name">{opponent.username}</span>

@@ -3,20 +3,18 @@ const getRoom = require("../data/getRoom");
 const setScore = require("../data/gameSystem");
 
 function onSetLocked(weapon, socket, io) {
-  socket.user.isReady = !socket.user.isReady;
-
   const roomId = socket.user.roomId;
   const room = getRoom(roomId, io);
 
-  //Manage weapon
+  if (!socket.user.score) socket.user.score = 0;
+  socket.user.isReady = !socket.user.isReady;
   socket.user.weapon = weapon;
-  const players = room.players.filter((player) => player.weapon);
+
+  const players = room.players.filter((player) => player);
+
+  io.to(socket.info.id).emit(SocketEvents.UPDATE_ROOM, players);
 
   //Manage ready
-  io.to(socket.user.id).emit(SocketEvents.UPDATE_USER, {
-    weapon: socket.user.weapon,
-    isReady: socket.user.isReady,
-  });
   const playersReady = room.players.filter((p) => p.isReady);
   io.to(roomId).emit(SocketEvents.SET_LOCKED, playersReady.length);
 
@@ -26,10 +24,6 @@ function onSetLocked(weapon, socket, io) {
       player.isReady = false;
       player.resultMatch = "";
     });
-
-    io.to(socket.id).emit(SocketEvents.UPDATE_USER, {
-      isReady: false,
-    });
     io.to(roomId).emit(SocketEvents.RESET_BUTTON);
     io.to(roomId).emit(SocketEvents.SET_LOCKED, playersReady.length);
     io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
@@ -37,18 +31,14 @@ function onSetLocked(weapon, socket, io) {
 
   if (playersReady.length === 2 && socket.user.weapon) {
     setScore(socket.user, players);
-    io.to(socket.user.id).emit(SocketEvents.UPDATE_USER, {
-      resultMatch: socket.user.resultMatch,
-      score: socket.user.score,
-    });
+    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
 
     room.players.filter((player) => {
-      if (player.score === 10) {
+      if (player.score === 3) {
         io.to(roomId).emit(SocketEvents.SET_WINNER, player);
+        // socket.leave(roomId);
       }
     });
-
-    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
     setTimeout(reset, 2000);
   }
 }

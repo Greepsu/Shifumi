@@ -24,6 +24,7 @@ app.use(express.json());
 
 //Socket.io
 io.on(SocketEvents.CONNECTION, (socket) => {
+  console.log(`${socket.id} has connected`);
   handleSocketConnection(socket, io);
 });
 

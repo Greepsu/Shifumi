@@ -26,11 +26,12 @@ export function UserContextProvider({ children }) {
 
     webSocket.on(SocketEvents.UPDATE_USER, (user) => {
       setUser((prev) => ({ ...prev, ...user }));
-      console.log(user);
     });
 
     webSocket.on(SocketEvents.DISCONNECT);
   }, [webSocket]);
+
+  console.log({ user });
 
   const values = { user };
 
