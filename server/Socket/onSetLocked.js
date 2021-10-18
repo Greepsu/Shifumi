@@ -1,8 +1,7 @@
-const { SocketEvents } = require("../Enums/events");
-const getRoom = require("../data/getRoom");
-const setScore = require("../data/gameSystem");
+import { SocketEvents } from "../Enums/events.js";
+import { setScore } from "../Data/gameSystem.js";
 
-function onSetLocked(weapon, socket, io) {
+export function onSetLocked(weapon, socket, io) {
   const roomId = socket.user.roomId;
   const room = getRoom(roomId, io);
 
@@ -42,5 +41,3 @@ function onSetLocked(weapon, socket, io) {
     setTimeout(reset, 2000);
   }
 }
-
-module.exports = onSetLocked;

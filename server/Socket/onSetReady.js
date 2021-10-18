@@ -1,7 +1,6 @@
-const { SocketEvents } = require("../Enums/events");
-const getRoom = require("../data/getRoom");
+import { SocketEvents } from "../Enums/events.js";
 
-function onSetReady(data, socket, io) {
+export function onSetReady(data, socket, io) {
   const roomId = socket.user.roomId;
   const room = getRoom(roomId, io);
 
@@ -21,5 +20,3 @@ function onSetReady(data, socket, io) {
     io.to(roomId).emit(SocketEvents.GAME_START, room.state);
   }
 }
-
-module.exports = onSetReady;

@@ -1,16 +1,25 @@
-const getRoom = require("../data/getRoom");
-const { SocketEvents } = require("../Enums/events");
+import { SocketEvents } from "../Enums/events.js";
+import { database } from "../Data/getRoom.js";
 
-function onJoinRoom(userInfo, socket, io) {
-  io.users[socket.id].roomId = userInfo.roomId;
-  const room = getRoom(userInfo.roomId, io);
-  if (room.players.length > 2) {
-    console.log(room.players);
-  }
+export function onJoinRoom(data, socket, io) {
+  const roomId = data.roomId;
+  const user = data.userInfo;
 
-  socket.join(userInfo.roomId);
+  const room = database.rooms.find((room) => room);
 
-  io.to(userInfo.roomId).emit(SocketEvents.GET_ROOM, room);
+  database.rooms.find((room) => {
+    room.id === roomId
+      ? room.players.push(user)
+      : database.rooms.push({
+          id: roomId,
+          state: "idle",
+          players: [],
+        });
+  });
+
+  console.log(database.rooms);
+
+  socket.join(roomId);
+
+  io.to(roomId).emit(SocketEvents.GET_ROOM, room);
 }
-
-module.exports = onJoinRoom;
