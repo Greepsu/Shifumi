@@ -1,161 +1,243 @@
 .game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 100vh;
   color: white;
+  padding-top: 40px;
+  padding: 40px 100px 0;
 }
 
 .match-container {
-  height: 70vh;
+  height: 35vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 3%;
 }
 
-.user-container {
+.user-container,
+.opponent-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 30%;
-  height: 40%;
+  background-color: var(--side-bg-color);
+  border-radius: 20px;
+  padding: 20px 20px;
+  width: 32%;
+  height: 100%;
   font-size: 42px;
 }
 
-.user-selection {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+.username,
+.opponent-name {
+  font-size: 36px;
 }
 
-.user-selection div {
+.selection {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.selection button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: none;
-  outline: none;
-  border: 0.2px solid white;
-  color: white;
-  width: 30px;
-  height: 15px;
-  padding: 20px 60px;
-  cursor: pointer;
-  font-size: 21px;
 }
 
 .selection-weapon {
-  position: relative;
-  overflow: hidden;
+  background: none;
+  border: none;
+  outline: none;
+  transition: transform 0.3s, filter 0.3s ease-in-out;
+  filter: opacity(0.4);
 }
 
-.selection-weapon:hover::before {
-  width: 100%;
+.selection-weapon:hover {
+  filter: opacity(1);
 }
 
-.selection-weapon::before {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  content: '';
-  width: 0%;
-  height: 100%;
-  transition: ease 0.8s;
+.selection-weapon:focus {
+  transform: scale(1.2);
+  filter: opacity(1);
 }
 
-.selection-rock::before {
-  background: #f3788d;
+.selection-weapon img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+  width: 90px;
+  padding: 10px;
+  background: var(--white);
+  outline: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.selection-paper::before {
-  background: #4cf846;
+.selection-rock img {
+  border: 8px solid var(--primary-blue);
 }
 
-.selection-scissors::before {
-  background: #9978f3;
+.selection-paper img {
+  border: 8px solid var(--green);
 }
 
-.user-selection span {
+.selection-scissors img {
+  border: 8px solid var(--red);
+}
+
+.selection span {
   z-index: 1;
+}
+
+.selection.opponent .selection-weapon {
+  background: none;
+  border: none;
+  outline: none;
+  transition: none;
+  filter: opacity(0.4);
+}
+
+.selection.opponent .selection-weapon:hover {
+  filter: opacity(0.4);
+}
+
+.selection.opponent .selection-weapon:focus {
+  transform: scale(1);
+  filter: opacity(0.4);
+}
+
+.score-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .score-container {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 20%;
+  align-self: center;
+  background-color: var(--main-bg-color);
+  width: 32%;
   font-size: 38px;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 30px;
 }
 
-.score-container span {
-  font-weight: 400;
+.score-container div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0ecec;
+  border-radius: 20px;
+  padding: 10px 20px;
 }
 
-.score-container span:last-of-type {
+.score-container div p {
+  color: var(--side-bg-color);
+}
+
+.score-container div span {
+  color: var(--primary-blue);
+}
+
+.score-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.score-container div span {
+  font-weight: 700;
+  font-family: 'roboto';
   font-size: 48px;
 }
 
-.opponent-container {
-  width: 30%;
-  height: 40%;
+/* .score-container span:last-of-type {
+} */
+
+.match-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.match-result span {
+  font-size: 58px;
+  text-align: center;
+}
+
+.play-container {
+  height: 25vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  font-size: 42px;
+  padding-bottom: 20px;
 }
 
-.opponent-container div {
-  height: 15px;
-}
-
-.opponent-container span:first-of-type,
-.user-container span:first-of-type {
-  font-size: 26px;
-}
-
-.play-container {
-  height: 30vh;
+.button-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.play-container div {
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  border: 0.2px solid white;
+  justify-content: space-between;
+  height: 120px;
+}
+
+.button-container button {
+  background: transparent;
+  outline: none;
+  border: 1px solid var(--primary-blue);
   color: white;
-  width: 270px;
-  height: 80px;
-  padding: 1px;
+  border-radius: 40px;
+  padding: 14px 80px;
   cursor: pointer;
-  font-size: 38px;
-  position: relative;
-  overflow: hidden;
+  text-align: center;
+  font-size: 36px;
+  transition: background-color 0.4s;
 }
 
-.play-container div::before {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  content: '';
-  width: 0%;
-  height: 100%;
-  transition: ease 0.8s;
-  background: white;
+.button-container > button:hover {
+  background-color: var(--primary-blue);
 }
 
-.play-container div:hover::before {
-  width: 100%;
+.button-container > button.ready {
+  border: '1px solid green';
+  background-color: green;
 }
 
-.play-container div:hover span {
-  color: black;
-  transition: 0.8s ease-in-out;
+@media screen and (max-width: 1200px) {
+  .match-container {
+    width: 100%;
+  }
+
+  .match-result span {
+    font-size: 48px;
+  }
+
+  .user-container,
+  .opponent-container {
+    width: 40%;
+  }
+
+  .selection {
+    width: 90%;
+  }
+
+  .score-container {
+    width: 40%;
+  }
 }
 
-.play-container div span {
-  z-index: 1;
+@media screen and (max-width: 1024px) {
+  .selection {
+    width: 100%;
+  }
 }

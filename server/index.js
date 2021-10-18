@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 const port = 5000;
-const SocketEvents = require("./Enums/events");
+const { SocketEvents } = require("./Enums/events");
 
 //Import CORS
 const cors = require("cors");
@@ -24,6 +24,7 @@ app.use(express.json());
 
 //Socket.io
 io.on(SocketEvents.CONNECTION, (socket) => {
+  console.log(`${socket.id} has connected`);
   handleSocketConnection(socket, io);
 });
 

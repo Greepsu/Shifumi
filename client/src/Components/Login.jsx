@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import '../Styles/Login.css';
+
 //Import WebSocketContext
 import { useWebSocketContext } from '../Contexts/WebSocketContext';
 
@@ -14,9 +16,12 @@ export default function Login() {
   const handleUsername = () => webSocket.emit(SocketEvents.ADD_USER, username);
 
   return (
-    <div>
-      <input value={username} onChange={handleInput} />
-      <button onClick={handleUsername}>Login</button>
+    <div className="login">
+      <div>
+        <p>Enter your name !</p>
+        <input value={username} onChange={handleInput} autoFocus />
+        <button onClick={handleUsername}>Login</button>
+      </div>
     </div>
   );
 }

@@ -1,16 +1,37 @@
 const SocketEvents = Object.freeze({
   CONNECTION: "connection",
   CONNECTED: "connected",
-  ADD_USER: "add user",
-  GET_USER: "get user",
-  CREATE_ROOM: "create room",
-  GET_ROOM: "get room",
-  JOIN_ROOM: "join room",
-  SET_READY: "set ready",
-  GAME_START: "game start",
-  PLAYER_CHOICE: "player choice",
+  ADD_USER: "add_user",
+  GET_USER: "get_user",
+  UPDATE_USER: "update_user",
+  CREATE_ROOM: "create_room",
+  GET_ROOM: "get_room",
+  UPDATE_ROOM: "update_room",
+  SET_OPPONENT: "set_opponent",
+  JOIN_ROOM: "join_room",
+  SET_READY: "set_ready",
+  SET_LOCKED: "set_locked",
+  RESET_BUTTON: "reset_button",
+  GAME_START: "game_start",
+  SET_WINNER: "set_winner",
+  PLAYER_CHOICE: "player_choice",
+  CPU: "cpu",
+  CLEAR_GAME: "clear_game",
   DISCONNECT: "disconnect",
   DISCONNECTED: "disconnected",
+  DISCONNECTING: "disconnecting",
 });
 
-module.exports = SocketEvents;
+const ShifumiWeaponObject = Object.freeze({
+  PAPER: "Paper",
+  SCISSORS: "Scissors",
+  ROCK: "Rock",
+});
+
+const ShifumiResultObject = Object.freeze({
+  WIN: "You Win !",
+  LOOSE: "You Loose !",
+  DRAW: "Draw !",
+});
+
+module.exports = { SocketEvents, ShifumiWeaponObject, ShifumiResultObject };

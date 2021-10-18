@@ -1,30 +1,25 @@
-const SocketEvents = require("../Enums/events");
+const { SocketEvents } = require("../Enums/events");
+const getRoom = require("../data/getRoom");
 
-const userReady = [];
 function onSetReady(data, socket, io) {
-  if (socket) {
-    socket.user.isReady = !socket.user.isReady;
-  }
-  console.log(socket.user.isReady);
-  if (socket.user.isReady) {
-    userReady.push(socket.user.username);
-  } else {
-    const index = userReady.indexOf(socket.user.username);
-    if (index > -1) {
-      userReady.splice(index, 1);
-    }
-  }
-  console.log(userReady);
-  io.emit(SocketEvents.SET_READY, userReady.length);
+  const roomId = socket.user.roomId;
+  const room = getRoom(roomId, io);
 
-  socket.on(SocketEvents.DISCONNECT, () => {
-    console.log(`${socket.user.username} left the room`);
-    const index = userReady.indexOf(socket.user.username);
-    if (index > -1) {
-      userReady.splice(index, 1);
-    }
-    io.emit(SocketEvents.SET_READY, userReady.length);
+  socket.user.isReady = !socket.user.isReady;
+  const players = room.players.filter((player) => player);
+  const playersReady = room.players.filter((player) => {
+    socket.user.isReady = false;
+    return player;
   });
+
+  io.to(socket).emit(SocketEvents.SET_READY, playersReady.length);
+
+  if (playersReady.length === 2) {
+    socket.user.isReady = false;
+    io.to(roomId).emit(SocketEvents.UPDATE_ROOM, players);
+    room.state = "playing";
+    io.to(roomId).emit(SocketEvents.GAME_START, room.state);
+  }
 }
 
 module.exports = onSetReady;

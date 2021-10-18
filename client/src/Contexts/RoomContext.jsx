@@ -10,34 +10,55 @@ export const RoomContext = createContext({});
 
 export function RoomContextProvider({ children }) {
   const webSocket = useWebSocketContext();
-  const [room, setRoom] = useState([]);
+  const [room, setRoom] = useState();
   const [showId, setShowId] = useState(false);
   const [ready, setReady] = useState(false);
-  const [readyCount, setReadyCount] = useState(0);
 
   useEffect(() => {
-    webSocket.on(SocketEvents.GET_ROOM, (roomUsers) => {
-      setRoom(roomUsers);
+    webSocket.on(SocketEvents.GET_ROOM, (room) => {
+      setRoom(room);
     });
 
-    webSocket.on(SocketEvents.SET_READY, (isReady) => {
-      setReadyCount(isReady);
+    webSocket.on(SocketEvents.UPDATE_ROOM, (newPlayers) => {
+      setRoom((prevRoom) => {
+        const copy = { ...prevRoom };
+        copy.players = newPlayers;
+        return copy;
+      });
     });
-    console.log(ready);
-  }, [webSocket, ready]);
+
+    webSocket.on(SocketEvents.GAME_START, (roomState) => {
+      setRoom((prevRoom) => {
+        const copy = { ...prevRoom };
+        copy.state = roomState;
+        return copy;
+      });
+      setReady(false);
+    });
+  }, [webSocket]);
 
   function joinRoom(roomId, userInfo) {
     webSocket.emit(SocketEvents.JOIN_ROOM, { roomId, userInfo });
     setShowId(true);
-    console.log(`Room with ${roomId} ID just joined by ${userInfo.username}`);
   }
 
   function getReady() {
-    webSocket.emit(SocketEvents.SET_READY);
     setReady(!ready);
+    webSocket.emit(SocketEvents.SET_READY);
   }
 
-  const values = { joinRoom, room, showId, getReady, readyCount, ready };
+  function vsCpu() {
+    webSocket.emit(SocketEvents.CPU);
+  }
+
+  const values = {
+    joinRoom,
+    room,
+    showId,
+    getReady,
+    ready,
+    vsCpu,
+  };
 
   return <RoomContext.Provider value={values}>{children}</RoomContext.Provider>;
 }

@@ -1,45 +1,331 @@
 .room {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 100%;
+  color: white;
+  padding: 0 20px;
 }
 
-.container {
+.left-section {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 4% 0;
-  height: 60%;
-  color: white;
+  background-color: var(--side-bg-color);
+  padding: 20px 5px;
+  width: 25%;
+  height: 80%;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.left-section p {
+  font-size: 24px;
+}
+
+.player {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  padding: 5px;
+  width: 80%;
+  border-radius: 20px;
+  font-weight: 600;
+  background-color: var(--white);
+  color: var(--main-bg-color);
+  margin-bottom: 5px;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 20px 3%;
+  background-color: var(--side-bg-color);
+  width: 68%;
+  height: 80%;
+  border-radius: 20px;
 }
 
 .room-id {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 20%;
+}
+
+.room-id-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy {
+  display: flex;
   justify-content: center;
   align-items: center;
+  height: 60px;
+  width: 60px;
+  background: transparent;
+  outline: none;
+  border: 1px solid var(--primary-blue);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  transition: background-color 0.4s;
+}
+
+.copy:hover {
+  background-color: var(--primary-blue);
+}
+
+.copy-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy-container span {
+  position: absolute;
+  width: 120px;
+  top: 70px;
+  background-color: var(--main-bg-color);
+  border-radius: 10px;
+  padding: 5px 12px;
+  transition: 0.2s ease-out;
+}
+
+.copy img {
+  filter: invert(100%) sepia(0%) saturate(7483%) hue-rotate(97deg)
+    brightness(102%) contrast(104%);
 }
 
 .room-id p {
-  font-size: 20px;
-  border-bottom: 0.1px solid white;
+  font-size: 38px;
+  border-radius: 40px;
+  padding: 10px 30px;
+  background-color: var(--main-bg-color);
+  color: white;
+  margin-right: 10px;
 }
 
-.user-list {
+.rules {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  font-size: 20px;
+  height: 40%;
+  font-size: 24px;
+  text-align: center;
 }
 
-.container button {
-  background: none;
+.rules-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 70%;
+}
+
+.rules-text h4 {
+  text-decoration: underline;
+}
+
+.rules-text span {
+  text-decoration: underline;
+}
+
+.start-btn {
+  background: transparent;
   outline: none;
-  border: 0.2px solid white;
+  border: 1px solid var(--primary-blue);
   color: white;
-  padding: 10px 4%;
+  border-radius: 40px;
+  padding: 14px 80px;
   cursor: pointer;
   text-align: center;
-  font-size: 26px;
+  font-size: 36px;
+  transition: background-color 0.4s;
+}
+
+.start-btn:hover {
+  background-color: var(--primary-blue);
+}
+
+@media screen and (max-width: 1424px) {
+  .room-id p {
+    font-size: 24px;
+  }
+
+  .copy {
+    background-color: var(--primary-blue);
+  }
+
+  .start-btn {
+    background-color: var(--primary-blue);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .room {
+    flex-direction: column;
+  }
+
+  .left-section {
+    width: 100%;
+    height: 25%;
+  }
+
+  .right-section {
+    height: 70%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 665px) {
+  .left-section {
+    width: 100%;
+    height: 20%;
+  }
+
+  .left-section h3 {
+    font-size: 28px;
+  }
+
+  .left-section p {
+    font-size: 18px;
+  }
+
+  .player {
+    padding: 0;
+    width: 50%;
+    font-size: 26px;
+  }
+
+  .right-section {
+    height: 75%;
+  }
+
+  .right-section h3 {
+    font-size: 28px;
+  }
+
+  .room-id {
+    height: 30%;
+  }
+
+  .room-id-copy {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .room-id-copy p {
+    padding: 10px;
+    width: 100%;
+    font-size: 20px;
+  }
+
+  .copy-container {
+    width: 90%;
+  }
+
+  .copy-container span {
+    position: absolute;
+    width: 120px;
+    top: 50px;
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+  }
+
+  .copy {
+    width: 100%;
+    height: 40px;
+    border-radius: 30px;
+  }
+
+  .start-btn {
+    border-radius: 40px;
+    padding: 10px 80px;
+    width: 100%;
+    font-size: 30px;
+  }
+
+  .rules {
+    height: 40%;
+  }
+
+  .rules-text {
+    height: 90%;
+  }
+}
+
+@media screen and (max-width: 465px) {
+  .left-section h3,
+  .right-section h3 {
+    font-size: 23px;
+    margin-bottom: 10px;
+  }
+
+  .left-section {
+    height: 18%;
+  }
+
+  .right-section {
+    height: 75%;
+  }
+
+  .rules {
+    height: 150px;
+    margin-top: 30px;
+  }
+
+  .rules-text {
+    height: 90%;
+  }
+
+  .rules-text h4 {
+    font-size: 21px;
+  }
+
+  .rules-text p {
+    font-size: 18px;
+  }
+
+  .right-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .room-id {
+    height: auto;
+  }
+
+  .room-id-copy {
+    height: auto;
+  }
+
+  .room-id-copy p {
+    margin-bottom: 10px;
+  }
+
+  .start-btn {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 20px 20px;
+    padding: 14px 0;
+    font-size: 36px;
+  }
 }

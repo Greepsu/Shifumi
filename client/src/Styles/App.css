@@ -1,6 +1,5 @@
 .App {
-  background: #0e1011 url(../Assets/Images/background.svg) no-repeat bottom
-    fixed;
+  background: var(--main-bg-color);
   width: 100%;
   height: 100vh;
 }

@@ -5,22 +5,30 @@ export const ShifumiWeaponObject = Object.freeze({
 });
 
 export const ShifumiResultObject = Object.freeze({
-  WIN: 'Win',
-  LOOSE: 'Loose',
-  DRAW: 'Draw',
+  WIN: 'You Win !',
+  LOOSE: 'You Loose !',
+  DRAW: 'Draw !',
 });
 
 export const SocketEvents = Object.freeze({
   CONNECTION: 'connection',
   CONNECTED: 'connected',
-  ADD_USER: 'add user',
-  GET_USER: 'get user',
-  CREATE_ROOM: 'create room',
-  GET_ROOM: 'get room',
-  JOIN_ROOM: 'join room',
-  SET_READY: 'set ready',
-  GAME_START: 'game start',
-  PLAYER_CHOICE: 'player choice',
+  ADD_USER: 'add_user',
+  GET_USER: 'get_user',
+  UPDATE_USER: 'update_user',
+  CREATE_ROOM: 'create_room',
+  GET_ROOM: 'get_room',
+  SET_OPPONENT: 'set_opponent',
+  UPDATE_ROOM: 'update_room',
+  JOIN_ROOM: 'join_room',
+  SET_READY: 'set_ready',
+  SET_LOCKED: 'set_locked',
+  RESET_BUTTON: 'reset_button',
+  GAME_START: 'game_start',
+  PLAYER_CHOICE: 'player_choice',
+  SET_WINNER: 'set_winner',
+  CPU: 'cpu',
+  CLEAR_GAME: 'clear_game',
   DISCONNECT: 'disconnect',
   DISCONNECTED: 'disconnected',
 });

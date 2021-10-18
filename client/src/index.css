@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 *,
 ::after,
@@ -8,13 +9,49 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
+
+  --main-bg-color: #202443;
+  --side-bg-color: #2e325c;
+  --primary-blue: #2daac9;
+  --white: #e9e7e7;
+  --red: rgb(199, 47, 47);
+  --green: rgb(30, 133, 30);
 }
 
 h1 {
   font-size: 158px;
-  font-family: 'Merienda', cursive;
+  font-family: 'Open Sans', cursive;
 }
 
 h2 {
+  font-size: 46px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h3 {
   font-size: 36px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+p,
+span,
+button {
+  font-family: 'Roboto', sans-serif;
+}
+
+.blue-word {
+  color: var(--primary-blue);
+}
+
+@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 128px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 88px;
+  }
 }

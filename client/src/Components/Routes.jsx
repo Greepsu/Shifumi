@@ -1,7 +1,6 @@
 import React from 'react';
 
 //Import components
-import Game from './Game';
 import MainLobby from './MainLobby';
 import Room from './Room';
 
@@ -14,9 +13,6 @@ export default function Routes() {
     <Switch>
       <Route exact path="/">
         <MainLobby />
-      </Route>
-      <Route path="/cpu">
-        <Game />
       </Route>
       <Route path="/user">
         <RoomHandler />
