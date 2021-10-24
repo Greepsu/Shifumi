@@ -1,7 +1,6 @@
 //Import and use express
 import express from "express";
 const app = express();
-import { Low, JSONFile } from "lowdb";
 const port = 5000;
 import { SocketEvents } from "./Enums/events.js";
 import cors from "cors";

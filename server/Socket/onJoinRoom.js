@@ -1,23 +1,17 @@
 import { SocketEvents } from "../Enums/events.js";
-import { database } from "../Data/getRoom.js";
+import { database, getRoom } from "../Data/getRoom.js";
 
 export function onJoinRoom(data, socket, io) {
   const roomId = data.roomId;
   const user = data.userInfo;
 
-  const room = database.rooms.find((room) => room);
+  const room = getRoom(roomId, user);
+  console.log(room);
+  console.log("-----");
 
-  database.rooms.find((room) => {
-    room.id === roomId
-      ? room.players.push(user)
-      : database.rooms.push({
-          id: roomId,
-          state: "idle",
-          players: [],
-        });
+  database.rooms.find((r) => {
+    if (roomId === r.id) console.log(r);
   });
-
-  console.log(database.rooms);
 
   socket.join(roomId);
 

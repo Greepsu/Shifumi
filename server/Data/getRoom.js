@@ -14,13 +14,27 @@ const db = new Low(adapter);
 
 // If file.json doesn't exist, db.data will be null
 // Set default data
-db.data ||= { rooms: [] }; // Node >= 15.x
-
-// You can also use this syntax if you prefer
-// const { posts } = db.data;
-// posts.push("hello world");
+db.data ||= { rooms: [] };
 
 // Write db.data content to db.json
 // await db.write();
 
 export const database = db.data;
+
+export function getRoom(roomId, user) {
+  const room = {
+    id: roomId,
+    state: "idle",
+    players: [],
+  };
+
+  const match = database.rooms.find((r) => roomId === r.id);
+  if (match) {
+    match.players.push(user);
+  } else {
+    room.players.push(user);
+    database.rooms.push(room);
+  }
+
+  return room;
+}
