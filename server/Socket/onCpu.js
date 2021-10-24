@@ -1,7 +1,7 @@
 const { SocketEvents } = require("../Enums/events");
-const getRoom = require("../data/getRoom");
+const getRoom = require("../Data/getRoom");
 
-function onCpu(data, socket, io) {
+export function onCpu(data, socket, io) {
   const cpu = {
     username: "Biboubip",
     id: "1010100110101",
@@ -12,5 +12,3 @@ function onCpu(data, socket, io) {
 
   io.to(socket.user.roomId).emit(SocketEvents.CPU, cpu);
 }
-
-module.exports = onCpu;

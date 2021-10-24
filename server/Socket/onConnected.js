@@ -1,7 +1,5 @@
-const { SocketEvents } = require("../Enums/events");
+import { SocketEvents } from "../Enums/events.js";
 
-function onConnected(data, socket, io) {
+export function onConnected(data, socket, io) {
   console.log(data);
 }
-
-module.exports = onConnected;

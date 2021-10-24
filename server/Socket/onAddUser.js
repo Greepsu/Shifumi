@@ -1,33 +1,14 @@
-const { v4: uuidv4 } = require("uuid");
-const { SocketEvents } = require("../Enums/events");
+import { v4 as uuidv4 } from "uuid";
+import { SocketEvents } from "../Enums/events.js";
 
-function onAddUser(username, socket, io) {
-  //Define socket.user
-  socket.user = {
+export function onAddUser(username, socket, io) {
+  const user = {
     username,
     id: socket.id,
     roomId: uuidv4(),
   };
 
-  socket.info = {
-    username,
-    id: socket.user.id,
-    roomId: uuidv4(),
-  };
+  io.to(socket.id).emit(SocketEvents.GET_USER, user);
 
-  if (io.users === undefined) {
-    io.users = {
-      [socket.id]: socket.user,
-    };
-  } else {
-    io.users[socket.id] = socket.user;
-  }
-
-  socket.username = socket.user.username;
-
-  io.to(socket.id).emit(SocketEvents.GET_USER, socket.info);
-
-  io.to(socket.id).emit(SocketEvents.CONNECTED, socket.username);
+  io.to(socket.id).emit(SocketEvents.CONNECTED, user.username);
 }
-
-module.exports = onAddUser;

@@ -1,22 +1,15 @@
 //Import and use express
-const express = require("express");
+import express from "express";
 const app = express();
-
 const port = 5000;
-const { SocketEvents } = require("./Enums/events");
-
-//Import CORS
-const cors = require("cors");
+import { SocketEvents } from "./Enums/events.js";
+import cors from "cors";
 
 //Import Socket.io
-const server = require("http").Server(app);
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
-const handleSocketConnection = require("./Socket/handleSocketConnection");
+import { Server } from "socket.io";
+import { handleSocketConnection } from "./Socket/handleSocketConnection.js";
+
+const io = new Server(5001, { cors: { origin: "*" } });
 
 //Middlewares
 app.use(cors());
@@ -29,8 +22,5 @@ io.on(SocketEvents.CONNECTION, (socket) => {
 });
 
 //Listen
-server.listen(5001, () => {
-  console.log(`Server started: socket.io`);
-});
 
 app.listen(port, () => console.log(`Shifumi app listening on port ${port} !`));

@@ -1,4 +1,4 @@
-const SocketEvents = Object.freeze({
+export const SocketEvents = Object.freeze({
   CONNECTION: "connection",
   CONNECTED: "connected",
   ADD_USER: "add_user",
@@ -22,16 +22,14 @@ const SocketEvents = Object.freeze({
   DISCONNECTING: "disconnecting",
 });
 
-const ShifumiWeaponObject = Object.freeze({
+export const ShifumiWeaponObject = Object.freeze({
   PAPER: "Paper",
   SCISSORS: "Scissors",
   ROCK: "Rock",
 });
 
-const ShifumiResultObject = Object.freeze({
+export const ShifumiResultObject = Object.freeze({
   WIN: "You Win !",
   LOOSE: "You Loose !",
   DRAW: "Draw !",
 });
-
-module.exports = { SocketEvents, ShifumiWeaponObject, ShifumiResultObject };

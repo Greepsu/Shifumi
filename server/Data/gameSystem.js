@@ -1,6 +1,6 @@
-const { ShifumiWeaponObject, ShifumiResultObject } = require("../Enums/events");
+import { ShifumiWeaponObject, ShifumiResultObject } from "../Enums/events.js";
 
-function setWin(user, opponent) {
+export function setWin(user, opponent) {
   return (
     (user.weapon === ShifumiWeaponObject.ROCK &&
       opponent.weapon === ShifumiWeaponObject.SCISSORS) ||
@@ -11,7 +11,7 @@ function setWin(user, opponent) {
   );
 }
 
-function setScore(user, roomPlayers) {
+export function setScore(user, roomPlayers) {
   const opponent = roomPlayers.find((player) => player.id !== user.id);
   const win = setWin(user, opponent);
   if (win) {
@@ -27,5 +27,3 @@ function setScore(user, roomPlayers) {
     user.resultMatch = ShifumiResultObject.LOOSE;
   }
 }
-
-module.exports = setScore;
